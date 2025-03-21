@@ -6,6 +6,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.http.HttpResponse;
+
+import org.example.trajectplanner.API.GetMethods;
 
 public class HelloApplication extends Application {
     @Override
@@ -18,6 +21,11 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
+
+        GetMethods getMethods = new GetMethods();
+
+        HttpResponse<String> response = getMethods.getExams();
+        System.out.println(response.body());
         launch();
     }
 }
