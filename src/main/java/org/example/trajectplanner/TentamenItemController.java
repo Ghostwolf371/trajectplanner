@@ -1,13 +1,11 @@
 package org.example.trajectplanner;
 
 import java.io.IOException;
-import java.net.URI;
 import java.net.URL;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ResourceBundle;
 
+import org.example.trajectplanner.API.DeleteMethods;
 import org.example.trajectplanner.Modal.Tentamen;
 
 import javafx.fxml.FXML;
@@ -34,7 +32,7 @@ public class TentamenItemController implements Initializable {
     private Button editButton;
     @FXML
     private Button deleteButton;
-    
+
     private String tentamenId;
 
     public void setData(Tentamen tentamen){
@@ -44,48 +42,34 @@ public class TentamenItemController implements Initializable {
         semester.setText(tentamen.getSemester());
         datum.setText(tentamen.getDatum());
         type.setText(tentamen.getType());
-        
+
         editButton.setOnAction(event -> navigateToEdit());
         deleteButton.setOnAction(event -> deleteTentamen());
     }
 
     private void deleteTentamen() {
         try {
-            String requestBody = "{\"exam_id\":" + tentamenId + "}";
-            
-            HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("https://trajectplannerapi.dulamari.com/exams"))
-                    .header("Content-Type", "application/json")
-                    .method("DELETE", HttpRequest.BodyPublishers.ofString(requestBody))
-                    .build();
+            DeleteMethods deleteMethods = new DeleteMethods();
+            HttpResponse<String> response = deleteMethods.deleteExam(tentamenId);
 
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            
-            // Remove from UI if successful
-            if (response.statusCode() == 200) {
+            if (response != null && response.statusCode() == 200) {
                 this.id.getParent().setVisible(false);
             }
-            
-            // Simple logging
-            System.out.println(requestBody);
-            System.out.println("Delete attempt for ID: " + tentamenId);
-            System.out.println("Status: " + response.statusCode());
-            
+
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }
     }
-    
+
 
     private void navigateToEdit() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("edit-tentamen.fxml"));
             Parent root = loader.load();
-            
+
             EditTentamenController editController = loader.getController();
             editController.setTentamenId(tentamenId);
-            
+
             // Get the current stage
             Stage stage = (Stage) editButton.getScene().getWindow();
             // Replace the current scene

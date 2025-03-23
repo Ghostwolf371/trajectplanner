@@ -9,7 +9,7 @@
 
 <VBox spacing="10" alignment="CENTER" prefWidth="400" prefHeight="300"
       xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.AddExamDialogController">
+      fx:controller="org.example.trajectplanner.AddExamDialogController">
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
@@ -17,27 +17,22 @@
     <Label text="Add New Exam" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
 
     <VBox spacing="5">
-        <Label text="Cursus Name:"/>
+        <Label text="Course Code:"/>
         <TextField fx:id="cursusNameField"/>
     </VBox>
 
     <VBox spacing="5">
-        <Label text="Semester:"/>
-        <TextField fx:id="semesterField"/>
+        <Label text="Exam Type (must be exactly 'Regulier' or 'Her'):"/>
+        <TextField fx:id="typeField" promptText="Enter 'Regulier' or 'Her'"/>
     </VBox>
 
     <VBox spacing="5">
-        <Label text="Datum:"/>
-        <TextField fx:id="datumField"/>
-    </VBox>
-
-    <VBox spacing="5">
-        <Label text="Type:"/>
-        <TextField fx:id="typeField"/>
+        <Label text="Exam Date (YYYY-MM-DD):"/>
+        <TextField fx:id="datumField" promptText="e.g., 2025-12-31"/>
     </VBox>
 
     <HBox spacing="10" alignment="CENTER">
-        <Button text="Add" onAction="#handleAdd" styleClass="button-primary"/>
+        <Button text="Add" onAction="#handleAdd" />
         <Button text="Cancel" onAction="#handleCancel"/>
     </HBox>
 </VBox>

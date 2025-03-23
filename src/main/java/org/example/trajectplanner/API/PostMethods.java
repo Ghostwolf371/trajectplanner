@@ -18,8 +18,10 @@ public class PostMethods {
                     .build();
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            
             return response;
         } catch (Exception e) {
+            System.err.println("Error in postExam:");
             e.printStackTrace();
             return null;
         }

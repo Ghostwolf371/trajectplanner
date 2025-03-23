@@ -23,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.Modality;
 
 public class Controller implements Initializable {
     @FXML
@@ -67,14 +68,22 @@ public class Controller implements Initializable {
 
     private void navigateToAdd() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("add-tentamen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AddExamDialog.fxml"));
             Parent root = loader.load();
             
-            // Get the current stage
-            Stage stage = (Stage) addButton.getScene().getWindow();
-            // Replace the current scene
-            stage.setScene(new Scene(root));
-            stage.setTitle("Add Tentamen");
+            // Create a new stage for the popup
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL); // Make it modal (blocks interaction with other windows)
+            popupStage.initOwner(addButton.getScene().getWindow()); // Set the parent window
+            
+            // Set up the new scene
+            Scene scene = new Scene(root);
+            popupStage.setScene(scene);
+            popupStage.setTitle("Add Tentamen");
+            
+            // Show the popup
+            popupStage.showAndWait(); // This will block until the popup is closed
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
