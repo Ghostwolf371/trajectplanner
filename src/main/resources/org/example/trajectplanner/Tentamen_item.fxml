@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.hellofx.TentamenItemController">
+   <children>
+      <Label fx:id="id" alignment="CENTER" prefHeight="20.0" prefWidth="59.0">
+         <font>
+            <Font name="MesloLGL Nerd Font Regular" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="cursusNaam" alignment="CENTER" prefHeight="22.0" prefWidth="191.0">
+         <font>
+            <Font name="MesloLGL Nerd Font Regular" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="semester" alignment="CENTER" prefHeight="22.0" prefWidth="123.0">
+         <font>
+            <Font name="MesloLGL Nerd Font Regular" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="datum" alignment="CENTER" prefHeight="22.0" prefWidth="139.0">
+         <font>
+            <Font name="MesloLGL Nerd Font Regular" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="type" alignment="CENTER" prefHeight="22.0" prefWidth="129.0">
+         <font>
+            <Font name="MesloLGL Nerd Font Regular" size="13.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" prefHeight="40.0" prefWidth="129.0" spacing="15.0">
+         <children>
+            <Button fx:id="editButton" mnemonicParsing="false" text="E" />
+            <Button fx:id="deleteButton" mnemonicParsing="false" text="D" />
+         </children>
+      </HBox>
+   </children>
+</HBox>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.hellofx.EditTentamenController">
+   <children>
+      <Label fx:id="tentamenIdLabel" text="Tentamen ID: " />
+      <!-- Add your edit form controls here -->
+   </children>
+</VBox>

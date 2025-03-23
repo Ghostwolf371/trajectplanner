@@ -1,16 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.example.trajectplanner.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.hellofx.Controller">
+   <content>
+      <VBox fx:id="tentamenLayout" prefHeight="486.0" prefWidth="800.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="33.0" prefWidth="59.0" text="ID">
+                     <font>
+                        <Font name="MesloLGL Nerd Font Regular" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="33.0" prefWidth="191.0" text="Cursus Naam">
+                     <font>
+                        <Font name="MesloLGL Nerd Font Regular" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="33.0" prefWidth="123.0" text="Semester">
+                     <font>
+                        <Font name="MesloLGL Nerd Font Regular" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="33.0" prefWidth="139.0" text="Datum">
+                     <font>
+                        <Font name="MesloLGL Nerd Font Regular" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="33.0" prefWidth="129.0" text="Type">
+                     <font>
+                        <Font name="MesloLGL Nerd Font Regular" size="20.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER" prefHeight="33.0" prefWidth="129.0" spacing="10.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="33.0" text="Actions">
+                           <font>
+                              <Font name="MesloLGL Nerd Font Regular" size="20.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="addButton" mnemonicParsing="false" text="+" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>
