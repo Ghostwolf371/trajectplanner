@@ -6,16 +6,18 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class DeleteMethods {
+    private static final String BASE_URL = "https://trajectplannerapi.dulamari.com";
 
-    public HttpResponse<String> deleteExam(String examId) {
+    public HttpResponse<String> deleteTentamen(String tentamenId) {
         try {
-            String requestBody = "{\"exam_id\":" + examId + "}";
-
+            String url = BASE_URL + "/exams/" + tentamenId;
+            String jsonBody = String.format("{\"exam_id\": %s}", tentamenId);
+            
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("https://trajectplannerapi.dulamari.com/exams"))
+                    .uri(new URI(url))
                     .header("Content-Type", "application/json")
-                    .method("DELETE", HttpRequest.BodyPublishers.ofString(requestBody))
+                    .method("DELETE", HttpRequest.BodyPublishers.ofString(jsonBody))
                     .build();
 
             return client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -24,20 +26,4 @@ public class DeleteMethods {
             return null;
         }
     }
-
-    public HttpResponse<String> deleteScore(int scoreId) {
-        try {
-            HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("https://trajectplannerapi.dulamari.com/scores/" + scoreId))
-                    .DELETE()
-                    .build();
-
-            return client.send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
 }

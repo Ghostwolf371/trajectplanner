@@ -1,0 +1,578 @@
+/* Root Colors - Updated Theme */
+* {
+  /* Primary Blue Colors */
+  -fx-primary: #143385;
+  -fx-primary-dark: #0a1b47;
+  -fx-primary-light: #2851c7;
+  -fx-primary-lighter: #4b6fd9;
+
+  /* Secondary Orange Colors */
+  -fx-secondary: #e27024;
+  -fx-secondary-dark: #b85a1d;
+  -fx-secondary-light: #f08b45;
+  -fx-secondary-lighter: #f4a66e;
+
+  /* Supporting Colors */
+  -fx-grey-color: #2c3e50;
+  -fx-light-grey: #ecf0f1;
+  -fx-background-grey: #f8f9fa;
+  -fx-focus-color: -fx-primary;
+  -fx-error-color: #e74c3c;
+  -fx-success-color: #2ecc71;
+}
+
+.root {
+  -fx-background-color: -fx-background-grey;
+  -fx-font-family: "Segoe UI", system;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  -fx-background-color: linear-gradient(
+    to bottom right,
+    -fx-primary-dark,
+    -fx-primary
+  );
+  -fx-min-width: 280px;
+  -fx-pref-width: 280px;
+  -fx-padding: 20px 0;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 2);
+}
+
+.sidebar-header {
+  -fx-padding: 20px;
+  -fx-background-color: rgba(255, 255, 255, 0.08);
+  -fx-background-radius: 10px;
+  -fx-margin: 0 20px 20px 20px;
+}
+
+.brand-name {
+  -fx-font-size: 32px;
+  -fx-font-weight: bold;
+  -fx-text-fill: white;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 5, 0, 0, 1);
+}
+
+.brand-subtitle {
+  -fx-font-size: 24px;
+  -fx-text-fill: -fx-secondary;
+  -fx-font-weight: bold;
+}
+
+.nav-items {
+  -fx-padding: 20px 10px;
+  -fx-spacing: 10;
+}
+
+.nav-item {
+  -fx-background-color: transparent;
+  -fx-text-fill: white;
+  -fx-padding: 15px 25px;
+  -fx-font-size: 16px;
+  -fx-cursor: hand;
+  -fx-alignment: CENTER_LEFT;
+  -fx-min-width: 240px;
+  -fx-background-radius: 5px;
+  -fx-margin: 5px 10px;
+}
+
+.nav-item:hover {
+  -fx-background-color: rgba(255, 255, 255, 0.15);
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 1);
+}
+
+.nav-item-active {
+  -fx-background-color: white;
+  -fx-text-fill: -fx-primary;
+  -fx-font-weight: bold;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0, 0, 2);
+}
+
+/* Main Content Styles */
+.main-content {
+  -fx-background-color: -fx-light-grey;
+  -fx-padding: 0;
+}
+
+.content-header {
+  -fx-background-color: white;
+  -fx-padding: 30px;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 2);
+}
+
+.page-title {
+  -fx-font-size: 32px;
+  -fx-font-weight: bold;
+  -fx-text-fill: -fx-primary;
+}
+
+.search-field {
+  -fx-background-color: -fx-light-grey;
+  -fx-background-radius: 25px;
+  -fx-padding: 12px 20px;
+  -fx-min-width: 300px;
+  -fx-font-size: 14px;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 1);
+}
+
+.search-field:focused {
+  -fx-background-color: white;
+  -fx-border-color: -fx-primary-light;
+  -fx-border-width: 2px;
+  -fx-border-radius: 25px;
+}
+
+.add-exam-button {
+  -fx-background-color: -fx-secondary;
+  -fx-text-fill: white;
+  -fx-padding: 12px 25px;
+  -fx-background-radius: 25px;
+  -fx-font-weight: bold;
+  -fx-font-size: 14px;
+  -fx-cursor: hand;
+}
+
+.add-exam-button:hover {
+  -fx-background-color: -fx-secondary-dark;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 2);
+  -fx-translate-y: -1px;
+}
+
+.add-score-button {
+  -fx-background-color: -fx-secondary;
+  -fx-text-fill: white;
+  -fx-padding: 12px 25px;
+  -fx-background-radius: 25px;
+  -fx-font-weight: bold;
+  -fx-font-size: 14px;
+  -fx-cursor: hand;
+}
+
+.add-score-button:hover {
+  -fx-background-color: -fx-secondary-dark;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 2);
+  -fx-translate-y: -1px;
+}
+
+/* Table Styles */
+.table-header {
+  -fx-background-color: -fx-primary;
+  -fx-padding: 20px;
+  -fx-background-radius: 10px 10px 0 0;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 1);
+  -fx-margin: 20px 20px 0 20px;
+}
+
+.header-label {
+  -fx-font-weight: bold;
+  -fx-text-fill: white;
+  -fx-font-size: 14px;
+}
+
+.table-content {
+  -fx-background-color: transparent;
+  -fx-padding: 0 20px;
+}
+
+.exam-item {
+  -fx-background-color: white;
+  -fx-padding: 20px;
+  -fx-background-radius: 8px;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);
+  -fx-spacing: 20;
+  -fx-border-color: transparent;
+  -fx-border-width: 2px;
+  -fx-border-radius: 8px;
+}
+
+.exam-item:hover {
+  -fx-background-color: derive(white, -2%);
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 8, 0, 0, 3);
+  -fx-border-color: -fx-primary-lighter;
+}
+
+.score-item {
+  -fx-background-color: white;
+  -fx-padding: 20px;
+  -fx-background-radius: 8px;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);
+  -fx-spacing: 20;
+  -fx-border-color: transparent;
+  -fx-border-width: 2px;
+  -fx-border-radius: 8px;
+}
+
+.score-item:hover {
+  -fx-background-color: derive(white, -2%);
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 8, 0, 0, 3);
+  -fx-border-color: -fx-primary-lighter;
+}
+
+/* Action Buttons */
+.edit-button {
+  -fx-background-color: -fx-primary-light;
+  -fx-text-fill: white;
+  -fx-padding: 8px 15px;
+  -fx-background-radius: 5px;
+  -fx-cursor: hand;
+}
+
+.edit-button:hover {
+  -fx-background-color: -fx-primary;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 1);
+}
+
+.delete-button {
+  -fx-background-color: -fx-error-color;
+  -fx-text-fill: white;
+  -fx-padding: 8px 15px;
+  -fx-background-radius: 5px;
+  -fx-cursor: hand;
+}
+
+.delete-button:hover {
+  -fx-background-color: derive(-fx-error-color, -10%);
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 1);
+}
+
+/* Dialog Styles */
+.dialog-container {
+  -fx-background-color: white;
+  -fx-background-radius: 15px;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 15, 0, 0, 5);
+}
+
+.dialog-sidebar {
+  -fx-background-color: linear-gradient(
+    to bottom,
+    -fx-primary-dark,
+    -fx-primary
+  );
+  -fx-min-width: 300px;
+  -fx-padding: 40px 30px;
+  -fx-background-radius: 15px 0 0 15px;
+}
+
+.dialog-sidebar-title {
+  -fx-font-size: 36px;
+  -fx-font-weight: bold;
+  -fx-text-fill: white;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 0, 1);
+}
+
+.dialog-sidebar-subtitle {
+  -fx-font-size: 16px;
+  -fx-text-fill: rgba(255, 255, 255, 0.8);
+  -fx-padding: 20px 0 0 0;
+}
+
+.dialog-container {
+  -fx-min-width: 800px;
+  -fx-min-height: 500px;
+}
+
+.dialog-content {
+  -fx-padding: 40px;
+  -fx-spacing: 25;
+  -fx-alignment: TOP_CENTER;
+  -fx-min-width: 500px;
+}
+
+.form-group {
+  -fx-padding: 0 0 20 0;
+}
+
+.form-field {
+  -fx-background-color: -fx-light-grey;
+  -fx-background-radius: 8px;
+  -fx-padding: 12px 15px;
+  -fx-font-size: 14px;
+  -fx-min-width: 400px;
+}
+
+.form-field:focused {
+  -fx-background-color: white;
+  -fx-border-color: -fx-primary;
+  -fx-border-width: 2px;
+  -fx-border-radius: 8px;
+}
+
+.form-field:disabled {
+  -fx-opacity: 0.7;
+  -fx-background-color: #f5f5f5;
+}
+
+.form-label {
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+  -fx-text-fill: -fx-grey-color;
+}
+
+.save-button {
+  -fx-background-color: -fx-success-color;
+  -fx-text-fill: white;
+  -fx-padding: 12px 30px;
+  -fx-background-radius: 25px;
+  -fx-font-weight: bold;
+  -fx-cursor: hand;
+}
+
+.save-button:hover {
+  -fx-background-color: derive(-fx-success-color, -10%);
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 2);
+  -fx-translate-y: -1px;
+}
+
+.cancel-button {
+  -fx-background-color: transparent;
+  -fx-text-fill: -fx-grey-color;
+  -fx-padding: 12px 30px;
+  -fx-background-radius: 25px;
+  -fx-border-color: -fx-grey-color;
+  -fx-border-radius: 25px;
+  -fx-border-width: 2px;
+  -fx-cursor: hand;
+}
+
+.cancel-button:hover {
+  -fx-background-color: -fx-light-grey;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 1);
+}
+
+/* Scrollbar Styling */
+.scroll-pane {
+  -fx-background-color: transparent;
+  -fx-padding: 20px;
+}
+
+.scroll-pane > .viewport {
+  -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical {
+  -fx-background-color: transparent;
+  -fx-pref-width: 12px;
+}
+
+.scroll-bar:vertical .thumb {
+  -fx-background-color: -fx-primary-light;
+  -fx-background-radius: 6px;
+}
+
+.scroll-bar:vertical .thumb:hover {
+  -fx-background-color: -fx-primary;
+}
+
+/* Animations */
+.nav-item,
+.add-exam-button,
+.add-score-button,
+.edit-button,
+.delete-button,
+.save-button {
+  -fx-transition: all 0.2s ease-out;
+}
+
+/* Additional styles for new elements */
+.filter-combo {
+  -fx-background-color: -fx-light-grey;
+  -fx-background-radius: 20px;
+  -fx-padding: 8px 15px;
+}
+
+.date-label {
+  -fx-text-fill: -fx-grey-color;
+  -fx-opacity: 0.8;
+}
+
+.form-label {
+  -fx-font-weight: bold;
+  -fx-text-fill: -fx-grey-color;
+}
+
+.form-label {
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+  -fx-text-fill: -fx-grey-color;
+}
+
+.form-field {
+  -fx-min-width: 400px;
+}
+
+/* Style for DatePicker */
+.date-picker {
+  -fx-background-color: -fx-light-grey;
+  -fx-background-radius: 8px;
+}
+
+.date-picker .arrow-button {
+  -fx-background-color: -fx-primary-light;
+  -fx-background-radius: 0 8px 8px 0;
+}
+
+.date-picker .arrow-button:hover {
+  -fx-background-color: -fx-primary;
+}
+
+/* ComboBox Styling */
+.combo-box {
+  -fx-background-color: -fx-light-grey;
+  -fx-background-radius: 8px;
+}
+
+.combo-box:hover {
+  -fx-background-color: derive(-fx-light-grey, -5%);
+}
+
+.combo-box .list-cell:selected {
+  -fx-text-fill: -fx-primary;
+  -fx-font-weight: bold;
+}
+
+/* DatePicker Styling */
+.date-picker {
+  -fx-background-color: -fx-light-grey;
+  -fx-background-radius: 8px;
+}
+
+.date-picker .arrow-button {
+  -fx-background-color: -fx-primary-light;
+  -fx-background-radius: 0 8px 8px 0;
+}
+
+.date-picker .arrow-button:hover {
+  -fx-background-color: -fx-primary;
+}
+
+/* TextArea Styling */
+.text-area {
+  -fx-background-color: -fx-light-grey;
+  -fx-background-radius: 8px;
+  -fx-padding: 5px;
+}
+
+.text-area .content {
+  -fx-background-color: transparent;
+}
+
+.text-area:focused {
+  -fx-background-color: white;
+  -fx-border-color: -fx-primary;
+  -fx-border-width: 2px;
+  -fx-border-radius: 8px;
+}
+
+/* Button Container */
+.button-container {
+  -fx-padding: 20px 0 0 0;
+  -fx-alignment: CENTER_RIGHT;
+}
+
+/* Edit Examination Dialog Styles */
+.dialog-container {
+  -fx-background-color: white;
+  -fx-padding: 30px;
+  -fx-spacing: 20;
+  -fx-min-width: 500px;
+}
+
+.page-title {
+  -fx-font-size: 24px;
+  -fx-font-weight: bold;
+  -fx-text-fill: -fx-primary;
+}
+
+.subtitle-label {
+  -fx-font-size: 14px;
+  -fx-text-fill: -fx-grey-color;
+}
+
+.form-label {
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+  -fx-text-fill: -fx-grey-color;
+}
+
+.form-field {
+  -fx-pref-width: 100%;
+  -fx-min-width: 400px;
+  -fx-padding: 8px;
+  -fx-background-color: -fx-light-grey;
+  -fx-background-radius: 4px;
+  -fx-border-color: transparent;
+}
+
+.form-field:focused {
+  -fx-background-color: white;
+  -fx-border-color: -fx-primary;
+  -fx-border-width: 2px;
+  -fx-border-radius: 4px;
+}
+
+.save-button {
+  -fx-background-color: -fx-primary;
+  -fx-text-fill: white;
+  -fx-padding: 10px 20px;
+  -fx-background-radius: 4px;
+  -fx-cursor: hand;
+}
+
+.save-button:hover {
+  -fx-background-color: derive(-fx-primary, -10%);
+}
+
+.cancel-button {
+  -fx-background-color: transparent;
+  -fx-text-fill: -fx-grey-color;
+  -fx-padding: 10px 20px;
+  -fx-background-radius: 4px;
+  -fx-cursor: hand;
+  -fx-border-color: -fx-grey-color;
+  -fx-border-radius: 4px;
+}
+
+.cancel-button:hover {
+  -fx-background-color: -fx-light-grey;
+}
+
+/* ComboBox specific styles */
+.combo-box {
+  -fx-background-color: -fx-light-grey;
+  -fx-background-radius: 4px;
+}
+
+.combo-box:focused {
+  -fx-background-color: white;
+  -fx-border-color: -fx-primary;
+  -fx-border-width: 2px;
+}
+
+.combo-box .list-cell {
+  -fx-padding: 8px;
+}
+
+/* DatePicker specific styles */
+.date-picker {
+  -fx-background-color: -fx-light-grey;
+  -fx-background-radius: 4px;
+}
+
+.date-picker:focused {
+  -fx-background-color: white;
+  -fx-border-color: -fx-primary;
+  -fx-border-width: 2px;
+}
+
+.date-picker .arrow-button {
+  -fx-background-color: -fx-primary;
+  -fx-background-radius: 0 4px 4px 0;
+}
+
+.date-picker .arrow-button:hover {
+  -fx-background-color: derive(-fx-primary, -10%);
+}
+
+.date-picker .arrow-button .arrow {
+  -fx-background-color: white;
+}

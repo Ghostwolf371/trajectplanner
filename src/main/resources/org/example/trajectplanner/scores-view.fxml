@@ -6,9 +6,8 @@
 
 <HBox xmlns="http://javafx.com/javafx/17.0.6" 
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="org.example.trajectplanner.Controller"
-      styleClass="root"
-      stylesheets="@../../styles/styles.css">
+      fx:controller="org.example.trajectplanner.ScoresController"
+      styleClass="root">
     
     <!-- Sidebar -->
     <VBox styleClass="sidebar" minWidth="200">
@@ -20,8 +19,8 @@
         
         <!-- Navigation Items -->
         <VBox styleClass="nav-items">
-            <Button text="Examinations" styleClass="nav-item, nav-item-active"/>
-            <Button fx:id="scoresButton" text="Scores" styleClass="nav-item"/>
+            <Button fx:id="examinationsButton" text="Examinations" styleClass="nav-item"/>
+            <Button text="Scores" styleClass="nav-item, nav-item-active"/>
             <Button text="Students" styleClass="nav-item"/>
             <Button text="Reports" styleClass="nav-item"/>
             <Button text="Settings" styleClass="nav-item"/>
@@ -33,11 +32,11 @@
         <!-- Header -->
         <VBox styleClass="content-header">
             <HBox alignment="CENTER_LEFT" spacing="20">
-                <Label text="Examinations" styleClass="page-title"/>
+                <Label text="Scores" styleClass="page-title"/>
                 <Region HBox.hgrow="ALWAYS"/>
-                <TextField fx:id="searchField" promptText="Search examinations..." 
+                <TextField fx:id="searchField" promptText="Search scores..." 
                           styleClass="search-field"/>
-                <Button fx:id="addButton" text="Add New Exam" 
+                <Button fx:id="addButton" text="Add New Score" 
                         styleClass="add-exam-button"/>
             </HBox>
         </VBox>
@@ -48,23 +47,23 @@
                 <Insets left="20" right="20" top="10" bottom="10"/>
             </padding>
             <columnConstraints>
-                <ColumnConstraints percentWidth="8"/>  <!-- ID -->
-                <ColumnConstraints percentWidth="35"/> <!-- Course Name -->
-                <ColumnConstraints percentWidth="15"/> <!-- Semester -->
-                <ColumnConstraints percentWidth="15"/> <!-- Date -->
-                <ColumnConstraints percentWidth="15"/> <!-- Type -->
-                <ColumnConstraints percentWidth="12"/> <!-- Actions -->
+                <ColumnConstraints percentWidth="8"/>   <!-- ID -->
+                <ColumnConstraints percentWidth="20"/>  <!-- Student Number -->
+                <ColumnConstraints percentWidth="25"/>  <!-- Course Name -->
+                <ColumnConstraints percentWidth="15"/>  <!-- Score -->
+                <ColumnConstraints percentWidth="20"/>  <!-- Date -->
+                <ColumnConstraints percentWidth="12"/>  <!-- Actions -->
             </columnConstraints>
 
             <Label text="ID" styleClass="header-label" 
                    GridPane.columnIndex="0"/>
-            <Label text="Course Name" styleClass="header-label" 
+            <Label text="Student Number" styleClass="header-label" 
                    GridPane.columnIndex="1"/>
-            <Label text="Semester" styleClass="header-label" 
+            <Label text="Course Name" styleClass="header-label" 
                    GridPane.columnIndex="2"/>
-            <Label text="Date" styleClass="header-label" 
+            <Label text="Score" styleClass="header-label" 
                    GridPane.columnIndex="3"/>
-            <Label text="Type" styleClass="header-label" 
+            <Label text="Date" styleClass="header-label" 
                    GridPane.columnIndex="4"/>
             <Label text="Actions" styleClass="header-label" alignment="CENTER"
                    GridPane.columnIndex="5"/>
@@ -72,7 +71,7 @@
 
         <!-- Table Content -->
         <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="table-content">
-            <VBox fx:id="tentamenLayout" spacing="10">
+            <VBox fx:id="scoresLayout" spacing="10">
                 <padding>
                     <Insets top="10" right="20" bottom="10" left="20"/>
                 </padding>

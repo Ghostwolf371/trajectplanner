@@ -1,11 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.trajectplanner.EditTentamenController">
-   <children>
-      <Label fx:id="tentamenIdLabel" text="Tentamen ID: " />
-      <!-- Add your edit form controls here -->
-   </children>
-</VBox>
+<HBox prefHeight="600" prefWidth="900" styleClass="dialog-container" stylesheets="@../../../styles/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.trajectplanner.EditTentamenController">
+    
+    <!-- Left Sidebar with gradient background -->
+    <VBox styleClass="dialog-sidebar">
+        <Label styleClass="dialog-sidebar-title" text="Edit" />
+        <Label styleClass="dialog-sidebar-title" text="Examination" />
+        <Label fx:id="tentamenIdLabel" styleClass="dialog-sidebar-subtitle" text="Update examination details" wrapText="true" />
+    </VBox>
+    
+    <!-- Right Content Area -->
+    <VBox styleClass="dialog-content" HBox.hgrow="ALWAYS">
+        <VBox spacing="20">
+            <!-- Course Code Field -->
+            <VBox spacing="10">
+                <Label styleClass="form-label" text="Course Code" />
+                <ComboBox fx:id="courseCodeComboBox" 
+                         promptText="Select course code" 
+                         styleClass="form-field" />
+            </VBox>
+
+            <!-- Exam Type Field -->
+            <VBox spacing="10">
+                <Label styleClass="form-label" text="Exam Type" />
+                <ComboBox fx:id="typeComboBox" promptText="Select type" styleClass="form-field" />
+            </VBox>
+
+            <!-- Date Field -->
+            <VBox spacing="10">
+                <Label styleClass="form-label" text="Date" />
+                <DatePicker fx:id="datePicker" promptText="Select date" styleClass="form-field" />
+            </VBox>
+
+            <!-- Button Container -->
+            <HBox alignment="CENTER_RIGHT" spacing="15" styleClass="button-container">
+                <Button onAction="#handleCancel" styleClass="cancel-button" text="Cancel" />
+                <Button onAction="#handleUpdate" styleClass="save-button" text="Save Changes" />
+            </HBox>
+        </VBox>
+    </VBox>
+</HBox>
