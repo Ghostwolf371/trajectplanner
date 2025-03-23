@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import org.example.trajectplanner.API.GetMethods;
 import org.example.trajectplanner.Modal.Tentamen;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,13 +33,9 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("https://trajectplannerapi.dulamari.com/exams/"))
-                    .GET()
-                    .build();
+            GetMethods getMethods = new GetMethods();
 
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response = getMethods.getExams();
 
             if (response.statusCode() == 200) {
                 ObjectMapper mapper = new ObjectMapper();

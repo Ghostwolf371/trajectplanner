@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.hellofx.TentamenItemController">
+<HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.trajectplanner.TentamenItemController">
    <children>
       <Label fx:id="id" alignment="CENTER" prefHeight="20.0" prefWidth="59.0">
          <font>
