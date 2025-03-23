@@ -10,8 +10,8 @@ import org.example.trajectplanner.utils.DialogUtils;
 import java.time.LocalDate;
 
 public class EditScoreController {
-    @FXML private TextField studentNumberField;
-    @FXML private TextField courseNameField;
+    @FXML private Label studentNumberField;
+    @FXML private Label courseNameField;
     @FXML private TextField scoreField;
     @FXML private DatePicker datePicker;
     
@@ -25,37 +25,66 @@ public class EditScoreController {
     private void loadScoreData() {
         try {
             var response = ScoreService.getById(scoreId);
+            if (response == null) {
+                System.out.println("Response is null for score ID: " + scoreId);
+                return;
+            }
+            System.out.println("Score ID being requested: " + scoreId);
+            System.out.println("Response status: " + (response != null ? response.statusCode() : "null"));
+            System.out.println("Response body: " + (response != null ? response.body() : "null"));
+            
             if (response != null && response.statusCode() == 200) {
                 ObjectMapper mapper = new ObjectMapper();
-                var score = mapper.readTree(response.body());
+                var scores = mapper.readTree(response.body());
                 
-                if (score.has("student_number")) {
-                    studentNumberField.setText(score.get("student_number").asText(""));
-                }
-                
-                if (score.has("course_name")) {
-                    courseNameField.setText(score.get("course_name").asText(""));
-                }
-                
-                if (score.has("score_value")) {
-                    var scoreValue = score.get("score_value");
-                    if (!scoreValue.isNull()) {
-                        scoreField.setText(String.valueOf(scoreValue.asDouble()));
+                // Since the response is an array, get the first element
+                if (scores.isArray() && scores.size() > 0) {
+                    var score = scores.get(0);
+                    
+                    // Clear existing values
+                    studentNumberField.setText("");
+                    courseNameField.setText("");
+                    scoreField.clear();
+                    datePicker.setValue(null);
+                    
+                    // Set student number
+                    if (score.has("student_number")) {
+                        studentNumberField.setText(score.get("student_number").asText());
                     }
-                }
-                
-                if (score.has("score_date")) {
-                    String dateStr = score.get("score_date").asText(null);
-                    if (dateStr != null && !dateStr.isEmpty()) {
-                        try {
-                            datePicker.setValue(LocalDate.parse(dateStr));
-                        } catch (Exception e) {
-                            System.err.println("Failed to parse date: " + dateStr);
+                    
+                    // Set course name
+                    if (score.has("course_name")) {
+                        courseNameField.setText(score.get("course_name").asText());
+                    }
+                    
+                    // Set score value
+                    if (score.has("score_value")) {
+                        var scoreValue = score.get("score_value");
+                        if (!scoreValue.isNull()) {
+                            scoreField.setText(scoreValue.asText());
+                        }
+                    }
+                    
+                    // Set date
+                    if (score.has("score_datetime")) {
+                        String dateStr = score.get("score_datetime").asText();
+                        if (dateStr != null && !dateStr.isEmpty()) {
+                            try {
+                                // Parse the date string to LocalDate
+                                LocalDate date = LocalDate.parse(dateStr.split(" ")[0]);
+                                datePicker.setValue(date);
+                            } catch (Exception e) {
+                                System.err.println("Failed to parse date: " + dateStr);
+                            }
                         }
                     }
                 }
+            } else {
+                DialogUtils.showError("Error", "Failed to load score data. Status code: " + 
+                    (response != null ? response.statusCode() : "null"));
             }
         } catch (Exception e) {
+            e.printStackTrace();
             DialogUtils.showError("Error", "Failed to load score data: " + e.getMessage());
             closeDialog();
         }

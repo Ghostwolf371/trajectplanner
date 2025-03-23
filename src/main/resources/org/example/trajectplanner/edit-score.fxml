@@ -27,20 +27,20 @@
             <!-- Student Number Field -->
             <VBox spacing="10">
                 <Label text="Student Number" styleClass="form-label"/>
-                <TextField fx:id="studentNumberField" 
-                          styleClass="form-field"
-                          editable="false"/>
+                <Label fx:id="studentNumberField" 
+                       styleClass="display-field"
+                       maxWidth="Infinity"/>
             </VBox>
 
             <!-- Course Name Field -->
             <VBox spacing="10">
                 <Label text="Course Name" styleClass="form-label"/>
-                <TextField fx:id="courseNameField" 
-                          styleClass="form-field"
-                          editable="false"/>
+                <Label fx:id="courseNameField" 
+                       styleClass="display-field"
+                       maxWidth="Infinity"/>
             </VBox>
 
-            <!-- Score Field -->
+            <!-- Score Field - Keep editable -->
             <VBox spacing="10">
                 <Label text="Score" styleClass="form-label"/>
                 <TextField fx:id="scoreField" 
@@ -48,7 +48,7 @@
                           promptText="Enter score (0.0 - 10.0)"/>
             </VBox>
 
-            <!-- Date Field -->
+            <!-- Date Field - Keep editable -->
             <VBox spacing="10">
                 <Label text="Date" styleClass="form-label"/>
                 <DatePicker fx:id="datePicker" 

@@ -6,6 +6,11 @@ import javafx.scene.control.Label;
 import org.example.trajectplanner.API.ScoreService;
 import org.example.trajectplanner.Modal.Score;
 import org.example.trajectplanner.utils.DialogUtils;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.stage.Modality;
 
 public class ScoreItemController {
     @FXML private Label id;
@@ -47,17 +52,26 @@ public class ScoreItemController {
 
     private void openEditDialog() {
         try {
-            var dialog = DialogUtils.showDialog(
-                "/org/example/trajectplanner/edit-score.fxml",
-                "Edit Score",
-                editButton.getScene().getWindow()
-            );
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/trajectplanner/edit-score.fxml"));
+            Parent root = loader.load();
+
+            EditScoreController editController = loader.getController();
+            editController.setScoreId(scoreId);
+
+            // Create a new stage for the edit window
+            Stage editStage = new Stage();
+            editStage.initModality(Modality.APPLICATION_MODAL);
+            editStage.initOwner(editButton.getScene().getWindow());
             
-            var controller = dialog.getUserData();
-            if (controller instanceof EditScoreController) {
-                ((EditScoreController) controller).setScoreId(scoreId);
-            }
+            Scene scene = new Scene(root);
+            editStage.setScene(scene);
+            editStage.setTitle("Edit Score");
+            
+            // Show the window and wait for it to close
+            editStage.showAndWait();
+            
         } catch (Exception e) {
+            e.printStackTrace();
             DialogUtils.showError("Error", "Failed to open edit window: " + e.getMessage());
         }
     }
