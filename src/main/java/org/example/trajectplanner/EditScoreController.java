@@ -26,62 +26,43 @@ public class EditScoreController {
         try {
             var response = ScoreService.getById(scoreId);
             if (response == null) {
-                System.out.println("Response is null for score ID: " + scoreId);
+                DialogUtils.showError("Error", "Failed to connect to server");
                 return;
             }
-            System.out.println("Score ID being requested: " + scoreId);
-            System.out.println("Response status: " + (response != null ? response.statusCode() : "null"));
-            System.out.println("Response body: " + (response != null ? response.body() : "null"));
             
-            if (response != null && response.statusCode() == 200) {
+            if (response.statusCode() == 200) {
                 ObjectMapper mapper = new ObjectMapper();
                 var scores = mapper.readTree(response.body());
                 
-                // Since the response is an array, get the first element
                 if (scores.isArray() && scores.size() > 0) {
                     var score = scores.get(0);
                     
-                    // Clear existing values
-                    studentNumberField.setText("");
-                    courseNameField.setText("");
-                    scoreField.clear();
-                    datePicker.setValue(null);
-                    
-                    // Set student number
                     if (score.has("student_number")) {
                         studentNumberField.setText(score.get("student_number").asText());
                     }
                     
-                    // Set course name
                     if (score.has("course_name")) {
                         courseNameField.setText(score.get("course_name").asText());
                     }
                     
-                    // Set score value
-                    if (score.has("score_value")) {
-                        var scoreValue = score.get("score_value");
-                        if (!scoreValue.isNull()) {
-                            scoreField.setText(scoreValue.asText());
-                        }
+                    if (score.has("score")) {
+                        scoreField.setText(score.get("score").asText());
                     }
                     
-                    // Set date
                     if (score.has("score_datetime")) {
                         String dateStr = score.get("score_datetime").asText();
                         if (dateStr != null && !dateStr.isEmpty()) {
                             try {
-                                // Parse the date string to LocalDate
                                 LocalDate date = LocalDate.parse(dateStr.split(" ")[0]);
                                 datePicker.setValue(date);
                             } catch (Exception e) {
-                                System.err.println("Failed to parse date: " + dateStr);
+                                DialogUtils.showError("Error", "Invalid date format in data");
                             }
                         }
                     }
                 }
             } else {
-                DialogUtils.showError("Error", "Failed to load score data. Status code: " + 
-                    (response != null ? response.statusCode() : "null"));
+                DialogUtils.showError("Error", "Failed to load score data. Status code: " + response.statusCode());
             }
         } catch (Exception e) {
             e.printStackTrace();

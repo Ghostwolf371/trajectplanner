@@ -1,9 +1,6 @@
 package org.example.trajectplanner;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.example.trajectplanner.API.GetMethods;
@@ -13,7 +10,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.io.IOException;
 import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Arrays;

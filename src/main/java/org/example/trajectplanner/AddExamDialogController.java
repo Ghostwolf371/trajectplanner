@@ -3,7 +3,6 @@ package org.example.trajectplanner;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.example.trajectplanner.API.PostMethods;
 import java.time.format.DateTimeFormatter;

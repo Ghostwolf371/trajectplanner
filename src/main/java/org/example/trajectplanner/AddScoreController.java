@@ -6,7 +6,6 @@ import javafx.stage.Stage;
 import org.example.trajectplanner.API.ScoreService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import java.time.LocalDate;
 
 public class AddScoreController {
     @FXML private TextField studentNumberField;
