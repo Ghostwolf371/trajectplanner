@@ -1,4 +1,4 @@
-package org.example.trajectplanner;
+package org.example.trajectplanner.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -88,7 +88,7 @@ public class ScoresController {
 
     private void addScoreItem(Score score) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Score_item.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/trajectplanner/Score_item.fxml"));
             GridPane gridPane = loader.load();
             ScoreItemController controller = loader.getController();
             controller.setData(score);
@@ -119,7 +119,7 @@ public class ScoresController {
 
     private void navigateToExaminations() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/trajectplanner/hello-view.fxml"));
             examinationsButton.getScene().setRoot(loader.load());
         } catch (IOException e) {
             DialogUtils.showError("Error", "Failed to navigate to examinations: " + e.getMessage());

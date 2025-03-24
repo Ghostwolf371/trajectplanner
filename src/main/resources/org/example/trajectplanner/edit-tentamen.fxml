@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox prefHeight="600" prefWidth="900" styleClass="dialog-container" stylesheets="@../../../styles/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.trajectplanner.EditTentamenController">
+<HBox prefHeight="600" prefWidth="900" styleClass="dialog-container" stylesheets="@../../../styles/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.trajectplanner.controllers.EditTentamenController">
     
     <!-- Left Sidebar with gradient background -->
     <VBox styleClass="dialog-sidebar">

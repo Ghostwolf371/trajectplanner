@@ -6,7 +6,7 @@
 
 <HBox xmlns="http://javafx.com/javafx/17.0.6" 
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="org.example.trajectplanner.AddScoreController"
+      fx:controller="org.example.trajectplanner.controllers.AddScoreController"
       stylesheets="@../../../styles/styles.css"
       styleClass="dialog-container"
       prefWidth="900"

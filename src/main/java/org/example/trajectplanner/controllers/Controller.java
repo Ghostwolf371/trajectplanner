@@ -1,4 +1,4 @@
-package org.example.trajectplanner;
+package org.example.trajectplanner.controllers;
 
 import java.io.IOException;
 import java.net.http.HttpResponse;
@@ -79,7 +79,7 @@ public class Controller implements Initializable {
                 examItems.clear();
                 for (Tentamen tentamen : tentamens) {
                     FXMLLoader fxmlLoader = new FXMLLoader();
-                    fxmlLoader.setLocation(getClass().getResource("Tentamen_item.fxml"));
+                    fxmlLoader.setLocation(getClass().getResource("/org/example/trajectplanner/Tentamen_item.fxml"));
 
                     try {
                         GridPane gridPane = fxmlLoader.load();
@@ -132,7 +132,7 @@ public class Controller implements Initializable {
 
     private void navigateToScores() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("scores-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/trajectplanner/scores-view.fxml"));
             Parent root = loader.load();
 
             Scene scene = scoresButton.getScene();

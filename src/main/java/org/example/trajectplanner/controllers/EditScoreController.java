@@ -1,4 +1,4 @@
-package org.example.trajectplanner;
+package org.example.trajectplanner.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -45,8 +45,14 @@ public class EditScoreController {
                         courseNameField.setText(score.get("course_name").asText());
                     }
                     
-                    if (score.has("score")) {
-                        scoreField.setText(score.get("score").asText());
+                    // Changed from "score" to "score_value"
+                    if (score.has("score_value")) {
+                        var scoreValue = score.get("score_value");
+                        if (scoreValue.isNumber()) {
+                            scoreField.setText(String.format("%.1f", scoreValue.asDouble()));
+                        } else {
+                            scoreField.setText(scoreValue.asText());
+                        }
                     }
                     
                     if (score.has("score_datetime")) {

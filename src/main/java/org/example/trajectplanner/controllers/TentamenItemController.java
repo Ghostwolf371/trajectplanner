@@ -1,4 +1,4 @@
-package org.example.trajectplanner;
+package org.example.trajectplanner.controllers;
 
 import java.io.IOException;
 import java.net.URL;
@@ -87,7 +87,7 @@ public class TentamenItemController implements Initializable {
 
     private void navigateToEdit() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("edit-tentamen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/trajectplanner/edit-tentamen.fxml"));
             Parent root = loader.load();
 
             EditTentamenController editController = loader.getController();

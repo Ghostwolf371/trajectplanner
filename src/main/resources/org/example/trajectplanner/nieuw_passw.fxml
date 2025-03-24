@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.6" 
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.trajectplanner.controllers.NewPasswordController"
+            prefWidth="1600" prefHeight="900"
+            maxWidth="1600" maxHeight="900"
+            minWidth="1600" minHeight="900"
+            stylesheets="@../../../styles/login-styles.css">
+    <center>
+        <HBox alignment="CENTER" spacing="0">
+            <!-- Left side - Image and info -->
+            <VBox styleClass="login-sidebar" alignment="CENTER" 
+                  prefWidth="800" prefHeight="900"
+                  maxWidth="800" maxHeight="900"
+                  minWidth="800" minHeight="900">
+                <padding>
+                    <Insets top="40" right="40" bottom="40" left="40"/>
+                </padding>
+                
+                <VBox alignment="CENTER" spacing="15">
+                    <Label text="Traject Planner" styleClass="brand-name"/>
+                    <Label text="Security Center" styleClass="brand-subtitle"/>
+                </VBox>
+                
+                <ImageView fitHeight="400.0" fitWidth="400.0" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/password-reset-icon.png"/>
+                    </image>
+                </ImageView>
+                
+                <VBox alignment="CENTER" spacing="15">
+                    <Label text="Password Reset" styleClass="login-title"/>
+                    <Label text="Secure Your Account" styleClass="login-subtitle" wrapText="true"/>
+                </VBox>
+            </VBox>
+            
+            <!-- Right side - Password form -->
+            <VBox styleClass="login-form-container" alignment="CENTER" 
+                  prefWidth="800" prefHeight="900"
+                  maxWidth="800" maxHeight="900"
+                  minWidth="800" minHeight="900">
+                <padding>
+                    <Insets top="40" right="60" bottom="40" left="60"/>
+                </padding>
+                
+                <!-- Form header -->
+                <VBox alignment="CENTER" spacing="15">
+                    <Label text="Create New Password" styleClass="form-title"/>
+                    <Label text="Please enter your new password" styleClass="form-subtitle"/>
+                </VBox>
+                
+                <!-- Password form fields -->
+                <VBox spacing="25">
+                    <VBox styleClass="form-group">
+                        <Label text="New Password" styleClass="form-label"/>
+                        <PasswordField fx:id="newPassword" 
+                                     promptText="Enter your new password" 
+                                     styleClass="login-field"/>
+                    </VBox>
+                    
+                    <VBox styleClass="form-group">
+                        <Label text="Confirm Password" styleClass="form-label"/>
+                        <PasswordField fx:id="confirmPassword"
+                                     promptText="Confirm your new password" 
+                                     styleClass="login-field"/>
+                    </VBox>
+                    
+                    <!-- Buttons -->
+                    <VBox spacing="15" alignment="CENTER">
+                        <Button text="Change Password" 
+                                onAction="#handleChangePassword"
+                                styleClass="login-button"
+                                maxWidth="Infinity"/>
+                                
+                        <Button text="Cancel" 
+                                onAction="#handleCancel"
+                                styleClass="cancel-button"/>
+                    </VBox>
+                </VBox>
+            </VBox>
+        </HBox>
+    </center>
+    
+    <bottom>
+        <HBox styleClass="login-footer" alignment="CENTER">
+            <padding>
+                <Insets top="10" bottom="10"/>
+            </padding>
+            <Label text="© 2024 Traject Planner. All rights reserved." 
+                   styleClass="footer-text"/>
+        </HBox>
+    </bottom>
+</BorderPane>

@@ -1,4 +1,4 @@
-package org.example.trajectplanner;
+package org.example.trajectplanner.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

@@ -11,9 +11,7 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1600, 800);
-        String css = HelloApplication.class.getResource("/styles/styles.css").toExternalForm();
-        scene.getStylesheets().add(css);
+        Scene scene = new Scene(fxmlLoader.load(), 1600, 900);
         stage.setTitle("Traject Planner");
         stage.setScene(scene);
         stage.show();

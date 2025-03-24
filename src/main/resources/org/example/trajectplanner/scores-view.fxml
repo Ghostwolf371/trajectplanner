@@ -6,8 +6,9 @@
 
 <HBox xmlns="http://javafx.com/javafx/17.0.6" 
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="org.example.trajectplanner.ScoresController"
-      styleClass="root">
+      fx:controller="org.example.trajectplanner.controllers.ScoresController"
+      styleClass="root"
+      stylesheets="@../../../styles/styles.css">
     
     <!-- Sidebar -->
     <VBox styleClass="sidebar" minWidth="200">
