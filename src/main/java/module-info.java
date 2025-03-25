@@ -7,9 +7,11 @@ module org.example.trajectplanner {
 
     opens org.example.trajectplanner to javafx.fxml;
     opens org.example.trajectplanner.controllers to javafx.fxml;
-    opens org.example.trajectplanner.Modal to com.fasterxml.jackson.databind;
+    opens org.example.trajectplanner.model to com.fasterxml.jackson.databind;
+    opens org.example.trajectplanner.api to com.fasterxml.jackson.databind;
     
     exports org.example.trajectplanner;
     exports org.example.trajectplanner.controllers;
-    exports org.example.trajectplanner.Modal;
+    exports org.example.trajectplanner.model;
+    exports org.example.trajectplanner.api;
 }

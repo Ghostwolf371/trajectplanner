@@ -3,8 +3,8 @@ package org.example.trajectplanner.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import org.example.trajectplanner.API.ScoreService;
-import org.example.trajectplanner.Modal.Score;
+import org.example.trajectplanner.api.ScoreService;
+import org.example.trajectplanner.model.Score;
 import org.example.trajectplanner.utils.DialogUtils;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -52,7 +52,7 @@ public class ScoreItemController {
 
     private void openEditDialog() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/trajectplanner/edit-score.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/edit-score.fxml"));
             Parent root = loader.load();
 
             EditScoreController editController = loader.getController();

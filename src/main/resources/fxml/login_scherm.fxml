@@ -12,7 +12,7 @@
             prefWidth="1600" prefHeight="900"
             maxWidth="1600" maxHeight="900"
             minWidth="1600" minHeight="900"
-            stylesheets="@../../../styles/login-styles.css">
+            stylesheets="@../css/login-styles.css">
     <center>
         <HBox alignment="CENTER" spacing="0">
             <!-- Left side - Image and info -->

@@ -1,4 +1,4 @@
-package org.example.trajectplanner.API;
+package org.example.trajectplanner.api;
 
 import java.net.http.HttpResponse;
 

@@ -6,8 +6,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import org.example.trajectplanner.API.GetMethods;
-import org.example.trajectplanner.Modal.Tentamen;
+import org.example.trajectplanner.api.GetMethods;
+import org.example.trajectplanner.model.Tentamen;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -79,7 +79,7 @@ public class Controller implements Initializable {
                 examItems.clear();
                 for (Tentamen tentamen : tentamens) {
                     FXMLLoader fxmlLoader = new FXMLLoader();
-                    fxmlLoader.setLocation(getClass().getResource("/org/example/trajectplanner/Tentamen_item.fxml"));
+                    fxmlLoader.setLocation(getClass().getResource("/fxml/Tentamen_item.fxml"));
 
                     try {
                         GridPane gridPane = fxmlLoader.load();
@@ -105,7 +105,7 @@ public class Controller implements Initializable {
 
     private void navigateToAdd() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/trajectplanner/AddExamDialog.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AddExamDialog.fxml"));
             Parent root = loader.load();
             
             Stage popupStage = new Stage();
@@ -113,8 +113,7 @@ public class Controller implements Initializable {
             popupStage.initOwner(addButton.getScene().getWindow());
             
             Scene scene = new Scene(root);
-            // Update CSS path to match the actual location
-            scene.getStylesheets().add(getClass().getResource("/styles/styles.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
             popupStage.setScene(scene);
             popupStage.setTitle("Add Examination");
             popupStage.setMinWidth(800);
@@ -132,7 +131,7 @@ public class Controller implements Initializable {
 
     private void navigateToScores() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/trajectplanner/scores-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/scores-view.fxml"));
             Parent root = loader.load();
 
             Scene scene = scoresButton.getScene();

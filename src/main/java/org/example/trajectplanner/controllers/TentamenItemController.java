@@ -5,8 +5,8 @@ import java.net.URL;
 import java.net.http.HttpResponse;
 import java.util.ResourceBundle;
 
-import org.example.trajectplanner.API.DeleteMethods;
-import org.example.trajectplanner.Modal.Tentamen;
+import org.example.trajectplanner.api.DeleteMethods;
+import org.example.trajectplanner.model.Tentamen;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -87,7 +87,7 @@ public class TentamenItemController implements Initializable {
 
     private void navigateToEdit() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/trajectplanner/edit-tentamen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/edit-tentamen.fxml"));
             Parent root = loader.load();
 
             EditTentamenController editController = loader.getController();

@@ -1,6 +1,7 @@
 package org.example.trajectplanner.utils;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Modality;
@@ -10,25 +11,24 @@ import javafx.stage.Window;
 public class DialogUtils {
     public static Stage showDialog(String fxmlPath, String title, Window owner) throws Exception {
         var url = DialogUtils.class.getResource(fxmlPath);
-        
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(url);
-        
-        if (loader.getLocation() == null) {
-            throw new IllegalArgumentException("Could not find FXML file: " + fxmlPath);
+        if (url != null) {
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(owner);
+            
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle(title);
+            stage.setMinWidth(800);
+            stage.setMinHeight(600);
+            
+            stage.showAndWait();
+            return stage;
         }
-
-        Stage dialog = new Stage();
-        dialog.initModality(Modality.APPLICATION_MODAL);
-        dialog.initOwner(owner);
-        dialog.setScene(new Scene(loader.load()));
-        dialog.setTitle(title);
-        
-        // Store the controller for later use
-        dialog.setUserData(loader.getController());
-        
-        dialog.showAndWait();
-        return dialog;
+        throw new IllegalArgumentException("Could not find FXML file: " + fxmlPath);
     }
 
     public static void showError(String title, String message) {

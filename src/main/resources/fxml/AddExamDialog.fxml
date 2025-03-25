@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<HBox prefHeight="600" prefWidth="900" styleClass="dialog-container" stylesheets="@../styles/styles.css" 
-      xmlns="http://javafx.com/javafx/23.0.1" 
+<HBox prefHeight="600" prefWidth="900" styleClass="dialog-container" stylesheets="@../css/styles.css"
+      xmlns="http://javafx.com/javafx/17.0.6" 
       xmlns:fx="http://javafx.com/fxml/1" 
       fx:controller="org.example.trajectplanner.controllers.AddExamDialogController">
     

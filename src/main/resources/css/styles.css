@@ -78,6 +78,7 @@
 
 .nav-item:hover {
   -fx-background-color: rgba(255, 255, 255, 0.15);
+  -fx-text-fill: -fx-secondary;
   -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 1);
 }
 

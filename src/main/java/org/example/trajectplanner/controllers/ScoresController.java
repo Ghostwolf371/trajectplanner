@@ -5,6 +5,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -14,8 +16,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.List;
 
-import org.example.trajectplanner.API.GetMethods;
-import org.example.trajectplanner.Modal.Score;
+import org.example.trajectplanner.api.GetMethods;
+import org.example.trajectplanner.model.Score;
 import org.example.trajectplanner.utils.DialogUtils;
 
 public class ScoresController {
@@ -88,7 +90,7 @@ public class ScoresController {
 
     private void addScoreItem(Score score) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/trajectplanner/Score_item.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Score_item.fxml"));
             GridPane gridPane = loader.load();
             ScoreItemController controller = loader.getController();
             controller.setData(score);
@@ -106,11 +108,7 @@ public class ScoresController {
 
     private void navigateToAddScore() {
         try {
-            DialogUtils.showDialog(
-                "/org/example/trajectplanner/AddScoreDialog.fxml",
-                "Add New Score",
-                addButton.getScene().getWindow()
-            );
+            DialogUtils.showDialog("/fxml/AddScoreDialog.fxml", "Add Score", addButton.getScene().getWindow());
             loadScores();
         } catch (Exception e) {
             DialogUtils.showError("Error", "Failed to open add score dialog: " + e.getMessage());
@@ -119,8 +117,10 @@ public class ScoresController {
 
     private void navigateToExaminations() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/trajectplanner/hello-view.fxml"));
-            examinationsButton.getScene().setRoot(loader.load());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/hello-view.fxml"));
+            Parent root = loader.load();
+            Scene scene = examinationsButton.getScene();
+            scene.setRoot(root);
         } catch (IOException e) {
             DialogUtils.showError("Error", "Failed to navigate to examinations: " + e.getMessage());
         }

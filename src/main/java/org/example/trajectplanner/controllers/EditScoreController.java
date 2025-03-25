@@ -3,7 +3,7 @@ package org.example.trajectplanner.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import org.example.trajectplanner.API.ScoreService;
+import org.example.trajectplanner.api.ScoreService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.example.trajectplanner.utils.DialogUtils;
