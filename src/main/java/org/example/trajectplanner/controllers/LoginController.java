@@ -138,9 +138,6 @@ public class LoginController {
             feedbackLabel.setText(message);
             feedbackLabel.setStyle(isError ? "-fx-text-fill: red;" : "-fx-text-fill: green;");
             feedbackLabel.setVisible(true);
-        } else {
-            // If feedbackLabel is not defined in FXML, show console message instead
-            System.out.println((isError ? "ERROR: " : "SUCCESS: ") + message);
         }
     }
     

@@ -2,6 +2,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -11,44 +13,50 @@
             prefWidth="1600"
             prefHeight="900">
             
-    <!-- Left Sidebar -->
-    <left>
-        <VBox styleClass="sidebar" spacing="10">
-            <padding><Insets top="20" left="20" right="20" bottom="20"/></padding>
+    <!-- Ultra Clean Modern Top Navigation Bar -->
+    <top>
+        <StackPane>
+            <!-- Background with elegant gradient -->
+            <Rectangle width="1600" height="80" styleClass="premium-header-bg"/>
             
-            <!-- Logo and Title -->
-            <Label text="Trajectplanner" styleClass="sidebar-title"/>
-            
-            <!-- Navigation Buttons -->
-            <Button text="Dashboard" styleClass="sidebar-button active" onAction="#navigateToDashboard"/>
-            <Button text="Studenten" styleClass="sidebar-button" onAction="#navigateToStudents"/>
-            <Button text="Tentamens" styleClass="sidebar-button" onAction="#navigateToExams"/>
-            <Button text="Cursussen" styleClass="sidebar-button" onAction="#navigateToCourses"/>
-            
-            <!-- Spacer to push admin section to bottom -->
-            <VBox VBox.vgrow="ALWAYS"/>
-            
-            <!-- Admin User Section -->
-            <VBox styleClass="admin-section">
-                <Label text="Admin User" styleClass="admin-label"/>
-                <Label text="Admin" styleClass="admin-name"/>
-            </VBox>
-            
-            <!-- Logout Button -->
-            <Button text="Logout" styleClass="logout-button" onAction="#handleLogout"/>
-        </VBox>
-    </left>
+            <!-- Main content -->
+            <HBox styleClass="premium-header">
+                <!-- Left side with logo -->
+                <HBox alignment="CENTER_LEFT" spacing="0" styleClass="logo-container">
+                    <Rectangle width="5" height="32" styleClass="logo-accent"/>
+                    <Label text="TRAJECT" styleClass="logo-part1"/>
+                    <Label text="PLANNER" styleClass="logo-part2"/>
+                </HBox>
+                
+                <!-- Right side with student info and logout -->
+                <HBox alignment="CENTER_RIGHT" spacing="20" HBox.hgrow="ALWAYS">
+                    <!-- Redesigned Student Info (no container) -->
+                    <VBox alignment="CENTER_RIGHT">
+                        <Label fx:id="studentNameLabel" text="Student Name" styleClass="premium-student-name"/>
+                        <Label fx:id="studentNumberLabel" text="SE/1145/47" styleClass="premium-student-number"/>
+                    </VBox>
+                    
+                    <!-- Sleek logout button -->
+                    <Button text="LOGOUT" styleClass="premium-logout-button" onAction="#handleLogout"/>
+                </HBox>
+            </HBox>
+        </StackPane>
+    </top>
     
-    <!-- Main Content -->
+    <!-- Main Content (scrollable part) -->
     <center>
         <ScrollPane fitToWidth="true" styleClass="content-scroll-pane">
             <VBox styleClass="content-container">
                 <padding>
-                    <Insets top="30" right="30" bottom="30" left="30"/>
+                    <Insets top="10" right="30" bottom="30" left="30"/>
                 </padding>
                 
-                <!-- Student Info Cards -->
-                <HBox spacing="20" styleClass="info-cards-container">
+                <!-- Student info cards at the top of the content area (will scroll away) -->
+                <HBox spacing="20" styleClass="info-cards-container" alignment="CENTER">
+                    <padding>
+                        <Insets top="10" right="0" bottom="20" left="0"/>
+                    </padding>
+                    
                     <!-- BirthDate Card -->
                     <VBox styleClass="info-card, primary-card">
                         <Label text="Birth Date" styleClass="card-label"/>
@@ -61,8 +69,8 @@
                         <Label fx:id="totalEcLabel" text="75 EC" styleClass="card-value"/>
                     </VBox>
                     
-                    <!-- Average Grade Card -->
-                    <VBox styleClass="info-card, warning-card">
+                    <!-- Average Grade Card (changed to success-card class) -->
+                    <VBox styleClass="info-card, success-card">
                         <Label text="Average Grade" styleClass="card-label"/>
                         <Label fx:id="averageGradeLabel" text="7.5" styleClass="card-value"/>
                     </VBox>
@@ -74,14 +82,13 @@
                     </VBox>
                 </HBox>
                 
-                <!-- Extra spacing -->
-                <Region minHeight="20" />
-                
                 <!-- Upcoming Exams Section -->
                 <TitledPane text="Upcoming Exams" expanded="true" styleClass="exams-section,section-pane">
                     <content>
                         <VBox styleClass="table-container">
-                            <TextField fx:id="examSearchField" promptText="Search exams..." styleClass="table-search-field"/>
+                            <HBox spacing="10" alignment="CENTER_LEFT">
+                                <TextField fx:id="examSearchField" promptText="Search exams..." styleClass="table-search-field" HBox.hgrow="ALWAYS"/>
+                            </HBox>
                             <TableView fx:id="examsTable" VBox.vgrow="ALWAYS" styleClass="data-table">
                                 <columns>
                                     <TableColumn fx:id="examIdColumn" text="Exam ID" />
@@ -99,7 +106,9 @@
                 <TitledPane text="Recent Scores" expanded="true" styleClass="scores-section,section-pane">
                     <content>
                         <VBox styleClass="table-container">
-                            <TextField fx:id="scoreSearchField" promptText="Search scores..." styleClass="table-search-field"/>
+                            <HBox spacing="10" alignment="CENTER_LEFT">
+                                <TextField fx:id="scoreSearchField" promptText="Search scores..." styleClass="table-search-field" HBox.hgrow="ALWAYS"/>
+                            </HBox>
                             <TableView fx:id="scoresTable" VBox.vgrow="ALWAYS" styleClass="data-table">
                                 <columns>
                                     <TableColumn fx:id="scoresCourseCodeColumn" text="Course Code" />
@@ -116,7 +125,9 @@
                 <TitledPane text="Courses" expanded="true" styleClass="courses-section,section-pane">
                     <content>
                         <VBox styleClass="table-container">
-                            <TextField fx:id="searchField" promptText="Search courses..." styleClass="table-search-field"/>
+                            <HBox spacing="10" alignment="CENTER_LEFT">
+                                <TextField fx:id="searchField" promptText="Search courses..." styleClass="table-search-field" HBox.hgrow="ALWAYS"/>
+                            </HBox>
                             <TableView fx:id="coursesTable" VBox.vgrow="ALWAYS" styleClass="data-table">
                                 <columns>
                                     <TableColumn fx:id="courseCodeColumn" text="Course Code" />

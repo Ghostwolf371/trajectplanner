@@ -834,9 +834,18 @@
 .header-title,
 .header-student-number,
 .logout-button,
-.section-pane > .title {
+.section-pane > .title,
+.premium-student-name,
+.premium-student-number,
+.logo-part1,
+.logo-part2 {
   -fx-text-fill: white !important;
   -fx-font-weight: bold;
+}
+
+/* Logo part2 exception (orange) */
+.logo-part2 {
+  -fx-text-fill: #e27024 !important;
 }
 
 /* Explicit fix for table cells */
@@ -1048,61 +1057,49 @@
   -fx-text-fill: white !important;
 }
 
-/* Info Cards Styles */
-.info-card {
-  -fx-background-color: white;
-  -fx-background-radius: 12;
-  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 1);
-  -fx-padding: 20;
-  -fx-pref-width: 220;
-  -fx-min-height: 120;
-  -fx-alignment: center;
-  -fx-spacing: 10;
-  -fx-border-radius: 12;
-  -fx-border-width: 0 0 0 5;
-  -fx-cursor: hand;
+/* Info Cards Container and Cards */
+.info-cards-container {
+  -fx-padding: 10px 0px 20px 0px;
+  -fx-alignment: CENTER;
+  -fx-background-color: -fx-background-grey;
+  -fx-spacing: 25;
 }
 
-.info-card:hover {
-  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 8, 0, 0, 2);
-  -fx-translate-y: -2;
-  -fx-background-color: linear-gradient(to bottom right, white, #fafbff);
+.info-card {
+  -fx-background-color: white;
+  -fx-padding: 15px 25px;
+  -fx-background-radius: 10px;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0, 0, 2);
+  -fx-pref-width: 200px;
+  -fx-min-height: 90px;
+  -fx-alignment: CENTER;
+  -fx-spacing: 5;
+  -fx-border-width: 0 0 4 0;
+  -fx-border-radius: 0 0 10 10;
 }
 
 .primary-card {
-  -fx-border-color: #143385;
-}
-
-.primary-card:hover {
-  -fx-background-color: linear-gradient(to bottom right, white, #eef3ff);
+  -fx-border-color: -fx-primary;
 }
 
 .success-card {
-  -fx-border-color: #2ecc71;
-}
-
-.success-card:hover {
-  -fx-background-color: linear-gradient(to bottom right, white, #eefff2);
+  -fx-border-color: -fx-secondary;
 }
 
 .warning-card {
-  -fx-border-color: #e27024;
-}
-
-.warning-card:hover {
-  -fx-background-color: linear-gradient(to bottom right, white, #fff3e8);
+  -fx-border-color: #f1c40f;
 }
 
 .card-label {
   -fx-font-size: 14px;
-  -fx-text-fill: #666666 !important;
-  -fx-opacity: 0.9;
+  -fx-text-fill: -fx-grey-color;
+  -fx-font-weight: normal;
 }
 
 .card-value {
-  -fx-font-size: 30px;
+  -fx-font-size: 24px;
   -fx-font-weight: bold;
-  -fx-text-fill: black !important;
+  -fx-text-fill: -fx-grey-color;
 }
 
 /* Ensure section titles have white text */
@@ -1294,33 +1291,38 @@
 
 .course-item {
   -fx-background-color: #f8f9fa;
-  -fx-background-radius: 6px;
-  -fx-border-radius: 6px;
+  -fx-background-radius: 5px;
   -fx-border-color: #e9ecef;
+  -fx-border-radius: 5px;
   -fx-border-width: 1px;
-  -fx-padding: 0 5 0 10;
-  -fx-alignment: center-left;
+  -fx-padding: 5px 10px;
+  -fx-alignment: CENTER_LEFT;
+  -fx-spacing: 15;
   -fx-min-height: 34px;
   -fx-pref-height: 34px;
   -fx-max-height: 34px;
 }
 
 .course-item:hover {
-  -fx-background-color: #e9ecef;
-  -fx-border-color: #ced4da;
+  -fx-background-color: #f0f3f8;
+  -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 3, 0, 0, 1);
 }
 
 .course-code {
-  -fx-font-size: 13px;
   -fx-font-weight: bold;
-  -fx-text-fill: #606060;
-  -fx-min-width: 65px;
+  -fx-font-size: 13px;
+  -fx-text-fill: -fx-primary-dark;
+  -fx-min-width: 70px;
+  -fx-pref-width: 70px;
+  -fx-alignment: CENTER_LEFT;
 }
 
 .course-name {
   -fx-font-size: 13px;
-  -fx-text-fill: #333333;
-  -fx-text-overrun: ellipsis;
+  -fx-padding: 0 0 0 0;
+  -fx-text-fill: #212529;
+  -fx-max-width: 170px;
+  -fx-alignment: CENTER_LEFT;
 }
 
 /* Scroll Pane for Course List */
@@ -1405,19 +1407,19 @@
 
 /* Consistent table search fields */
 .table-search-field {
-  -fx-background-color: #f8f9fa;
-  -fx-background-radius: 20px;
-  -fx-border-color: #e9ecef;
-  -fx-border-radius: 20px;
+  -fx-background-color: white;
+  -fx-background-radius: 5px;
+  -fx-border-color: #e0e0e0;
+  -fx-border-radius: 5px;
   -fx-padding: 8px 15px;
   -fx-pref-height: 35px;
-  -fx-prompt-text-fill: #6c757d;
+  -fx-prompt-text-fill: #8a8a8a;
   -fx-font-size: 14px;
 }
 
 .table-search-field:focused {
   -fx-background-color: white;
-  -fx-border-color: #143385;
+  -fx-border-color: -fx-primary;
 }
 
 /* Consistent margin for table containers */
@@ -1438,4 +1440,610 @@
   -fx-font-weight: bold;
   -fx-text-fill: -fx-primary;
   -fx-padding: 5 0;
+}
+
+/* Top Navigation Bar Styles */
+.top-navbar {
+  -fx-background-color: linear-gradient(to right, #143385, #2851c7);
+  -fx-padding: 12px 30px;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 3);
+  -fx-spacing: 15;
+  -fx-min-height: 70px;
+  -fx-alignment: CENTER_LEFT;
+}
+
+.sidebar-title {
+  -fx-font-size: 22px;
+  -fx-font-weight: bold;
+  -fx-text-fill: white;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 5, 0, 0, 1);
+}
+
+.dashboard-title {
+  -fx-font-size: 18px;
+  -fx-font-weight: bold;
+  -fx-text-fill: white;
+  -fx-padding: 5px 10px;
+  -fx-background-color: rgba(255, 255, 255, 0.15);
+  -fx-background-radius: 5px;
+}
+
+.sidebar-button {
+  -fx-background-color: transparent;
+  -fx-text-fill: white;
+  -fx-padding: 8px 15px;
+  -fx-font-size: 14px;
+  -fx-cursor: hand;
+  -fx-background-radius: 5px;
+}
+
+.sidebar-button:hover {
+  -fx-background-color: rgba(255, 255, 255, 0.15);
+  -fx-text-fill: -fx-secondary-lighter;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 1);
+}
+
+.sidebar-button.active {
+  -fx-background-color: white;
+  -fx-text-fill: -fx-primary;
+  -fx-font-weight: bold;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0, 0, 2);
+}
+
+.admin-section {
+  -fx-background-color: rgba(255, 255, 255, 0.15);
+  -fx-padding: 5px 15px;
+  -fx-background-radius: 5px;
+}
+
+.admin-label {
+  -fx-text-fill: rgba(255, 255, 255, 0.7);
+  -fx-font-size: 12px;
+}
+
+.admin-name {
+  -fx-text-fill: white;
+  -fx-font-weight: bold;
+  -fx-font-size: 14px;
+}
+
+.logout-button {
+  -fx-background-color: rgba(255, 255, 255, 0.2);
+  -fx-text-fill: white;
+  -fx-padding: 10px 20px;
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+  -fx-background-radius: 20px;
+  -fx-cursor: hand;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 4, 0, 0, 1);
+  -fx-border-width: 1.5px;
+  -fx-border-color: white;
+  -fx-border-radius: 20px;
+}
+
+.logout-button:hover {
+  -fx-background-color: derive(#e27024, -10%);
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 6, 0, 0, 2);
+  -fx-translate-y: -1px;
+}
+
+/* Student Information Section Styles */
+.student-info-section {
+  -fx-background-color: rgba(255, 255, 255, 0.15);
+  -fx-padding: 5px 15px;
+  -fx-background-radius: 5px;
+}
+
+.student-name-label {
+  -fx-text-fill: white;
+  -fx-font-weight: bold;
+  -fx-font-size: 16px;
+}
+
+.student-number-label {
+  -fx-text-fill: rgba(255, 255, 255, 0.8);
+  -fx-font-size: 14px;
+}
+
+/* Student Header Information Styles */
+.student-header-info {
+  -fx-background-color: rgba(255, 255, 255, 0.15);
+  -fx-padding: 8px 15px;
+  -fx-background-radius: 8px;
+  -fx-min-width: 200px;
+  -fx-alignment: CENTER_LEFT;
+}
+
+.student-name-label {
+  -fx-text-fill: white;
+  -fx-font-weight: bold;
+  -fx-font-size: 18px;
+}
+
+.student-number-label {
+  -fx-text-fill: rgba(255, 255, 255, 0.9);
+  -fx-font-size: 14px;
+}
+
+/* Action Button Styles (including Logout) */
+.action-button {
+  -fx-background-color: #e27024;
+  -fx-text-fill: white;
+  -fx-font-weight: bold;
+  -fx-padding: 10px 15px;
+  -fx-background-radius: 5px;
+  -fx-cursor: hand;
+  -fx-min-width: 100px;
+  -fx-border-color: white;
+  -fx-border-width: 1px;
+  -fx-border-radius: 5px;
+}
+
+.action-button:hover {
+  -fx-background-color: #b85a1d;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 0, 1);
+}
+
+/* Logout specific styles */
+.logout-button {
+  -fx-background-color: #e27024;
+}
+
+.logout-button:hover {
+  -fx-background-color: #b85a1d;
+}
+
+/* Info Cards Container - Center alignment */
+.info-cards-container {
+  -fx-padding: 0 0 10 0;
+  -fx-alignment: CENTER;
+  -fx-background-color: -fx-background-grey;
+}
+
+/* Table Column Alignment - ALL centered */
+.data-table .column-header .label {
+  -fx-text-fill: black !important;
+  -fx-font-weight: bold;
+  -fx-font-size: 14px;
+  -fx-alignment: CENTER;
+}
+
+.data-table .table-cell {
+  -fx-alignment: CENTER;
+  -fx-text-fill: black !important;
+  -fx-font-size: 14px;
+  -fx-padding: 10 15;
+}
+
+/* Improved search fields */
+.table-search-field {
+  -fx-background-color: white;
+  -fx-background-radius: 5px;
+  -fx-border-color: #e0e0e0;
+  -fx-border-radius: 5px;
+  -fx-padding: 8px 15px;
+  -fx-font-size: 14px;
+  -fx-pref-height: 35px;
+  -fx-prompt-text-fill: #8a8a8a;
+}
+
+.table-search-field:focused {
+  -fx-background-color: white;
+  -fx-border-color: -fx-primary;
+}
+
+/* Top navbar with better spacing */
+.top-navbar {
+  -fx-background-color: linear-gradient(to right, #143385, #2851c7);
+  -fx-padding: 12px 30px;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 3);
+  -fx-spacing: 15;
+  -fx-min-height: 70px;
+  -fx-alignment: CENTER_LEFT;
+}
+
+/* Fixed Top Section */
+.top-section {
+  -fx-background-color: -fx-background-grey;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 5);
+  -fx-min-height: 180px;
+}
+
+/* App Title */
+.app-title {
+  -fx-font-size: 28px;
+  -fx-font-weight: bold;
+  -fx-text-fill: -fx-secondary;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 3, 0, 0, 1);
+}
+
+/* Student Header Information Styles */
+.student-header-info {
+  -fx-background-color: rgba(255, 255, 255, 0.15);
+  -fx-padding: 8px 15px;
+  -fx-background-radius: 8px;
+  -fx-min-width: 200px;
+  -fx-alignment: CENTER_LEFT;
+}
+
+.student-name-label {
+  -fx-text-fill: white;
+  -fx-font-size: 18px;
+  -fx-font-weight: bold;
+}
+
+.student-number-label {
+  -fx-text-fill: rgba(255, 255, 255, 0.9);
+  -fx-font-size: 14px;
+}
+
+/* Content Scroll Pane - Ensure it doesn't overlap with fixed top section */
+.content-scroll-pane {
+  -fx-background-color: transparent;
+  -fx-padding: 0;
+}
+
+.content-container {
+  -fx-background-color: -fx-background-grey;
+  -fx-padding: 10 30 30 30;
+}
+
+/* Redesigned Top Navigation Bar */
+.top-navbar {
+  -fx-background-color: linear-gradient(to right, #143385, #2851c7);
+  -fx-padding: 12px 30px;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 3);
+  -fx-spacing: 15;
+  -fx-min-height: 70px;
+  -fx-alignment: CENTER_LEFT;
+}
+
+/* App Logo and Title */
+.app-logo-text {
+  -fx-font-size: 26px;
+  -fx-font-weight: bold;
+  -fx-text-fill: #e27024;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 2, 0, 0, 1);
+}
+
+/* Student Information Container */
+.student-info-container {
+  -fx-spacing: 5;
+  -fx-padding: 5;
+  -fx-min-width: 250px;
+}
+
+.student-info-header {
+  -fx-padding: 0 0 3 0;
+  -fx-alignment: CENTER_RIGHT;
+}
+
+.student-info-title {
+  -fx-font-size: 12px;
+  -fx-text-fill: rgba(255, 255, 255, 0.7);
+  -fx-font-style: italic;
+}
+
+.student-name-label {
+  -fx-font-size: 18px;
+  -fx-font-weight: bold;
+  -fx-text-fill: white;
+}
+
+.student-number-label {
+  -fx-text-fill: rgba(255, 255, 255, 0.9);
+}
+
+/* Vertical Separator */
+.top-navbar-separator {
+  -fx-background-color: rgba(255, 255, 255, 0.3);
+  -fx-pref-width: 1px;
+  -fx-opacity: 0.7;
+}
+
+/* Logout Button */
+.logout-button {
+  -fx-background-color: #e27024;
+  -fx-text-fill: white;
+  -fx-padding: 10px 20px;
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+  -fx-background-radius: 20px;
+  -fx-cursor: hand;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 4, 0, 0, 1);
+  -fx-border-width: 1.5px;
+  -fx-border-color: white;
+  -fx-border-radius: 20px;
+}
+
+.logout-button:hover {
+  -fx-background-color: derive(#e27024, -10%);
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 6, 0, 0, 2);
+  -fx-translate-y: -1px;
+}
+
+/* Header Banner Color Blocks */
+.header-banner {
+  -fx-min-height: 90px;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 0, 3);
+}
+
+.blue-banner {
+  -fx-fill: -fx-primary;
+  -fx-arc-width: 0;
+  -fx-arc-height: 0;
+}
+
+.orange-banner {
+  -fx-fill: -fx-secondary;
+  -fx-arc-width: 0;
+  -fx-arc-height: 0;
+}
+
+/* App Title Styling */
+.app-title-container {
+  -fx-spacing: 0;
+  -fx-min-width: 180px;
+}
+
+.app-title-part1 {
+  -fx-text-fill: white;
+  -fx-font-size: 28px;
+  -fx-font-weight: bold;
+  -fx-padding: 0 0 -5 0;
+}
+
+.app-title-part2 {
+  -fx-text-fill: white;
+  -fx-font-size: 28px;
+  -fx-font-weight: bold;
+  -fx-padding: -5 0 0 15;
+}
+
+/* Student Info in Header */
+.header-student-container {
+  -fx-background-color: rgba(255, 255, 255, 0.2);
+  -fx-background-radius: 10;
+  -fx-padding: 10 15;
+  -fx-min-width: 250px;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 3, 0, 0, 1);
+}
+
+.header-student-label {
+  -fx-text-fill: white;
+  -fx-font-size: 12px;
+  -fx-opacity: 0.9;
+  -fx-font-style: italic;
+}
+
+.header-student-name {
+  -fx-text-fill: white;
+  -fx-font-size: 18px;
+  -fx-font-weight: bold;
+}
+
+.header-student-number {
+  -fx-text-fill: white;
+  -fx-font-size: 14px;
+  -fx-font-weight: normal;
+}
+
+/* Header Logout Button */
+.header-logout-button {
+  -fx-background-color: white;
+  -fx-text-fill: -fx-primary;
+  -fx-font-weight: bold;
+  -fx-font-size: 14px;
+  -fx-background-radius: 20;
+  -fx-padding: 8 20;
+  -fx-min-width: 100;
+  -fx-cursor: hand;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 2, 0, 0, 1);
+}
+
+.header-logout-button:hover {
+  -fx-background-color: #eeeeee;
+  -fx-translate-y: -1;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 4, 0, 0, 2);
+}
+
+/* Ultra Modern Header Styles */
+.modern-header-bg {
+  -fx-fill: linear-gradient(to right, #1a237e, #311b92);
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 10, 0, 0, 3);
+}
+
+.modern-header {
+  -fx-min-height: 100px;
+  -fx-padding: 0;
+  -fx-spacing: 30;
+  -fx-alignment: CENTER_LEFT;
+}
+
+/* Modern Logo Styling */
+.modern-logo {
+  -fx-spacing: -5;
+  -fx-alignment: CENTER_LEFT;
+}
+
+.modern-logo-part1 {
+  -fx-font-family: "System";
+  -fx-font-size: 26px;
+  -fx-font-weight: bold;
+  -fx-text-fill: white;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 2, 0, 0, 1);
+}
+
+.modern-logo-part2 {
+  -fx-font-family: "System";
+  -fx-font-size: 26px;
+  -fx-font-weight: bold;
+  -fx-text-fill: #ff9800;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 2, 0, 0, 1);
+  -fx-padding: 0 0 0 10;
+}
+
+/* Student Card Styling */
+.student-card {
+  -fx-background-color: rgba(255, 255, 255, 0.1);
+  -fx-background-radius: 30px;
+  -fx-padding: 15 25;
+  -fx-spacing: 20;
+  -fx-min-width: 350px;
+  -fx-border-color: rgba(255, 255, 255, 0.2);
+  -fx-border-width: 1px;
+  -fx-border-radius: 30px;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 0, 1);
+}
+
+.student-card-label {
+  -fx-text-fill: #ff9800;
+  -fx-font-size: 12px;
+  -fx-font-weight: bold;
+  -fx-padding: 5 15;
+  -fx-background-color: rgba(255, 255, 255, 0.1);
+  -fx-background-radius: 15px;
+  -fx-border-color: #ff9800;
+  -fx-border-width: 1px;
+  -fx-border-radius: 15px;
+}
+
+.student-info {
+  -fx-spacing: 5;
+  -fx-padding: 0 0 0 5;
+}
+
+.modern-student-name {
+  -fx-text-fill: white;
+  -fx-font-size: 18px;
+  -fx-font-weight: bold;
+}
+
+.modern-student-number {
+  -fx-text-fill: rgba(255, 255, 255, 0.8);
+  -fx-font-size: 14px;
+}
+
+/* Modern Logout Button */
+.modern-logout-button {
+  -fx-background-color: #ff9800;
+  -fx-text-fill: white;
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+  -fx-padding: 12 25;
+  -fx-background-radius: 25px;
+  -fx-cursor: hand;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 0, 1);
+  -fx-min-width: 130px;
+  -fx-border-width: 0;
+}
+
+.modern-logout-button:hover {
+  -fx-background-color: white;
+  -fx-text-fill: #1a237e;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0, 0, 2);
+  -fx-translate-y: -2;
+}
+
+/* Premium Header Styles - New Clean Design */
+.premium-header-bg {
+  -fx-fill: linear-gradient(to right, #143385, #1d4db8);
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0, 0, 2);
+}
+
+.premium-header {
+  -fx-min-height: 80px;
+  -fx-padding: 0 40px;
+  -fx-spacing: 20;
+  -fx-alignment: CENTER;
+}
+
+.logo-container {
+  -fx-alignment: CENTER_LEFT;
+  -fx-spacing: 10;
+  -fx-padding: 0;
+  -fx-min-width: 300px;
+}
+
+.logo-accent {
+  -fx-fill: #e27024;
+  -fx-effect: dropshadow(gaussian, rgba(226, 112, 36, 0.4), 5, 0, 0, 0);
+}
+
+.premium-logo {
+  -fx-font-family: "System";
+  -fx-font-size: 22px;
+  -fx-font-weight: bold;
+  -fx-text-fill: white;
+  -fx-padding: 0 0 0 12;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 1, 0, 0, 1);
+}
+
+.premium-student-container {
+  -fx-background-color: rgba(255, 255, 255, 0.08);
+  -fx-background-radius: 8px;
+  -fx-padding: 12px 20px;
+  -fx-spacing: 12;
+  -fx-border-width: 1px;
+  -fx-border-color: rgba(255, 255, 255, 0.15);
+  -fx-border-radius: 8px;
+}
+
+.premium-student-name {
+  -fx-font-size: 16px;
+  -fx-font-weight: bold;
+  -fx-text-fill: white !important;
+}
+
+.premium-student-number {
+  -fx-font-size: 13px;
+  -fx-text-fill: rgba(255, 255, 255, 0.85) !important;
+}
+
+.premium-logout-button {
+  -fx-background-color: #e27024;
+  -fx-background-radius: 6px;
+  -fx-text-fill: white;
+  -fx-font-size: 13px;
+  -fx-font-weight: bold;
+  -fx-padding: 8px 18px;
+  -fx-min-width: 100px;
+  -fx-cursor: hand;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 3, 0, 0, 1);
+}
+
+.premium-logout-button:hover {
+  -fx-background-color: #f08b45;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.35), 6, 0, 0, 1);
+  -fx-translate-y: -1px;
+}
+
+/* New Logo Part Styles */
+.logo-part1 {
+  -fx-font-family: "System";
+  -fx-font-size: 22px;
+  -fx-font-weight: bold;
+  -fx-text-fill: white !important;
+  -fx-padding: 0 0 0 12; /* Keep left padding */
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 1, 0, 0, 1);
+}
+
+.logo-part2 {
+  -fx-font-family: "System";
+  -fx-font-size: 22px;
+  -fx-font-weight: bold;
+  -fx-text-fill: #e27024 !important; /* School Orange */
+  -fx-padding: 0 0 0 8px; /* Space between words */
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 1, 0, 0, 1);
+}
+
+.premium-student-name {
+  -fx-text-fill: white;
+  -fx-font-size: 18px;
+  -fx-font-weight: bold;
+}
+
+.premium-student-number {
+  -fx-text-fill: rgba(255, 255, 255, 0.8);
+  -fx-font-size: 14px;
 }
