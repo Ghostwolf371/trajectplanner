@@ -1,30 +1,30 @@
 package org.example.trajectplanner.controllers;
 
 import java.io.IOException;
-import java.net.http.HttpResponse;
 import java.net.URL;
+import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.time.LocalDate;
 
 import org.example.trajectplanner.api.GetMethods;
 import org.example.trajectplanner.model.Tentamen;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.control.Button;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.stage.Modality;
-import javafx.scene.control.TextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class Controller implements Initializable {
     @FXML
@@ -41,10 +41,8 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Initialize the filtered list
         filteredExams = new FilteredList<>(examItems, p -> true);
         
-        // Add search listener
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredExams.setPredicate(examItem -> {
                 if (newValue == null || newValue.isEmpty()) {
@@ -60,6 +58,7 @@ public class Controller implements Initializable {
         });
 
         loadExams();
+        
         addButton.setOnAction(event -> navigateToAdd());
         scoresButton.setOnAction(event -> navigateToScores());
     }
@@ -76,20 +75,21 @@ public class Controller implements Initializable {
                     mapper.getTypeFactory().constructCollectionType(List.class, Tentamen.class)
                 );
 
+                tentamens.sort((t1, t2) -> {
+                    LocalDate date1 = LocalDate.parse(t1.getDate());
+                    LocalDate date2 = LocalDate.parse(t2.getDate());
+                    return date1.compareTo(date2);
+                });
+
                 examItems.clear();
                 for (Tentamen tentamen : tentamens) {
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setLocation(getClass().getResource("/fxml/Tentamen_item.fxml"));
-
-                    try {
-                        GridPane gridPane = fxmlLoader.load();
-                        TentamenItemController tic = fxmlLoader.getController();
-                        tic.setData(tentamen);
-                        gridPane.setUserData(tic);
-                        examItems.add(gridPane);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    GridPane gridPane = fxmlLoader.load();
+                    TentamenItemController tic = fxmlLoader.getController();
+                    tic.setData(tentamen);
+                    gridPane.setUserData(tic);
+                    examItems.add(gridPane);
                 }
                 updateExamList();
             }
@@ -121,7 +121,6 @@ public class Controller implements Initializable {
             
             popupStage.showAndWait();
             
-            // Refresh the exam list after adding
             loadExams();
             
         } catch (Exception e) {
@@ -133,7 +132,6 @@ public class Controller implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/scores-view.fxml"));
             Parent root = loader.load();
-
             Scene scene = scoresButton.getScene();
             scene.setRoot(root);
         } catch (IOException e) {

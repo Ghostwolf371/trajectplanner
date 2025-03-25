@@ -162,3 +162,14 @@ StackPane {
 ImageView {
   -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 3);
 }
+
+/* Add feedback label styling */
+.feedback-label {
+  -fx-font-size: 14px;
+  -fx-padding: 0 0 10 0;
+  -fx-text-fill: #d32f2f;
+  -fx-font-weight: bold;
+  -fx-alignment: center;
+  -fx-max-width: infinity;
+  -fx-text-alignment: center;
+}

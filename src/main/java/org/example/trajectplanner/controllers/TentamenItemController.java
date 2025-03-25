@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.http.HttpResponse;
 import java.util.ResourceBundle;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.example.trajectplanner.api.DeleteMethods;
 import org.example.trajectplanner.model.Tentamen;
@@ -37,12 +39,23 @@ public class TentamenItemController implements Initializable {
 
     private String tentamenId;
 
-    public void setData(Tentamen tentamen){
+    public void setData(Tentamen tentamen) {
         this.tentamenId = tentamen.getId();
         id.setText(tentamenId);
-        cursusNaam.setText(tentamen.getCursesNaam());
-        semester.setText(tentamen.getSemester());
-        datum.setText(tentamen.getDatum());
+        cursusNaam.setText(tentamen.getCourseName());
+        semester.setText(String.valueOf(tentamen.getSemester()));
+        
+        // Format the date to yyyy-MM-dd format
+        String dateStr = tentamen.getDate();
+        if (dateStr != null && !dateStr.isEmpty()) {
+            try {
+                LocalDate date = LocalDate.parse(dateStr); // Assumes input is in yyyy-MM-dd format
+                datum.setText(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            } catch (Exception e) {
+                datum.setText(dateStr);
+            }
+        }
+        
         type.setText(tentamen.getType());
 
         editButton.setOnAction(event -> navigateToEdit());

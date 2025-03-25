@@ -1,54 +1,61 @@
 package org.example.trajectplanner.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 public class Tentamen {
-    private String id;
-    @JsonProperty("course_id")
-    private String courseId;
-    @JsonProperty("course_name")
-    private String cursesNaam;
-    private String semester;
-    @JsonProperty("date")
-    private String datum;
-    private String type;
-    
-    public String getId() {
-        return id;
-    }
-    public void setId(String id) {
-        this.id = id;
-    }
-    public String getCourseId() {
-        return courseId;
-    }
-    public void setCourseId(String courseId) {
-        this.courseId = courseId;
-    }
-    public String getCursesNaam() {
-        return cursesNaam;
-    }
-    public void setCursesNaam(String cursesNaam) {
-        this.cursesNaam = cursesNaam;
-    }
-    public String getSemester() {
-        return semester;
-    }
-    public void setSemester(String semester) {
-        this.semester = semester;
-    }
-    public String getDatum() {
-        return datum;
-    }
-    public void setDatum(String datum) {
-        this.datum = datum;
-    }
-    public String getType() {
-        return type;
-    }
-    public void setType(String type) {
-        this.type = type;
+    private SimpleIntegerProperty id;
+    private SimpleIntegerProperty courseId;
+    private SimpleStringProperty courseName;
+    private SimpleIntegerProperty semester;
+    private SimpleStringProperty type;
+    private SimpleStringProperty date;
+
+    public Tentamen() {
+        this.id = new SimpleIntegerProperty();
+        this.courseId = new SimpleIntegerProperty();
+        this.courseName = new SimpleStringProperty();
+        this.semester = new SimpleIntegerProperty();
+        this.type = new SimpleStringProperty();
+        this.date = new SimpleStringProperty();
     }
 
-    
+    @JsonProperty("id")
+    public String getId() { return String.valueOf(id.get()); }
+    @JsonProperty("id")
+    public void setId(int id) { this.id.set(id); }
+
+    @JsonProperty("course_id")
+    public int getCourseId() { return courseId.get(); }
+    @JsonProperty("course_id")
+    public void setCourseId(int courseId) { this.courseId.set(courseId); }
+
+    @JsonProperty("course_name")
+    public String getCourseName() { return courseName.get(); }
+    @JsonProperty("course_name")
+    public void setCourseName(String courseName) { this.courseName.set(courseName); }
+
+    @JsonProperty("semester")
+    public int getSemester() { return semester.get(); }
+    @JsonProperty("semester")
+    public void setSemester(int semester) { this.semester.set(semester); }
+
+    @JsonProperty("type")
+    public String getType() { return type.get(); }
+    @JsonProperty("type")
+    public void setType(String type) { this.type.set(type); }
+
+    @JsonProperty("date")
+    public String getDate() { return date.get(); }
+    @JsonProperty("date")
+    public void setDate(String date) { this.date.set(date); }
+
+    // Property getters
+    public SimpleIntegerProperty idProperty() { return id; }
+    public SimpleIntegerProperty courseIdProperty() { return courseId; }
+    public SimpleStringProperty courseNameProperty() { return courseName; }
+    public SimpleIntegerProperty semesterProperty() { return semester; }
+    public SimpleStringProperty typeProperty() { return type; }
+    public SimpleStringProperty dateProperty() { return date; }
 }

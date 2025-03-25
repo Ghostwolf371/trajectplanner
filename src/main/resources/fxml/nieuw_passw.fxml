@@ -72,6 +72,11 @@
                                      styleClass="login-field"/>
                     </VBox>
                     
+                    <!-- Add feedback label here -->
+                    <Label fx:id="feedbackLabel" 
+                           styleClass="feedback-label"
+                           visible="false"/>
+                    
                     <!-- Buttons -->
                     <VBox spacing="15" alignment="CENTER">
                         <Button text="Change Password" 

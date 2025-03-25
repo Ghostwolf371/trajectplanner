@@ -1,27 +1,38 @@
 package org.example.trajectplanner.api;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class GetMethods {
+    private static final String BASE_URL = "https://trajectplannerapi.dulamari.com";
 
-    public HttpResponse<String> getExams() {
+    public HttpResponse<String> getStudentByNumber(String studentNumber) {
         try {
+            String formattedStudentNumber = studentNumber.replace("/", "-");
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("https://trajectplannerapi.dulamari.com/exams"))
+                    .uri(new URI(BASE_URL + "/students/" + formattedStudentNumber))
                     .GET()
                     .build();
 
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-            return response;
+            return client.send(request, HttpResponse.BodyHandlers.ofString());
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public HttpResponse<String> getExams() throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://trajectplannerapi.dulamari.com/exams"))
+                .GET()
+                .build();
+
+        return client.send(request, HttpResponse.BodyHandlers.ofString());
     }
 
     public HttpResponse<String> postExamById(String id) {
@@ -125,6 +136,26 @@ public class GetMethods {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public HttpResponse<String> getCourses() throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create("https://trajectplannerapi.dulamari.com/courses"))
+            .GET()
+            .build();
+        
+        return HttpClient.newHttpClient()
+            .send(request, HttpResponse.BodyHandlers.ofString());
+    }
+
+    public HttpResponse<String> getSemesters() throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create("https://trajectplannerapi.dulamari.com/semesters"))
+            .GET()
+            .build();
+        
+        return HttpClient.newHttpClient()
+            .send(request, HttpResponse.BodyHandlers.ofString());
     }
 }
 

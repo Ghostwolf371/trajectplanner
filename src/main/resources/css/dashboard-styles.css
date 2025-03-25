@@ -1,0 +1,1441 @@
+/* Root Colors - School Theme */
+* {
+  /* Primary Blue Colors */
+  -fx-primary: #143385;
+  -fx-primary-dark: #0a1b47;
+  -fx-primary-light: #2851c7;
+  -fx-primary-lighter: #4b6fd9;
+
+  /* Secondary Orange Colors */
+  -fx-secondary: #e27024;
+  -fx-secondary-dark: #b85a1d;
+  -fx-secondary-light: #f08b45;
+  -fx-secondary-lighter: #f4a66e;
+
+  /* Supporting Colors */
+  -fx-grey-color: #2c3e50;
+  -fx-light-grey: #ecf0f1;
+  -fx-background-grey: #f0f2f5;
+  -fx-focus-color: -fx-primary;
+  -fx-error-color: #e74c3c;
+  -fx-success-color: #2ecc71;
+}
+
+.root {
+  -fx-background-color: -fx-background-grey;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  -fx-background-color: linear-gradient(
+    to bottom right,
+    -fx-primary-dark,
+    -fx-primary
+  );
+  -fx-min-width: 280px;
+  -fx-pref-width: 280px;
+  -fx-padding: 20px 0;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 2);
+}
+
+.sidebar-header {
+  -fx-padding: 20px;
+  -fx-background-color: rgba(255, 255, 255, 0.08);
+  -fx-background-radius: 10px;
+  -fx-margin: 0 20px 20px 20px;
+}
+
+.brand-name {
+  -fx-font-size: 32px;
+  -fx-font-weight: bold;
+  -fx-text-fill: white;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 5, 0, 0, 1);
+}
+
+.brand-subtitle {
+  -fx-font-size: 24px;
+  -fx-text-fill: -fx-secondary;
+  -fx-font-weight: bold;
+}
+
+.nav-items {
+  -fx-padding: 20px 10px;
+  -fx-spacing: 10;
+}
+
+.nav-item {
+  -fx-background-color: transparent;
+  -fx-text-fill: white;
+  -fx-padding: 15px 25px;
+  -fx-font-size: 16px;
+  -fx-cursor: hand;
+  -fx-alignment: CENTER_LEFT;
+  -fx-min-width: 240px;
+  -fx-background-radius: 5px;
+  -fx-margin: 5px 10px;
+}
+
+.nav-item:hover {
+  -fx-background-color: rgba(255, 255, 255, 0.15);
+  -fx-text-fill: -fx-secondary;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 1);
+}
+
+.nav-item-active {
+  -fx-background-color: white;
+  -fx-text-fill: -fx-primary;
+  -fx-font-weight: bold;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0, 0, 2);
+}
+
+/* Main Content Styles */
+.main-content {
+  -fx-background-color: -fx-light-grey;
+  -fx-padding: 0;
+}
+
+.content-header {
+  -fx-background-color: white;
+  -fx-padding: 30px;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 2);
+}
+
+.page-title {
+  -fx-font-size: 32px;
+  -fx-font-weight: bold;
+  -fx-text-fill: -fx-primary;
+}
+
+.search-field {
+  -fx-background-color: -fx-light-grey;
+  -fx-background-radius: 25px;
+  -fx-padding: 12px 20px;
+  -fx-min-width: 300px;
+  -fx-font-size: 14px;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 1);
+}
+
+.search-field:focused {
+  -fx-background-color: white;
+  -fx-border-color: -fx-primary-light;
+  -fx-border-width: 2px;
+  -fx-border-radius: 25px;
+}
+
+.add-exam-button {
+  -fx-background-color: -fx-secondary;
+  -fx-text-fill: white;
+  -fx-padding: 12px 25px;
+  -fx-background-radius: 25px;
+  -fx-font-weight: bold;
+  -fx-font-size: 14px;
+  -fx-cursor: hand;
+}
+
+.add-exam-button:hover {
+  -fx-background-color: -fx-secondary-dark;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 2);
+  -fx-translate-y: -1px;
+}
+
+.add-score-button {
+  -fx-background-color: -fx-secondary;
+  -fx-text-fill: white;
+  -fx-padding: 12px 25px;
+  -fx-background-radius: 25px;
+  -fx-font-weight: bold;
+  -fx-font-size: 14px;
+  -fx-cursor: hand;
+}
+
+.add-score-button:hover {
+  -fx-background-color: -fx-secondary-dark;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 2);
+  -fx-translate-y: -1px;
+}
+
+/* Table Styles */
+.table-header {
+  -fx-background-color: -fx-primary;
+  -fx-padding: 20px;
+  -fx-background-radius: 10px 10px 0 0;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 1);
+  -fx-margin: 20px 20px 0 20px;
+}
+
+.header-label {
+  -fx-font-weight: bold;
+  -fx-text-fill: white;
+  -fx-font-size: 14px;
+}
+
+.table-content {
+  -fx-background-color: transparent;
+  -fx-padding: 0 20px;
+}
+
+.exam-item {
+  -fx-background-color: white;
+  -fx-padding: 20px;
+  -fx-background-radius: 8px;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);
+  -fx-spacing: 20;
+  -fx-border-color: transparent;
+  -fx-border-width: 2px;
+  -fx-border-radius: 8px;
+}
+
+.exam-item:hover {
+  -fx-background-color: derive(white, -2%);
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 8, 0, 0, 3);
+  -fx-border-color: -fx-primary-lighter;
+}
+
+.score-item {
+  -fx-background-color: white;
+  -fx-padding: 20px;
+  -fx-background-radius: 8px;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);
+  -fx-spacing: 20;
+  -fx-border-color: transparent;
+  -fx-border-width: 2px;
+  -fx-border-radius: 8px;
+}
+
+.score-item:hover {
+  -fx-background-color: derive(white, -2%);
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 8, 0, 0, 3);
+  -fx-border-color: -fx-primary-lighter;
+}
+
+/* Action Buttons */
+.edit-button {
+  -fx-background-color: -fx-primary-light;
+  -fx-text-fill: white;
+  -fx-padding: 8px 15px;
+  -fx-background-radius: 5px;
+  -fx-cursor: hand;
+}
+
+.edit-button:hover {
+  -fx-background-color: -fx-primary;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 1);
+}
+
+.delete-button {
+  -fx-background-color: -fx-error-color;
+  -fx-text-fill: white;
+  -fx-padding: 8px 15px;
+  -fx-background-radius: 5px;
+  -fx-cursor: hand;
+}
+
+.delete-button:hover {
+  -fx-background-color: derive(-fx-error-color, -10%);
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 1);
+}
+
+/* Dialog Styles */
+.dialog-container {
+  -fx-background-color: white;
+  -fx-background-radius: 15px;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 15, 0, 0, 5);
+}
+
+.dialog-sidebar {
+  -fx-background-color: linear-gradient(
+    to bottom,
+    -fx-primary-dark,
+    -fx-primary
+  );
+  -fx-min-width: 300px;
+  -fx-padding: 40px 30px;
+  -fx-background-radius: 15px 0 0 15px;
+}
+
+.dialog-sidebar-title {
+  -fx-font-size: 36px;
+  -fx-font-weight: bold;
+  -fx-text-fill: white;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 0, 1);
+}
+
+.dialog-sidebar-subtitle {
+  -fx-font-size: 16px;
+  -fx-text-fill: rgba(255, 255, 255, 0.8);
+  -fx-padding: 20px 0 0 0;
+}
+
+.dialog-container {
+  -fx-min-width: 800px;
+  -fx-min-height: 500px;
+}
+
+.dialog-content {
+  -fx-padding: 40px;
+  -fx-spacing: 25;
+  -fx-alignment: TOP_CENTER;
+  -fx-min-width: 500px;
+}
+
+.form-group {
+  -fx-padding: 0 0 20 0;
+}
+
+.form-field {
+  -fx-background-color: -fx-light-grey;
+  -fx-background-radius: 8px;
+  -fx-padding: 12px 15px;
+  -fx-font-size: 14px;
+  -fx-min-width: 400px;
+}
+
+.form-field:focused {
+  -fx-background-color: white;
+  -fx-border-color: -fx-primary;
+  -fx-border-width: 2px;
+  -fx-border-radius: 8px;
+}
+
+.form-field:disabled,
+.form-field:editable:false {
+  -fx-opacity: 0.8;
+  -fx-background-color: #f5f5f5;
+}
+
+.form-label {
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+  -fx-text-fill: -fx-grey-color;
+}
+
+.save-button {
+  -fx-background-color: -fx-success-color;
+  -fx-text-fill: white;
+  -fx-padding: 12px 30px;
+  -fx-background-radius: 25px;
+  -fx-font-weight: bold;
+  -fx-cursor: hand;
+}
+
+.save-button:hover {
+  -fx-background-color: derive(-fx-success-color, -10%);
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 2);
+  -fx-translate-y: -1px;
+}
+
+.cancel-button {
+  -fx-background-color: transparent;
+  -fx-text-fill: -fx-grey-color;
+  -fx-padding: 12px 30px;
+  -fx-background-radius: 25px;
+  -fx-border-color: -fx-grey-color;
+  -fx-border-radius: 25px;
+  -fx-border-width: 2px;
+  -fx-cursor: hand;
+}
+
+.cancel-button:hover {
+  -fx-background-color: -fx-light-grey;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 1);
+}
+
+/* Scrollbar Styling */
+.scroll-pane {
+  -fx-background-color: transparent;
+  -fx-padding: 20px;
+}
+
+.scroll-pane > .viewport {
+  -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical {
+  -fx-background-color: transparent;
+  -fx-pref-width: 12px;
+}
+
+.scroll-bar:vertical .thumb {
+  -fx-background-color: -fx-primary-light;
+  -fx-background-radius: 6px;
+}
+
+.scroll-bar:vertical .thumb:hover {
+  -fx-background-color: -fx-primary;
+}
+
+/* Animations */
+.nav-item,
+.add-exam-button,
+.add-score-button,
+.edit-button,
+.delete-button,
+.save-button {
+  -fx-transition: all 0.2s ease-out;
+}
+
+/* Additional styles for new elements */
+.filter-combo {
+  -fx-background-color: -fx-light-grey;
+  -fx-background-radius: 20px;
+  -fx-padding: 8px 15px;
+}
+
+.date-label {
+  -fx-text-fill: -fx-grey-color;
+  -fx-opacity: 0.8;
+}
+
+.form-label {
+  -fx-font-weight: bold;
+  -fx-text-fill: -fx-grey-color;
+}
+
+.form-label {
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+  -fx-text-fill: -fx-grey-color;
+}
+
+.form-field {
+  -fx-min-width: 400px;
+}
+
+/* Style for DatePicker */
+.date-picker {
+  -fx-background-color: -fx-light-grey;
+  -fx-background-radius: 8px;
+}
+
+.date-picker .arrow-button {
+  -fx-background-color: -fx-primary-light;
+  -fx-background-radius: 0 8px 8px 0;
+}
+
+.date-picker .arrow-button:hover {
+  -fx-background-color: -fx-primary;
+}
+
+/* ComboBox Styling */
+.combo-box {
+  -fx-background-color: -fx-light-grey;
+  -fx-background-radius: 8px;
+}
+
+.combo-box:hover {
+  -fx-background-color: derive(-fx-light-grey, -5%);
+}
+
+.combo-box .list-cell:selected {
+  -fx-text-fill: -fx-primary;
+  -fx-font-weight: bold;
+}
+
+/* DatePicker Styling */
+.date-picker {
+  -fx-background-color: -fx-light-grey;
+  -fx-background-radius: 8px;
+}
+
+.date-picker .arrow-button {
+  -fx-background-color: -fx-primary-light;
+  -fx-background-radius: 0 8px 8px 0;
+}
+
+.date-picker .arrow-button:hover {
+  -fx-background-color: -fx-primary;
+}
+
+/* TextArea Styling */
+.text-area {
+  -fx-background-color: -fx-light-grey;
+  -fx-background-radius: 8px;
+  -fx-padding: 5px;
+}
+
+.text-area .content {
+  -fx-background-color: transparent;
+}
+
+.text-area:focused {
+  -fx-background-color: white;
+  -fx-border-color: -fx-primary;
+  -fx-border-width: 2px;
+  -fx-border-radius: 8px;
+}
+
+/* Button Container */
+.button-container {
+  -fx-padding: 20px 0 0 0;
+  -fx-alignment: CENTER_RIGHT;
+}
+
+/* Edit Examination Dialog Styles */
+.dialog-container {
+  -fx-background-color: white;
+  -fx-padding: 30px;
+  -fx-spacing: 20;
+  -fx-min-width: 500px;
+}
+
+.page-title {
+  -fx-font-size: 24px;
+  -fx-font-weight: bold;
+  -fx-text-fill: -fx-primary;
+}
+
+.subtitle-label {
+  -fx-font-size: 14px;
+  -fx-text-fill: -fx-grey-color;
+}
+
+.form-label {
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+  -fx-text-fill: -fx-grey-color;
+}
+
+.form-field {
+  -fx-pref-width: 100%;
+  -fx-min-width: 400px;
+  -fx-padding: 8px;
+  -fx-background-color: -fx-light-grey;
+  -fx-background-radius: 4px;
+  -fx-border-color: transparent;
+}
+
+.form-field:focused {
+  -fx-background-color: white;
+  -fx-border-color: -fx-primary;
+  -fx-border-width: 2px;
+  -fx-border-radius: 4px;
+}
+
+.save-button {
+  -fx-background-color: -fx-primary;
+  -fx-text-fill: white;
+  -fx-padding: 10px 20px;
+  -fx-background-radius: 4px;
+  -fx-cursor: hand;
+}
+
+.save-button:hover {
+  -fx-background-color: derive(-fx-primary, -10%);
+}
+
+.cancel-button {
+  -fx-background-color: transparent;
+  -fx-text-fill: -fx-grey-color;
+  -fx-padding: 10px 20px;
+  -fx-background-radius: 4px;
+  -fx-cursor: hand;
+  -fx-border-color: -fx-grey-color;
+  -fx-border-radius: 4px;
+}
+
+.cancel-button:hover {
+  -fx-background-color: -fx-light-grey;
+}
+
+/* ComboBox specific styles */
+.combo-box {
+  -fx-background-color: -fx-light-grey;
+  -fx-background-radius: 4px;
+}
+
+.combo-box:focused {
+  -fx-background-color: white;
+  -fx-border-color: -fx-primary;
+  -fx-border-width: 2px;
+}
+
+.combo-box .list-cell {
+  -fx-padding: 8px;
+}
+
+/* DatePicker specific styles */
+.date-picker {
+  -fx-background-color: -fx-light-grey;
+  -fx-background-radius: 4px;
+}
+
+.date-picker:focused {
+  -fx-background-color: white;
+  -fx-border-color: -fx-primary;
+  -fx-border-width: 2px;
+}
+
+.date-picker .arrow-button {
+  -fx-background-color: -fx-primary;
+  -fx-background-radius: 0 4px 4px 0;
+}
+
+.date-picker .arrow-button:hover {
+  -fx-background-color: derive(-fx-primary, -10%);
+}
+
+.date-picker .arrow-button .arrow {
+  -fx-background-color: white;
+}
+
+.display-field {
+  -fx-background-color: #f8f9fa;
+  -fx-padding: 8px 12px;
+  -fx-border-color: #dee2e6;
+  -fx-border-radius: 4px;
+  -fx-background-radius: 4px;
+  -fx-font-size: 14px;
+  -fx-text-fill: #495057;
+}
+
+/* Root Colors - Matching Login Theme */
+* {
+  -fx-primary: #143385;
+  -fx-primary-dark: #0a1b47;
+  -fx-primary-light: #2851c7;
+  -fx-primary-lighter: #4b6fd9;
+  -fx-secondary: #e27024;
+  -fx-secondary-dark: #b85a1d;
+  -fx-grey-color: #1a1a1a;
+  -fx-light-grey: #ecf0f1;
+  -fx-background-grey: #f8f9fa;
+  -fx-error-color: #e74c3c;
+  -fx-card-background: white;
+}
+
+/* Dashboard Specific Styles */
+.dashboard-view {
+  -fx-background-color: #f0f2f5;
+}
+
+.dashboard-view .content-header {
+  -fx-background-color: linear-gradient(to right, #143385, #2851c7);
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 4);
+  -fx-background-radius: 0 0 25 25;
+  -fx-alignment: CENTER_LEFT;
+  -fx-spacing: 30;
+}
+
+.dashboard-view .profile-picture {
+  -fx-fill: white;
+  -fx-stroke: rgba(255, 255, 255, 0.3);
+  -fx-stroke-width: 3;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0, 0, 2);
+}
+
+.dashboard-view .student-name {
+  -fx-font-size: 32px;
+  -fx-font-weight: bold;
+  -fx-text-fill: white;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 2, 0, 0, 1);
+}
+
+.dashboard-view .student-number {
+  -fx-font-size: 16px;
+  -fx-text-fill: rgba(255, 255, 255, 0.9);
+  -fx-font-weight: bold;
+}
+
+.dashboard-view .student-birthdate {
+  -fx-font-size: 16px;
+  -fx-text-fill: rgba(255, 255, 255, 0.75);
+}
+
+.dashboard-view .header-stat-title {
+  -fx-font-size: 14px;
+  -fx-text-fill: rgba(255, 255, 255, 0.85);
+  -fx-font-weight: bold;
+}
+
+.dashboard-view .header-stat-value {
+  -fx-font-size: 24px;
+  -fx-font-weight: bold;
+  -fx-text-fill: white;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 2, 0, 0, 1);
+}
+
+/* Content Sections */
+.dashboard-view .content-section {
+  -fx-background-color: white;
+  -fx-background-radius: 20;
+  -fx-padding: 25;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0, 0, 2);
+  -fx-min-height: 300;
+  -fx-border-radius: 20;
+}
+
+.dashboard-view .exam-section {
+  -fx-border-color: #2851c7;
+  -fx-border-width: 0 0 0 4;
+  -fx-border-radius: 0 0 0 0;
+  -fx-background-radius: 4 20 20 4;
+  -fx-padding: 25 25 25 30;
+}
+
+.dashboard-view .score-section {
+  -fx-border-color: #e27024;
+  -fx-border-width: 0 0 0 4;
+  -fx-border-radius: 0 0 0 0;
+  -fx-background-radius: 4 20 20 4;
+  -fx-padding: 25 25 25 30;
+}
+
+.dashboard-view .course-section {
+  -fx-border-color: #2ecc71;
+  -fx-border-width: 0 0 0 4;
+  -fx-border-radius: 0 0 0 0;
+  -fx-background-radius: 4 20 20 4;
+  -fx-padding: 25 25 25 30;
+}
+
+.dashboard-view .semester-section {
+  -fx-border-color: #9b59b6;
+  -fx-border-width: 0 0 0 4;
+  -fx-border-radius: 0 0 0 0;
+  -fx-background-radius: 4 20 20 4;
+  -fx-padding: 25 25 25 30;
+}
+
+/* Semester Cards */
+.semester-box {
+  -fx-background-color: linear-gradient(to bottom right, white, #fcfcff);
+  -fx-background-radius: 12;
+  -fx-border-radius: 12;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 4, 0, 0, 1);
+  -fx-border-width: 0 0 0 5;
+  -fx-border-color: #9b59b6;
+  -fx-min-width: 280px;
+  -fx-max-width: 320px;
+  -fx-min-height: 320px;
+  -fx-max-height: 320px;
+}
+
+/* Fix text display issues */
+.semester-title {
+  -fx-font-size: 22px;
+  -fx-font-weight: bold;
+  -fx-text-fill: #9b59b6 !important;
+  -fx-padding: 0 0 5 0;
+  -fx-wrap-text: true;
+  -fx-max-width: 250px;
+}
+
+.semester-subtitle {
+  -fx-font-size: 14px;
+  -fx-text-fill: #333333 !important;
+  -fx-padding: 0 0 10 0;
+  -fx-wrap-text: true;
+  -fx-max-width: 250px;
+}
+
+.semester-stat-value {
+  -fx-font-size: 20px;
+  -fx-font-weight: bold;
+  -fx-text-fill: #000000 !important;
+}
+
+.semester-stat-title {
+  -fx-font-size: 14px;
+  -fx-text-fill: #333333 !important;
+}
+
+.semester-course-item {
+  -fx-font-size: 13px;
+  -fx-text-fill: black !important;
+  -fx-wrap-text: false;
+  -fx-min-height: 24px;
+  -fx-max-height: 24px;
+  -fx-padding: 2 0;
+  -fx-pref-width: 210px;
+  -fx-max-width: 210px;
+  -fx-text-overrun: ellipsis;
+}
+
+.semester-list-title {
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+  -fx-text-fill: #000000 !important;
+  -fx-padding: 2 0;
+}
+
+/* Make sure table cells show all text */
+.table-cell {
+  -fx-wrap-text: true;
+  -fx-alignment: center-left;
+  -fx-padding: 10 8;
+}
+
+.data-table .table-row-cell {
+  -fx-cell-size: 50px; /* Increase row height */
+}
+
+.data-table .table-cell {
+  -fx-text-fill: #000000 !important;
+  -fx-font-size: 14px;
+  -fx-wrap-text: true;
+  -fx-alignment: center-left;
+}
+
+/* Semester scroll pane adjustments */
+.semester-scroll-pane {
+  -fx-background-color: transparent;
+  -fx-fit-to-width: true;
+  -fx-padding: 0;
+}
+
+.semester-scroll-pane > .viewport {
+  -fx-background-color: transparent;
+}
+
+/* Make the scroll pane for courses larger */
+.semester-box .scroll-pane {
+  -fx-min-height: 160px;
+  -fx-pref-height: 160px;
+  -fx-max-height: 160px;
+  -fx-background-color: transparent;
+  -fx-border-color: transparent;
+  -fx-padding: 0;
+  -fx-fit-to-width: true;
+}
+
+.semester-box .scroll-pane .viewport {
+  -fx-background-color: transparent;
+}
+
+.semester-course-list {
+  -fx-spacing: 2;
+}
+
+/* Global High-Contrast Text Fixes */
+* .table-cell,
+* .label,
+.table-view .table-row-cell .table-cell,
+.table-view .column-header .label,
+.section-pane .table-cell,
+.section-pane .table-column .label,
+.modern-table .table-cell,
+.data-table .table-cell,
+.semester-course-item,
+.semester-list-title,
+.semester-stat-title,
+.semester-stat-value {
+  -fx-text-fill: black !important;
+  -fx-font-weight: normal;
+}
+
+/* Override for headings and titles that need emphasis */
+.semester-title,
+.card-value {
+  -fx-font-weight: bold !important;
+}
+
+/* White text elements */
+.main-header .label,
+.header-title,
+.header-student-number,
+.logout-button,
+.section-pane > .title {
+  -fx-text-fill: white !important;
+  -fx-font-weight: bold;
+}
+
+/* Explicit fix for table cells */
+.table-view .table-cell {
+  -fx-text-fill: black !important;
+  -fx-wrap-text: true;
+  -fx-alignment: center-left;
+}
+
+.semester-box:hover {
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0, 0, 2);
+  -fx-translate-y: -2;
+  -fx-background-color: linear-gradient(to bottom right, white, #f6f0ff);
+}
+
+/* Scroll Bar */
+.scroll-bar:vertical,
+.scroll-bar:horizontal {
+  -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical .thumb,
+.scroll-bar:horizontal .thumb {
+  -fx-background-color: #bdc3c7;
+  -fx-background-radius: 10;
+}
+
+.scroll-bar:vertical .thumb:hover,
+.scroll-bar:horizontal .thumb:hover {
+  -fx-background-color: #95a5a6;
+}
+
+/* Root Container */
+.root-container {
+  -fx-background-color: linear-gradient(to bottom right, #f5f7fa, #e0e6f0);
+}
+
+/* Header Container */
+.header-container {
+  -fx-background-color: linear-gradient(to right, #143385 60%, #e27024);
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 2);
+}
+
+/* Main Header */
+.main-header {
+  -fx-alignment: CENTER_LEFT;
+  -fx-spacing: 20;
+}
+
+.header-title {
+  -fx-font-size: 24px;
+  -fx-font-weight: bold;
+  -fx-text-fill: white !important;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 2, 0, 0, 1);
+}
+
+.header-student-number {
+  -fx-font-size: 16px;
+  -fx-text-fill: rgba(255, 255, 255, 0.9) !important;
+  -fx-font-weight: bold;
+  -fx-padding: 5 10;
+  -fx-background-color: rgba(255, 255, 255, 0.1);
+  -fx-background-radius: 15;
+}
+
+/* Logout Button */
+.logout-button {
+  -fx-background-color: #e27024;
+  -fx-text-fill: white !important;
+  -fx-font-weight: bold;
+  -fx-font-size: 14px;
+  -fx-background-radius: 20;
+  -fx-padding: 8 20;
+  -fx-cursor: hand;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 1);
+  -fx-border-width: 2;
+  -fx-border-color: white;
+  -fx-border-radius: 20;
+}
+
+.logout-button:hover {
+  -fx-background-color: white;
+  -fx-text-fill: #e27024 !important;
+  -fx-border-color: #e27024;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0, 0, 2);
+  -fx-translate-y: -1;
+}
+
+/* Section Panes */
+.section-pane {
+  -fx-background-color: white;
+  -fx-background-radius: 12;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 1);
+  -fx-min-height: 350;
+  -fx-border-radius: 12;
+  -fx-margin-top: 15px;
+  -fx-margin-bottom: 15px;
+}
+
+.section-pane > .title {
+  -fx-font-size: 18px;
+  -fx-font-weight: bold;
+  -fx-text-fill: white !important;
+  -fx-padding: 15 20;
+}
+
+.section-pane > .title > .text {
+  -fx-fill: white !important;
+}
+
+.section-pane > *.content {
+  -fx-background-color: white;
+  -fx-border-width: 0;
+  -fx-padding: 20;
+  -fx-background-radius: 0 0 12 12;
+}
+
+.exams-section > .title {
+  -fx-background-color: linear-gradient(to right, #143385, #2851c7);
+  -fx-background-radius: 12 12 0 0;
+}
+
+.scores-section > .title {
+  -fx-background-color: linear-gradient(to right, #e27024, #f08b45);
+  -fx-background-radius: 12 12 0 0;
+}
+
+.courses-section > .title {
+  -fx-background-color: linear-gradient(to right, #2ecc71, #57e58c);
+  -fx-background-radius: 12 12 0 0;
+}
+
+.semesters-section > .title {
+  -fx-background-color: linear-gradient(to right, #9b59b6, #b77cc8);
+  -fx-background-radius: 12 12 0 0;
+}
+
+/* Fix all text display issues in one place */
+* {
+  -fx-text-fill: black;
+}
+
+.table-cell,
+.label,
+.text-field {
+  -fx-text-fill: black !important;
+}
+
+.table-view {
+  -fx-font-size: 14px;
+}
+
+.table-view .table-cell {
+  -fx-padding: 10 8;
+  -fx-wrap-text: true;
+  -fx-text-fill: black !important;
+  -fx-font-weight: normal;
+}
+
+.table-view .column-header .label {
+  -fx-text-fill: black !important;
+  -fx-font-weight: bold;
+}
+
+.data-table .table-row-cell {
+  -fx-cell-size: 50px;
+}
+
+/* Table background fix */
+.table-view {
+  -fx-background-color: white;
+  -fx-table-cell-border-color: transparent;
+}
+
+.table-view:focused {
+  -fx-background-color: white;
+}
+
+.table-view .column-header-background {
+  -fx-background-color: #f0f0f0;
+}
+
+.table-view .column-header,
+.table-view .filler {
+  -fx-background-color: white;
+  -fx-size: 45px;
+  -fx-border-color: transparent;
+  -fx-border-width: 0 0 1 0;
+}
+
+.table-view .column-header:hover {
+  -fx-background-color: #f5f5f5;
+}
+
+/* Add bold text where needed */
+.semester-title {
+  -fx-font-size: 22px;
+  -fx-font-weight: bold !important;
+  -fx-text-fill: #9b59b6 !important;
+}
+
+/* Exceptions for white text where needed */
+.main-header .label,
+.header-title,
+.header-student-number,
+.section-pane > .title,
+.button,
+.logout-button {
+  -fx-text-fill: white !important;
+}
+
+/* Info Cards Styles */
+.info-card {
+  -fx-background-color: white;
+  -fx-background-radius: 12;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 1);
+  -fx-padding: 20;
+  -fx-pref-width: 220;
+  -fx-min-height: 120;
+  -fx-alignment: center;
+  -fx-spacing: 10;
+  -fx-border-radius: 12;
+  -fx-border-width: 0 0 0 5;
+  -fx-cursor: hand;
+}
+
+.info-card:hover {
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 8, 0, 0, 2);
+  -fx-translate-y: -2;
+  -fx-background-color: linear-gradient(to bottom right, white, #fafbff);
+}
+
+.primary-card {
+  -fx-border-color: #143385;
+}
+
+.primary-card:hover {
+  -fx-background-color: linear-gradient(to bottom right, white, #eef3ff);
+}
+
+.success-card {
+  -fx-border-color: #2ecc71;
+}
+
+.success-card:hover {
+  -fx-background-color: linear-gradient(to bottom right, white, #eefff2);
+}
+
+.warning-card {
+  -fx-border-color: #e27024;
+}
+
+.warning-card:hover {
+  -fx-background-color: linear-gradient(to bottom right, white, #fff3e8);
+}
+
+.card-label {
+  -fx-font-size: 14px;
+  -fx-text-fill: #666666 !important;
+  -fx-opacity: 0.9;
+}
+
+.card-value {
+  -fx-font-size: 30px;
+  -fx-font-weight: bold;
+  -fx-text-fill: black !important;
+}
+
+/* Ensure section titles have white text */
+.exams-section > .title > .text,
+.scores-section > .title > .text,
+.courses-section > .title > .text,
+.semesters-section > .title > .text {
+  -fx-fill: white !important;
+}
+
+/* Fix TitledPane text colors */
+.titled-pane > .title > .text,
+.section-pane > .title > .text {
+  -fx-fill: white !important;
+}
+
+.titled-pane > .title,
+.section-pane > .title {
+  -fx-text-fill: white !important;
+}
+
+.exams-section > .title > .text,
+.scores-section > .title > .text,
+.courses-section > .title > .text,
+.semesters-section > .title > .text {
+  -fx-fill: white !important;
+  -fx-font-size: 18px;
+}
+
+/* Fix table column header text */
+.table-view .column-header .label {
+  -fx-text-fill: black !important;
+  -fx-font-weight: bold;
+  -fx-font-size: 14px;
+}
+
+/* Stronger text color override for section titles */
+.section-pane {
+  -fx-text-fill: white !important;
+}
+
+.section-pane > .title {
+  -fx-text-fill: white !important;
+}
+
+.section-pane > .title > .arrow {
+  -fx-background-color: white;
+}
+
+/* Add spacing between info cards and sections */
+.info-cards-container {
+  -fx-padding: 0 0 25 0; /* Bottom padding */
+  -fx-margin-bottom: 20px;
+}
+
+/* Make the semester box footer area smaller */
+.semester-list-title {
+  -fx-font-size: 14px; /* Reduced from 16px */
+  -fx-font-weight: bold;
+  -fx-text-fill: #000000 !important;
+  -fx-padding: 2 0; /* Reduced from 5 0 */
+}
+
+/* Adjust the semester box scroll pane */
+.semester-box .scroll-pane {
+  -fx-min-height: 160px; /* Reduced from 180px */
+  -fx-pref-height: 160px; /* Reduced from 180px */
+  -fx-max-height: 160px; /* Reduced from 180px */
+  -fx-background-color: transparent;
+  -fx-border-color: transparent;
+  -fx-padding: 0;
+  -fx-fit-to-width: true;
+}
+
+/* Make the semester course list more compact */
+.semester-course-list {
+  -fx-spacing: 2; /* Reduced from 3 */
+}
+
+/* Make semester box slightly shorter */
+.semester-box {
+  -fx-min-height: 300px; /* Reduced from default */
+  -fx-max-height: 300px; /* Added explicit max height */
+}
+
+/* Add spacing between sections */
+.section-pane {
+  -fx-margin-top: 15px;
+  -fx-margin-bottom: 15px;
+}
+
+/* Fixed spacing between sections using VBox margins instead of FX margins */
+.content-container {
+  -fx-spacing: 20;
+}
+
+/* Add spacing between the info cards and sections */
+.info-cards-container {
+  -fx-padding: 0 0 25 0; /* Bottom padding */
+}
+
+/* Fix section spacing */
+.section-pane {
+  -fx-background-color: white;
+  -fx-background-radius: 12;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 1);
+  -fx-min-height: 350;
+  -fx-border-radius: 12;
+}
+
+/* Fix TitledPane title text */
+.titled-pane > .title > .text,
+.section-pane > .title > .text {
+  -fx-fill: white !important;
+}
+
+.titled-pane > .title,
+.section-pane > .title {
+  -fx-text-fill: white !important;
+}
+
+/* Content container spacing */
+.content-container {
+  -fx-spacing: 20;
+  -fx-background-color: transparent;
+}
+
+/* Info cards spacing */
+.info-cards-container {
+  -fx-padding: 0 0 25 0; /* Bottom padding */
+  -fx-margin-bottom: 20px;
+}
+
+/* Section spacing */
+.section-pane {
+  -fx-background-color: white;
+  -fx-background-radius: 12;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 1);
+  -fx-min-height: 350;
+  -fx-border-radius: 12;
+  -fx-margin-top: 15px;
+  -fx-margin-bottom: 15px;
+}
+
+/* Semester Card Styles */
+.semester-card {
+  -fx-background-color: white;
+  -fx-background-radius: 10px;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 8, 0, 0, 2);
+  -fx-padding: 15px;
+  -fx-border-color: #9b59b6;
+  -fx-border-width: 0 0 0 5px;
+  -fx-border-radius: 10px;
+  -fx-min-height: 330px;
+  -fx-max-height: 330px;
+}
+
+.semester-title {
+  -fx-font-size: 20px;
+  -fx-font-weight: bold;
+  -fx-text-fill: #9b59b6;
+}
+
+.semester-subtitle {
+  -fx-font-size: 14px;
+  -fx-text-fill: #606060;
+  -fx-padding: 0 0 5 0;
+}
+
+.semester-stats-value {
+  -fx-font-size: 16px;
+  -fx-font-weight: bold;
+  -fx-text-fill: #333333;
+}
+
+.semester-courses-header {
+  -fx-font-size: 15px;
+  -fx-font-weight: bold;
+  -fx-text-fill: #333333;
+  -fx-padding: 5 0 5 0;
+}
+
+/* Course List Styling */
+.course-list {
+  -fx-background-color: transparent;
+  -fx-padding: 2;
+  -fx-spacing: 6;
+}
+
+.course-item {
+  -fx-background-color: #f8f9fa;
+  -fx-background-radius: 6px;
+  -fx-border-radius: 6px;
+  -fx-border-color: #e9ecef;
+  -fx-border-width: 1px;
+  -fx-padding: 0 5 0 10;
+  -fx-alignment: center-left;
+  -fx-min-height: 34px;
+  -fx-pref-height: 34px;
+  -fx-max-height: 34px;
+}
+
+.course-item:hover {
+  -fx-background-color: #e9ecef;
+  -fx-border-color: #ced4da;
+}
+
+.course-code {
+  -fx-font-size: 13px;
+  -fx-font-weight: bold;
+  -fx-text-fill: #606060;
+  -fx-min-width: 65px;
+}
+
+.course-name {
+  -fx-font-size: 13px;
+  -fx-text-fill: #333333;
+  -fx-text-overrun: ellipsis;
+}
+
+/* Scroll Pane for Course List */
+.course-scroll {
+  -fx-background-color: transparent;
+  -fx-background: transparent;
+  -fx-padding: 0;
+  -fx-border-color: transparent;
+}
+
+.course-scroll > .viewport {
+  -fx-background-color: transparent;
+}
+
+.course-scroll .scroll-bar:vertical {
+  -fx-background-color: transparent;
+  -fx-pref-width: 10px;
+}
+
+.course-scroll .scroll-bar:vertical .thumb {
+  -fx-background-color: #d0d0d0;
+  -fx-background-radius: 5px;
+}
+
+/* Table Styling Improvements */
+.data-table {
+  -fx-background-color: white;
+  -fx-border-color: transparent;
+  -fx-table-cell-border-color: transparent;
+  -fx-padding: 0;
+}
+
+.data-table .column-header {
+  -fx-background-color: #f8f9fa;
+  -fx-padding: 15px 10px;
+  -fx-border-color: #e9ecef;
+  -fx-border-width: 0 0 1 0;
+}
+
+.data-table .column-header .label {
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+  -fx-text-fill: #495057 !important;
+  -fx-alignment: CENTER;
+  -fx-padding: 0;
+  -fx-wrap-text: true;
+}
+
+.data-table .table-row-cell {
+  -fx-background-color: white;
+  -fx-border-color: transparent transparent #f0f0f0 transparent;
+  -fx-border-width: 0 0 1 0;
+  -fx-cell-size: 50px;
+}
+
+.data-table .table-row-cell:hover {
+  -fx-background-color: #f8f9fa;
+}
+
+.data-table .table-row-cell:selected {
+  -fx-background-color: #e7f0ff;
+  -fx-border-color: transparent transparent #d0e0ff transparent;
+}
+
+.data-table .table-row-cell:selected .table-cell {
+  -fx-text-fill: #143385 !important;
+}
+
+.data-table .table-cell {
+  -fx-alignment: CENTER;
+  -fx-padding: 0 10px;
+  -fx-text-fill: #333333 !important;
+  -fx-font-size: 14px;
+  -fx-border-color: transparent;
+  -fx-border-width: 0;
+}
+
+/* Ensure consistent spacing in section panes */
+.section-pane > .content {
+  -fx-padding: 15px;
+}
+
+/* Consistent table search fields */
+.table-search-field {
+  -fx-background-color: #f8f9fa;
+  -fx-background-radius: 20px;
+  -fx-border-color: #e9ecef;
+  -fx-border-radius: 20px;
+  -fx-padding: 8px 15px;
+  -fx-pref-height: 35px;
+  -fx-prompt-text-fill: #6c757d;
+  -fx-font-size: 14px;
+}
+
+.table-search-field:focused {
+  -fx-background-color: white;
+  -fx-border-color: #143385;
+}
+
+/* Consistent margin for table containers */
+.table-container {
+  -fx-spacing: 10;
+  -fx-padding: 0 0 10 0;
+}
+
+/* Fixing specific table section spacing */
+.exams-section .table-container,
+.scores-section .table-container,
+.courses-section .table-container {
+  -fx-padding: 0 5 0 5;
+}
+
+.student-number-label {
+  -fx-font-size: 16px;
+  -fx-font-weight: bold;
+  -fx-text-fill: -fx-primary;
+  -fx-padding: 5 0;
+}

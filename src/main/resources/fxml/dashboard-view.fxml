@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.example.trajectplanner.controllers.DashboardController"
+            styleClass="root"
+            stylesheets="@../css/dashboard-styles.css"
+            prefWidth="1600"
+            prefHeight="900">
+            
+    <!-- Left Sidebar -->
+    <left>
+        <VBox styleClass="sidebar" spacing="10">
+            <padding><Insets top="20" left="20" right="20" bottom="20"/></padding>
+            
+            <!-- Logo and Title -->
+            <Label text="Trajectplanner" styleClass="sidebar-title"/>
+            
+            <!-- Navigation Buttons -->
+            <Button text="Dashboard" styleClass="sidebar-button active" onAction="#navigateToDashboard"/>
+            <Button text="Studenten" styleClass="sidebar-button" onAction="#navigateToStudents"/>
+            <Button text="Tentamens" styleClass="sidebar-button" onAction="#navigateToExams"/>
+            <Button text="Cursussen" styleClass="sidebar-button" onAction="#navigateToCourses"/>
+            
+            <!-- Spacer to push admin section to bottom -->
+            <VBox VBox.vgrow="ALWAYS"/>
+            
+            <!-- Admin User Section -->
+            <VBox styleClass="admin-section">
+                <Label text="Admin User" styleClass="admin-label"/>
+                <Label text="Admin" styleClass="admin-name"/>
+            </VBox>
+            
+            <!-- Logout Button -->
+            <Button text="Logout" styleClass="logout-button" onAction="#handleLogout"/>
+        </VBox>
+    </left>
+    
+    <!-- Main Content -->
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="content-scroll-pane">
+            <VBox styleClass="content-container">
+                <padding>
+                    <Insets top="30" right="30" bottom="30" left="30"/>
+                </padding>
+                
+                <!-- Student Info Cards -->
+                <HBox spacing="20" styleClass="info-cards-container">
+                    <!-- BirthDate Card -->
+                    <VBox styleClass="info-card, primary-card">
+                        <Label text="Birth Date" styleClass="card-label"/>
+                        <Label fx:id="birthdateLabel" text="09-02-2000" styleClass="card-value"/>
+                    </VBox>
+                    
+                    <!-- Total EC Card -->
+                    <VBox styleClass="info-card, success-card">
+                        <Label text="Total EC" styleClass="card-label"/>
+                        <Label fx:id="totalEcLabel" text="75 EC" styleClass="card-value"/>
+                    </VBox>
+                    
+                    <!-- Average Grade Card -->
+                    <VBox styleClass="info-card, warning-card">
+                        <Label text="Average Grade" styleClass="card-label"/>
+                        <Label fx:id="averageGradeLabel" text="7.5" styleClass="card-value"/>
+                    </VBox>
+                    
+                    <!-- Upcoming Exams Card -->
+                    <VBox styleClass="info-card, primary-card">
+                        <Label text="Exams in 30 Days" styleClass="card-label"/>
+                        <Label fx:id="upcomingExamsLabel" text="3" styleClass="card-value"/>
+                    </VBox>
+                </HBox>
+                
+                <!-- Extra spacing -->
+                <Region minHeight="20" />
+                
+                <!-- Upcoming Exams Section -->
+                <TitledPane text="Upcoming Exams" expanded="true" styleClass="exams-section,section-pane">
+                    <content>
+                        <VBox styleClass="table-container">
+                            <TextField fx:id="examSearchField" promptText="Search exams..." styleClass="table-search-field"/>
+                            <TableView fx:id="examsTable" VBox.vgrow="ALWAYS" styleClass="data-table">
+                                <columns>
+                                    <TableColumn fx:id="examIdColumn" text="Exam ID" />
+                                    <TableColumn fx:id="examCourseColumn" text="Course Name" />
+                                    <TableColumn fx:id="examSemesterColumn" text="Semester" />
+                                    <TableColumn fx:id="examDateColumn" text="Exam Date" />
+                                    <TableColumn fx:id="examTypeColumn" text="Exam Type" />
+                                </columns>
+                            </TableView>
+                        </VBox>
+                    </content>
+                </TitledPane>
+                
+                <!-- Recent Scores Section -->
+                <TitledPane text="Recent Scores" expanded="true" styleClass="scores-section,section-pane">
+                    <content>
+                        <VBox styleClass="table-container">
+                            <TextField fx:id="scoreSearchField" promptText="Search scores..." styleClass="table-search-field"/>
+                            <TableView fx:id="scoresTable" VBox.vgrow="ALWAYS" styleClass="data-table">
+                                <columns>
+                                    <TableColumn fx:id="scoresCourseCodeColumn" text="Course Code" />
+                                    <TableColumn fx:id="scoresCourseColumn" text="Course Name" />
+                                    <TableColumn fx:id="scoresValueColumn" text="Score Value" />
+                                    <TableColumn fx:id="scoresDateColumn" text="Score Date" />
+                                </columns>
+                            </TableView>
+                        </VBox>
+                    </content>
+                </TitledPane>
+                
+                <!-- Courses Section -->
+                <TitledPane text="Courses" expanded="true" styleClass="courses-section,section-pane">
+                    <content>
+                        <VBox styleClass="table-container">
+                            <TextField fx:id="searchField" promptText="Search courses..." styleClass="table-search-field"/>
+                            <TableView fx:id="coursesTable" VBox.vgrow="ALWAYS" styleClass="data-table">
+                                <columns>
+                                    <TableColumn fx:id="courseCodeColumn" text="Course Code" />
+                                    <TableColumn fx:id="courseNameColumn" text="Course Name" />
+                                    <TableColumn fx:id="courseSemesterColumn" text="Semester" />
+                                    <TableColumn fx:id="courseBlockColumn" text="Block" />
+                                    <TableColumn fx:id="courseEcColumn" text="EC Points" />
+                                </columns>
+                            </TableView>
+                        </VBox>
+                    </content>
+                </TitledPane>
+                
+                <!-- Semesters Section -->
+                <TitledPane text="Semesters" styleClass="section-pane, semesters-section">
+                    <ScrollPane fitToWidth="true" styleClass="semester-scroll-pane" hbarPolicy="NEVER">
+                        <GridPane fx:id="semesterGrid" hgap="15" vgap="15" alignment="CENTER">
+                            <padding>
+                                <Insets top="10" right="10" bottom="10" left="10"/>
+                            </padding>
+                        </GridPane>
+                    </ScrollPane>
+                </TitledPane>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>
