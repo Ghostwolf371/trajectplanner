@@ -90,7 +90,7 @@ public class StudentItemController {
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
         dialogStage.setScene(scene);
-        dialogStage.setMinWidth(1000);
+        dialogStage.setMinWidth(800);
         dialogStage.setMinHeight(600);
         dialogStage.setResizable(true);
 
@@ -123,9 +123,7 @@ public class StudentItemController {
 
     private void deleteThroughApi() {
         try {
-            // Format student number by replacing slashes with dashes (e.g., "SE/2324/01" -> "SE-2324-01")
-            String formattedStudentNumber = student.getStudentNumber().replace("/", "-");
-            var response = StudentService.delete(formattedStudentNumber);
+            var response = StudentService.delete(student.getStudentNumber());
             
             if (response != null) {
                 switch (((HttpResponse<String>) response).statusCode()) {

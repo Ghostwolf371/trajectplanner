@@ -19,7 +19,7 @@ public class AddStudentDialogController {
     @FXML private TextField firstNameField;
     @FXML private TextField lastNameField;
     @FXML private ComboBox<String> majorComboBox;
-    @FXML private ComboBox<String> cohortComboBox;
+    @FXML private TextField cohortField;
     @FXML private ComboBox<String> genderComboBox;
     @FXML private DatePicker birthdatePicker;
 
@@ -31,13 +31,6 @@ public class AddStudentDialogController {
             "SE",
             "BI",
             "NE"
-        );
-
-        cohortComboBox.getItems().addAll(
-            "1122",
-            "1123",
-            "1124"
-            
         );
 
         genderComboBox.getItems().addAll(
@@ -71,7 +64,7 @@ public class AddStudentDialogController {
                 .put("first_name", formattedFirstName)
                 .put("last_name", lastNameField.getText().trim())
                 .put("major", majorComboBox.getValue())
-                .put("cohort", Integer.parseInt(cohortComboBox.getValue()))
+                .put("cohort", Integer.parseInt(cohortField.getText().trim()))
                 .put("gender", genderComboBox.getValue())
                 .put("birthdate", birthdatePicker.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE))
                 .put("password", DEFAULT_PASSWORD); // Using the same default password as in LoginController
@@ -143,8 +136,15 @@ public class AddStudentDialogController {
             return false;
         }
 
-        if (cohortComboBox.getValue() == null) {
+        if (cohortField.getText() == null || cohortField.getText().trim().isEmpty()) {
             showError("Validation Error", "Cohort is required");
+            return false;
+        }
+
+        try {
+            Integer.parseInt(cohortField.getText().trim());
+        } catch (NumberFormatException e) {
+            showError("Validation Error", "Cohort must be a valid number");
             return false;
         }
 

@@ -35,9 +35,9 @@
            GridPane.columnIndex="4"/>
     
     <HBox alignment="CENTER" spacing="10" GridPane.columnIndex="5">
-        <Button fx:id="editButton" styleClass="edit-button" text="Edit" 
+        <Button fx:id="editButton" styleClass="edit-button" text="E" 
                 prefWidth="55"/>
-        <Button fx:id="deleteButton" styleClass="delete-button" text="Delete" 
+        <Button fx:id="deleteButton" styleClass="delete-button" text="D" 
                 prefWidth="55"/>
     </HBox>
 </GridPane>

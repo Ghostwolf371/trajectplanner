@@ -130,8 +130,6 @@ public class StudentDialogController {
         // Add password validation
         if (isNullOrEmpty(passwordField.getText())) {
             errorMessage.append("Password is required!\n");
-        } else if (passwordField.getText().length() < 8) {
-            errorMessage.append("Password must be at least 8 characters long!\n");
         }
 
         if (errorMessage.length() == 0) {

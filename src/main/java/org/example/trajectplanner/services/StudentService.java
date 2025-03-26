@@ -20,15 +20,13 @@ public class StudentService {
     }
 
     public static HttpResponse<String> delete(String studentNumber) {
-        // Format student number for API call
-        String formattedStudentNumber = studentNumber.replace("/", "-");
-        String deleteUrl = API_URL + "/" + formattedStudentNumber;
+        String deleteUrl = API_URL + "/" + studentNumber;
         
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(deleteUrl))
                 .header("Content-Type", "application/json")
                 .method("DELETE", HttpRequest.BodyPublishers.ofString(
-                    String.format("{\"student_number\": \"%s\"}", formattedStudentNumber)
+                    String.format("{\"student_number\": \"%s\"}", studentNumber)
                 ))
                 .build();
 

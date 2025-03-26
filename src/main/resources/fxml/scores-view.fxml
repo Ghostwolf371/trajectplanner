@@ -23,8 +23,6 @@
             <Button fx:id="examinationsButton" text="Examinations" styleClass="nav-item"/>
             <Button text="Scores" styleClass="nav-item, nav-item-active"/>
             <Button fx:id="studentsButton" text="Students" styleClass="nav-item" onAction="#navigateToStudents"/>
-            <Button text="Reports" styleClass="nav-item"/>
-            <Button text="Settings" styleClass="nav-item"/>
         </VBox>
     </VBox>
 

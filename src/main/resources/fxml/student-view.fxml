@@ -8,7 +8,9 @@
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="org.example.trajectplanner.controllers.StudentController"
       styleClass="root"
-      stylesheets="@../css/styles.css">
+      stylesheets="@../css/styles.css"
+      prefHeight="900" 
+      prefWidth="1600">
     
     <!-- Sidebar -->
     <VBox styleClass="sidebar" minWidth="200">
@@ -23,8 +25,6 @@
             <Button text="Examinations" styleClass="nav-item" onAction="#navigateToExams"/>
             <Button text="Scores" styleClass="nav-item" onAction="#navigateToScores"/>
             <Button text="Students" styleClass="nav-item, nav-item-active"/>
-            <Button text="Reports" styleClass="nav-item"/>
-            <Button text="Settings" styleClass="nav-item"/>
         </VBox>
     </VBox>
 
@@ -49,24 +49,24 @@
                 <Insets left="20" right="20" top="10" bottom="10"/>
             </padding>
             <columnConstraints>
-                <ColumnConstraints percentWidth="20"/>  <!-- Student Number -->
+                <ColumnConstraints percentWidth="15"/>  <!-- Student Number -->
                 <ColumnConstraints percentWidth="20"/>  <!-- First Name -->
                 <ColumnConstraints percentWidth="20"/>  <!-- Last Name -->
-                <ColumnConstraints percentWidth="20"/>  <!-- Gender -->
-                <ColumnConstraints percentWidth="20"/>  <!-- Birthday/Actions -->
+                <ColumnConstraints percentWidth="10"/>  <!-- Gender -->
+                <ColumnConstraints percentWidth="35"/>  <!-- Birthday/Actions -->
             </columnConstraints>
 
             <Label text="Student Number" styleClass="header-label" 
                    GridPane.columnIndex="0" GridPane.halignment="LEFT"/>
-            <Label text="First Name" styleClass="header-label" style="-fx-font-size: 14px;"
+            <Label text="First Name" styleClass="header-label" 
                    GridPane.columnIndex="1" GridPane.halignment="CENTER"/>
-            <Label text="Last Name" styleClass="header-label" style="-fx-font-size: 14px;"
+            <Label text="Last Name" styleClass="header-label" 
                    GridPane.columnIndex="2" GridPane.halignment="CENTER"/>
-            <Label text="Gender" styleClass="header-label" style="-fx-font-size: 14px;"
+            <Label text="Gender" styleClass="header-label" 
                    GridPane.columnIndex="3" GridPane.halignment="CENTER"/>
-            <HBox spacing="50" alignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="CENTER">
-                <Label text="Birthday" styleClass="header-label" style="-fx-font-size: 14px;"/>
-                <Label text="Actions" styleClass="header-label" style="-fx-font-size: 14px;"/>
+            <HBox spacing="100" alignment="CENTER" GridPane.columnIndex="4">
+                <Label text="Birthday" styleClass="header-label"/>
+                <Label text="Actions" styleClass="header-label"/>
             </HBox>
         </GridPane>
 
