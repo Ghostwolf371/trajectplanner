@@ -21,17 +21,12 @@ import org.example.trajectplanner.model.Score;
 import org.example.trajectplanner.model.Semester;
 import org.example.trajectplanner.model.Tentamen;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.URI;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
@@ -40,8 +35,6 @@ import javafx.event.ActionEvent;
 
 public class DashboardController implements Initializable {
     private static final String STUDENT_NUMBER = "SE/1145/47";
-    private static final String API_URL = "https://trajectplannerapi.dulamari.com/students/";
-    private static final double TOTAL_EC_REQUIRED = 75.0;
     private final ObjectMapper mapper = new ObjectMapper();
     private final GetMethods getMethods = new GetMethods();
 

@@ -27,11 +27,11 @@ public class LoginController {
     private static final String API_URL = "https://trajectplannerapi.dulamari.com/students/";
     private final ObjectMapper mapper = new ObjectMapper();
     
-    // Default password for new accounts (12 digits)
+    // Default system password that triggers the password change screen
     private static final String DEFAULT_PASSWORD = "9x#V@7p!Lz$Q2w%T8m^C3j*B6r&K0d";
     
-    // For storing the user's API password when redirecting to change password screen
-    private static String userApiPassword;
+    // For storing the user's student number when redirecting to change password screen
+    private static String userStudentNumber;
 
     @FXML
     private TextField studentnummer;
@@ -81,12 +81,14 @@ public class LoginController {
                                 if (jsonNode.isArray() && jsonNode.size() > 0) {
                                     JsonNode student = jsonNode.get(0);
                                     String apiPassword = student.get("password").asText();
-                                    userApiPassword = apiPassword;
                                     
                                     // Verify password
                                     if (password.equals(apiPassword)) {
-                                        // Check if it's the default password
+                                        // Check if it's the default system password
                                         if (apiPassword.equals(DEFAULT_PASSWORD)) {
+                                            // Store student number for password change screen
+                                            userStudentNumber = studentNumber;
+                                            
                                             // New user with default password, redirect to change password
                                             Platform.runLater(() -> {
                                                 try {
@@ -96,7 +98,7 @@ public class LoginController {
                                                 }
                                             });
                                         } else {
-                                            // Regular login, proceed to dashboard
+                                            // Regular login, proceed to main application
                                             Platform.runLater(() -> {
                                                 try {
                                                     navigateToDashboard(event);
@@ -150,7 +152,7 @@ public class LoginController {
         
         // Set the student number in the new password controller
         if (newPasswordController != null) {
-            newPasswordController.setStudentInfo(studentNumber, userApiPassword);
+            newPasswordController.setStudentInfo(studentNumber, DEFAULT_PASSWORD);
         }
         
         Scene scene = new Scene(root);
@@ -181,6 +183,6 @@ public class LoginController {
     
     // Static method to get the current API password
     public static String getUserApiPassword() {
-        return userApiPassword;
+        return userStudentNumber;
     }
 }

@@ -60,6 +60,12 @@ public class NewPasswordController {
             showFeedback("Please confirm your new password", true);
             return;
         }
+        
+        // Check password length (minimum 4 characters required by API)
+        if (newPasswordValue.length() < 4) {
+            showFeedback("Password must be at least 4 characters long", true);
+            return;
+        }
 
         // Check if passwords match
         if (newPasswordValue.equals(confirmPasswordValue)) {
@@ -73,23 +79,17 @@ public class NewPasswordController {
     
     private void updatePasswordOnServer(String newPassword, ActionEvent event) {
         try {
-            // Format student number for API call
-            String formattedStudentNumber = studentNumber.replace("/", "-");
+            // Create JSON body with student number and new password
+            ObjectNode requestBody = mapper.createObjectNode();
+            requestBody.put("student_number", studentNumber);
+            requestBody.put("password", newPassword);
             
             // Create HTTP client
             HttpClient client = HttpClient.newHttpClient();
             
-            // For a real implementation, this would be a PUT request to update the password
-            // Since we don't have an actual update endpoint, we'll just simulate success
-            // In a real app, you would make an API call like this:
-            /*
-            // Create JSON body with updated password
-            ObjectNode requestBody = mapper.createObjectNode();
-            requestBody.put("password", newPassword);
-            
             // Create HTTP request
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(API_URL + formattedStudentNumber))
+                    .uri(URI.create("https://trajectplannerapi.dulamari.com/students"))
                     .header("Content-Type", "application/json")
                     .PUT(HttpRequest.BodyPublishers.ofString(requestBody.toString()))
                     .build();
@@ -101,36 +101,42 @@ public class NewPasswordController {
                           // Password updated successfully
                           Platform.runLater(() -> {
                               showFeedback("Password successfully changed. Redirecting to login...", false);
-                              redirectToLogin(event);
+                              // Redirect to login screen after 2 seconds
+                              new Thread(() -> {
+                                  try {
+                                      Thread.sleep(2000);
+                                      Platform.runLater(() -> {
+                                          try {
+                                              navigateToLogin(event);
+                                          } catch (IOException e) {
+                                              e.printStackTrace();
+                                          }
+                                      });
+                                  } catch (InterruptedException e) {
+                                      e.printStackTrace();
+                                  }
+                              }).start();
                           });
                       } else {
                           // Error updating password
+                          String errorMessage = "Error updating password. ";
+                          try {
+                              JsonNode responseJson = mapper.readTree(response.body());
+                              if (responseJson.has("message")) {
+                                  errorMessage += responseJson.get("message").asText();
+                              } else {
+                                  errorMessage += "Status code: " + response.statusCode();
+                              }
+                          } catch (Exception e) {
+                              errorMessage += "Status code: " + response.statusCode();
+                          }
+                          
+                          final String finalErrorMessage = errorMessage;
                           Platform.runLater(() -> {
-                              showFeedback("Error updating password. Please try again.", true);
+                              showFeedback(finalErrorMessage, true);
                           });
                       }
                   });
-            */
-            
-            // For now, simulate successful password change
-            showFeedback("Password successfully changed. Redirecting to login...", false);
-            
-            // Redirect to login screen after 2 seconds
-            new Thread(() -> {
-                try {
-                    Thread.sleep(2000);
-                    Platform.runLater(() -> {
-                        try {
-                            navigateToLogin(event);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    });
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }).start();
-            
         } catch (Exception e) {
             showFeedback("Error updating password: " + e.getMessage(), true);
         }
