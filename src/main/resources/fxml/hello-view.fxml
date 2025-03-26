@@ -8,7 +8,10 @@
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="org.example.trajectplanner.controllers.Controller"
       styleClass="root"
-      stylesheets="@../css/styles.css">
+      stylesheets="@../css/styles.css"
+      prefHeight="900" 
+      prefWidth="1600"
+      >
     
     <!-- Sidebar -->
     <VBox styleClass="sidebar" minWidth="200">

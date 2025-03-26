@@ -63,6 +63,8 @@
                         <PasswordField fx:id="newPassword" 
                                      promptText="Enter your new password" 
                                      styleClass="login-field"/>
+                        <Label text="Password must be at least 4 characters" 
+                               styleClass="password-requirements"/>
                     </VBox>
                     
                     <VBox styleClass="form-group">

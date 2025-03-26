@@ -21,7 +21,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class NewPasswordController {
-    private static final String API_URL = "https://trajectplannerapi.dulamari.com/students/";
+    private static final String API_URL = "https://trajectplannerapi.dulamari.com/students";
     private final ObjectMapper mapper = new ObjectMapper();
 
     @FXML
@@ -46,11 +46,9 @@ public class NewPasswordController {
 
     @FXML
     public void handleChangePassword(ActionEvent event) {
-        // Get the entered passwords
         String newPasswordValue = newPassword.getText();
         String confirmPasswordValue = confirmPassword.getText();
 
-        // Validate password fields
         if (newPasswordValue == null || newPasswordValue.trim().isEmpty()) {
             showFeedback("Please enter a new password", true);
             return;
@@ -60,13 +58,15 @@ public class NewPasswordController {
             showFeedback("Please confirm your new password", true);
             return;
         }
+        
+        if (newPasswordValue.length() < 4) {
+            showFeedback("Password must be at least 4 characters long", true);
+            return;
+        }
 
-        // Check if passwords match
         if (newPasswordValue.equals(confirmPasswordValue)) {
-            // Update the password via API
             updatePasswordOnServer(newPasswordValue, event);
         } else {
-            // Show error if passwords don't match
             showFeedback("Passwords do not match!", true);
         }
     }
@@ -76,16 +76,17 @@ public class NewPasswordController {
             // Format student number for API call
             String formattedStudentNumber = studentNumber.replace("/", "-");
             
+            // Create JSON body with student number and new password
+            ObjectNode requestBody = mapper.createObjectNode();
+            requestBody.put("student_number", formattedStudentNumber);
+            requestBody.put("password", newPassword);
+            
             // Create HTTP client
             HttpClient client = HttpClient.newHttpClient();
             
-            // Create JSON body with updated password
-            ObjectNode requestBody = mapper.createObjectNode();
-            requestBody.put("password", newPassword);
-            
             // Create HTTP request
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(API_URL + formattedStudentNumber))
+                    .uri(URI.create(API_URL + "/" + formattedStudentNumber))
                     .header("Content-Type", "application/json")
                     .PUT(HttpRequest.BodyPublishers.ofString(requestBody.toString()))
                     .build();
@@ -94,26 +95,46 @@ public class NewPasswordController {
             client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                   .thenAccept(response -> {
                       if (response.statusCode() == 200) {
-                          // Password updated successfully
                           Platform.runLater(() -> {
                               showFeedback("Password successfully changed. Redirecting to login...", false);
-                              try {
-                                  navigateToLogin(event);
-                              } catch (IOException e) {
-                                  showFeedback("Error redirecting to login: " + e.getMessage(), true);
-                              }
+                              // Redirect to login screen after 2 seconds
+                              new Thread(() -> {
+                                  try {
+                                      Thread.sleep(2000);
+                                      Platform.runLater(() -> {
+                                          try {
+                                              navigateToLogin(event);
+                                          } catch (IOException e) {
+                                              showFeedback("Error redirecting to login: " + e.getMessage(), true);
+                                          }
+                                      });
+                                  } catch (InterruptedException e) {
+                                      Thread.currentThread().interrupt();
+                                      Platform.runLater(() -> 
+                                          showFeedback("Error during redirect: " + e.getMessage(), true));
+                                  }
+                              }).start();
                           });
                       } else {
-                          // Error updating password
-                          Platform.runLater(() -> {
-                              showFeedback("Error updating password. Please try again.", true);
-                          });
+                          String errorMessage = "Error updating password. ";
+                          try {
+                              JsonNode responseJson = mapper.readTree(response.body());
+                              if (responseJson.has("message")) {
+                                  errorMessage += responseJson.get("message").asText();
+                              } else {
+                                  errorMessage += "Status code: " + response.statusCode();
+                              }
+                          } catch (Exception e) {
+                              errorMessage += "Status code: " + response.statusCode();
+                          }
+                          
+                          final String finalErrorMessage = errorMessage;
+                          Platform.runLater(() -> showFeedback(finalErrorMessage, true));
                       }
                   })
                   .exceptionally(e -> {
-                      Platform.runLater(() -> {
-                          showFeedback("Error connecting to server: " + e.getMessage(), true);
-                      });
+                      Platform.runLater(() -> 
+                          showFeedback("Error connecting to server: " + e.getMessage(), true));
                       return null;
                   });
         } catch (Exception e) {
@@ -126,7 +147,7 @@ public class NewPasswordController {
         try {
             navigateToLogin(event);
         } catch (IOException e) {
-            e.printStackTrace();
+            showFeedback("Error returning to login: " + e.getMessage(), true);
         }
     }
 
