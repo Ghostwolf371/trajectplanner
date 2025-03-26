@@ -3,7 +3,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
-<HBox prefHeight="600" prefWidth="900" 
+<HBox prefHeight="700" prefWidth="1000" 
       styleClass="dialog-container" 
       stylesheets="@../css/styles.css"
       xmlns="http://javafx.com/javafx/17.0.6" 
@@ -11,7 +11,7 @@
       fx:controller="org.example.trajectplanner.controllers.StudentDialogController">
     
     <!-- Left Sidebar with gradient background -->
-    <VBox styleClass="dialog-sidebar">
+    <VBox styleClass="dialog-sidebar" minWidth="300">
         <Label text="Edit" styleClass="dialog-sidebar-title"/>
         <Label text="Student" styleClass="dialog-sidebar-title"/>
         <Label text="Update student details" 
@@ -19,13 +19,16 @@
                wrapText="true"/>
     </VBox>
     
-    <!-- Right Content Area -->
-    <VBox styleClass="dialog-content" HBox.hgrow="ALWAYS">
-        <padding>
-            <Insets top="20" right="20" bottom="20" left="20"/>
-        </padding>
-        
+    <!-- Main content with scroll -->
+    <ScrollPane fitToWidth="true" 
+                styleClass="content-scroll"
+                hbarPolicy="NEVER"
+                VBox.vgrow="ALWAYS">
         <VBox spacing="20">
+            <padding>
+                <Insets top="30" right="40" bottom="30" left="40"/>
+            </padding>
+
             <!-- Student Number Field -->
             <VBox spacing="10">
                 <Label text="Student Number" styleClass="form-label"/>
@@ -50,12 +53,21 @@
                           styleClass="form-field"/>
             </VBox>
 
+            <!-- Password Field -->
+            <VBox spacing="10">
+                <Label text="Password" styleClass="form-label"/>
+                <PasswordField fx:id="passwordField" 
+                              promptText="Enter password"
+                              styleClass="form-field"/>
+            </VBox>
+
             <!-- Gender Field -->
             <VBox spacing="10">
                 <Label text="Gender" styleClass="form-label"/>
                 <ComboBox fx:id="genderComboBox" 
                          promptText="Select gender"
-                         styleClass="form-field"/>
+                         styleClass="form-field"
+                         maxWidth="Infinity"/>
             </VBox>
 
             <!-- Birthdate Field -->
@@ -63,7 +75,8 @@
                 <Label text="Birthdate" styleClass="form-label"/>
                 <DatePicker fx:id="birthdatePicker" 
                            promptText="Select birthdate"
-                           styleClass="form-field"/>
+                           styleClass="form-field"
+                           maxWidth="Infinity"/>
             </VBox>
 
             <!-- Button Container -->
@@ -78,5 +91,5 @@
                         styleClass="save-button"/>
             </HBox>
         </VBox>
-    </VBox>
+    </ScrollPane>
 </HBox>

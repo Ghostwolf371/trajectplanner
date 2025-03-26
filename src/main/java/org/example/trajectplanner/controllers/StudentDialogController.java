@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 import org.example.trajectplanner.model.Student;
 
@@ -25,6 +26,7 @@ public class StudentDialogController {
     @FXML private TextField lastNameField;
     @FXML private ComboBox<String> genderComboBox;
     @FXML private DatePicker birthdatePicker;
+    @FXML private PasswordField passwordField;
 
     private Stage dialogStage;
     private Student student;
@@ -33,7 +35,7 @@ public class StudentDialogController {
 
     @FXML
     private void initialize() {
-        genderComboBox.getItems().addAll("Male", "Female", "Other");
+        genderComboBox.getItems().addAll("M", "F");
         setupValidation();
     }
 
@@ -75,6 +77,7 @@ public class StudentDialogController {
             studentNumberField.setText(student.getStudentNumber());
             firstNameField.setText(student.getFirstName());
             lastNameField.setText(student.getLastName());
+            passwordField.setText(student.getPassword());
             genderComboBox.setValue(student.getGender());
             
             if (student.getBirthdate() != null && !student.getBirthdate().isEmpty()) {
@@ -138,9 +141,10 @@ public class StudentDialogController {
 
     private ObjectNode createRequestBody() {
         return mapper.createObjectNode()
-            .put("studentNumber", studentNumberField.getText().trim())
-            .put("firstName", firstNameField.getText().trim())
-            .put("lastName", lastNameField.getText().trim())
+            .put("student_number", studentNumberField.getText().trim())
+            .put("first_name", firstNameField.getText().trim())
+            .put("last_name", lastNameField.getText().trim())
+            .put("password", passwordField.getText().trim())
             .put("gender", genderComboBox.getValue())
             .put("birthdate", birthdatePicker.getValue().toString());
     }
