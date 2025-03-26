@@ -1,0 +1,175 @@
+/* Root Colors - Matching Main Theme */
+* {
+  -fx-primary: #143385;
+  -fx-primary-dark: #0a1b47;
+  -fx-primary-light: #2851c7;
+  -fx-primary-lighter: #4b6fd9;
+  -fx-secondary: #e27024;
+  -fx-secondary-dark: #b85a1d;
+  -fx-grey-color: #2c3e50;
+  -fx-light-grey: #ecf0f1;
+  -fx-background-grey: #f8f9fa;
+  -fx-error-color: #e74c3c;
+}
+
+.root {
+  -fx-background-color: -fx-background-grey;
+  -fx-font-family: "Segoe UI", system;
+}
+
+/* Login Screen Specific Styles */
+.root {
+  -fx-background-color: -fx-background-grey;
+}
+
+/* StackPane - Main Container */
+StackPane {
+  -fx-background-color: white;
+}
+
+/* Left Side - Sidebar */
+.login-sidebar {
+  -fx-background-color: linear-gradient(
+    to bottom right,
+    -fx-primary-dark,
+    -fx-primary
+  );
+  -fx-background-radius: 15px;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 2);
+  -fx-min-height: 900px;
+  -fx-pref-height: 900px;
+}
+
+/* Adding styles from styles.css that are used in login screen */
+.brand-name {
+  -fx-font-size: 32px;
+  -fx-font-weight: bold;
+  -fx-text-fill: white;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 5, 0, 0, 1);
+}
+
+.brand-subtitle {
+  -fx-font-size: 24px;
+  -fx-text-fill: -fx-secondary;
+  -fx-font-weight: bold;
+}
+
+.login-title {
+  -fx-font-size: 28px;
+  -fx-font-weight: bold;
+  -fx-text-fill: white;
+}
+
+.login-subtitle {
+  -fx-font-size: 16px;
+  -fx-text-fill: rgba(255, 255, 255, 0.8);
+}
+
+/* Right Side - Login Form */
+.login-form-container {
+  -fx-background-color: white;
+  -fx-background-radius: 15px;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 15, 0, 0, 5);
+  -fx-min-height: 900px;
+  -fx-pref-height: 900px;
+  -fx-alignment: center;
+}
+
+.form-title {
+  -fx-font-size: 32px;
+  -fx-font-weight: bold;
+  -fx-text-fill: -fx-primary;
+}
+
+.form-subtitle {
+  -fx-font-size: 16px;
+  -fx-text-fill: -fx-grey-color;
+}
+
+.form-label {
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+  -fx-text-fill: -fx-grey-color;
+  -fx-padding: 0 0 5 0;
+}
+
+.login-field {
+  -fx-background-color: -fx-light-grey;
+  -fx-background-radius: 8px;
+  -fx-padding: 12px 15px;
+  -fx-font-size: 14px;
+  -fx-min-width: 400px;
+}
+
+.login-field:focused {
+  -fx-background-color: white;
+  -fx-border-color: -fx-primary;
+  -fx-border-width: 2px;
+  -fx-border-radius: 8px;
+}
+
+/* Button Styles */
+.login-button {
+  -fx-background-color: -fx-primary;
+  -fx-text-fill: white;
+  -fx-font-size: 16px;
+  -fx-font-weight: bold;
+  -fx-padding: 12px 30px;
+  -fx-background-radius: 25px;
+  -fx-cursor: hand;
+  -fx-min-width: 200px;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 1);
+}
+
+.login-button:hover {
+  -fx-background-color: derive(-fx-primary, -10%);
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0, 0, 3);
+  -fx-translate-y: -1px;
+}
+
+.cancel-button {
+  -fx-background-color: transparent;
+  -fx-text-fill: -fx-grey-color;
+  -fx-font-size: 14px;
+  -fx-padding: 10px 25px;
+  -fx-cursor: hand;
+  -fx-border-color: transparent;
+}
+
+.cancel-button:hover {
+  -fx-text-fill: -fx-error-color;
+}
+
+/* Footer */
+.login-footer {
+  -fx-background-color: -fx-light-grey;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), -5, 0, 0, -2);
+}
+
+.footer-text {
+  -fx-text-fill: -fx-grey-color;
+  -fx-font-size: 14px;
+}
+
+/* Animation */
+.login-button,
+.cancel-button,
+.login-field {
+  -fx-transition: all 0.2s ease-out;
+}
+
+/* ImageView Enhancement */
+ImageView {
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 3);
+}
+
+/* Add feedback label styling */
+.feedback-label {
+  -fx-font-size: 14px;
+  -fx-padding: 0 0 10 0;
+  -fx-text-fill: #d32f2f;
+  -fx-font-weight: bold;
+  -fx-alignment: center;
+  -fx-max-width: infinity;
+  -fx-text-alignment: center;
+}

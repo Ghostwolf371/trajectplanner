@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<HBox xmlns="http://javafx.com/javafx/17.0.6" 
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.trajectplanner.controllers.ScoresController"
+      styleClass="root"
+      stylesheets="@../css/styles.css">
+    
+    <!-- Sidebar -->
+    <VBox styleClass="sidebar" minWidth="200">
+        <!-- Brand Header -->
+        <VBox styleClass="sidebar-header">
+            <Label text="Traject" styleClass="brand-name"/>
+            <Label text="Planner" styleClass="brand-subtitle"/>
+        </VBox>
+        
+        <!-- Navigation Items -->
+        <VBox styleClass="nav-items">
+            <Button fx:id="examinationsButton" text="Examinations" styleClass="nav-item"/>
+            <Button text="Scores" styleClass="nav-item, nav-item-active"/>
+            <Button fx:id="studentsButton" text="Students" styleClass="nav-item" onAction="#navigateToStudents"/>
+        </VBox>
+    </VBox>
+
+    <!-- Main Content -->
+    <VBox HBox.hgrow="ALWAYS" styleClass="main-content">
+        <!-- Header -->
+        <VBox styleClass="content-header">
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <Label text="Scores" styleClass="page-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <TextField fx:id="searchField" promptText="Search scores..." 
+                          styleClass="search-field"/>
+                <Button fx:id="addButton" text="Add New Score" 
+                        styleClass="add-exam-button"/>
+            </HBox>
+        </VBox>
+
+        <!-- Table Header -->
+        <GridPane styleClass="table-header" hgap="10">
+            <padding>
+                <Insets left="20" right="20" top="10" bottom="10"/>
+            </padding>
+            <columnConstraints>
+                <ColumnConstraints percentWidth="8"/>   <!-- ID -->
+                <ColumnConstraints percentWidth="20"/>  <!-- Student Number -->
+                <ColumnConstraints percentWidth="25"/>  <!-- Course Name -->
+                <ColumnConstraints percentWidth="15"/>  <!-- Score -->
+                <ColumnConstraints percentWidth="20"/>  <!-- Date -->
+                <ColumnConstraints percentWidth="12"/>  <!-- Actions -->
+            </columnConstraints>
+
+            <Label text="ID" styleClass="header-label" 
+                   GridPane.columnIndex="0"/>
+            <Label text="Student Number" styleClass="header-label" 
+                   GridPane.columnIndex="1"/>
+            <Label text="Course Name" styleClass="header-label" 
+                   GridPane.columnIndex="2"/>
+            <Label text="Score" styleClass="header-label" 
+                   GridPane.columnIndex="3"/>
+            <Label text="Date" styleClass="header-label" 
+                   GridPane.columnIndex="4"/>
+            <Label text="Actions" styleClass="header-label" alignment="CENTER"
+                   GridPane.columnIndex="5"/>
+        </GridPane>
+
+        <!-- Table Content -->
+        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="table-content">
+            <VBox fx:id="scoresLayout" spacing="10">
+                <padding>
+                    <Insets top="10" right="20" bottom="10" left="20"/>
+                </padding>
+            </VBox>
+        </ScrollPane>
+    </VBox>
+</HBox>

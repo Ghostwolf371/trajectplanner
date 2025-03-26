@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<HBox prefHeight="600" prefWidth="900" styleClass="dialog-container" stylesheets="@../css/styles.css"
+      xmlns="http://javafx.com/javafx/17.0.6" 
+      xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="org.example.trajectplanner.controllers.AddExamDialogController">
+    
+    <!-- Left Sidebar -->
+    <VBox styleClass="dialog-sidebar">
+        <Label styleClass="dialog-sidebar-title" text="Add New" />
+        <Label styleClass="dialog-sidebar-title" text="Examination" />
+        <Label styleClass="dialog-sidebar-subtitle" text="Enter the details for the new examination" wrapText="true" />
+    </VBox>
+    
+    <!-- Right Content -->
+    <VBox styleClass="dialog-content" HBox.hgrow="ALWAYS">
+        <VBox spacing="20">
+            <VBox spacing="10" styleClass="form-group">
+                <Label text="Course Code" styleClass="form-label"/>
+                <ComboBox fx:id="courseCodeComboBox" 
+                          styleClass="form-field"
+                          promptText="Select course code"
+                          prefWidth="300"/>
+            </VBox>
+
+            <VBox spacing="10">
+                <Label styleClass="form-label" text="Exam Type" />
+                <ComboBox fx:id="typeComboBox" promptText="Select type" styleClass="form-field" />
+            </VBox>
+
+            <VBox spacing="10">
+                <Label styleClass="form-label" text="Date" />
+                <DatePicker fx:id="datePicker" promptText="Select date" styleClass="form-field" />
+            </VBox>
+
+            <!-- Button Container -->
+            <HBox alignment="CENTER_RIGHT" spacing="15" styleClass="button-container">
+                <Button onAction="#handleCancel" styleClass="cancel-button" text="Cancel" />
+                <Button onAction="#handleSave" styleClass="save-button" text="Save" />
+            </HBox>
+        </VBox>
+    </VBox>
+</HBox>

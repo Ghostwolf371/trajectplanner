@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<HBox xmlns="http://javafx.com/javafx/17.0.6" 
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.trajectplanner.controllers.EditScoreController"
+      styleClass="dialog-container"
+      stylesheets="@../css/styles.css"
+      prefWidth="900"
+      prefHeight="600">
+    
+    <!-- Left Sidebar with gradient background -->
+    <VBox styleClass="dialog-sidebar">
+        <Label text="Edit" styleClass="dialog-sidebar-title"/>
+        <Label text="Score" styleClass="dialog-sidebar-title"/>
+        <Label text="Update score details" 
+               styleClass="dialog-sidebar-subtitle"
+               wrapText="true"/>
+    </VBox>
+    
+    <!-- Right Content Area -->
+    <VBox styleClass="dialog-content" HBox.hgrow="ALWAYS">
+        <VBox spacing="20">
+            <!-- Student Number Field -->
+            <VBox spacing="10">
+                <Label text="Student Number" styleClass="form-label"/>
+                <Label fx:id="studentNumberField" 
+                       styleClass="display-field"
+                       maxWidth="Infinity"/>
+            </VBox>
+
+            <!-- Course Name Field -->
+            <VBox spacing="10">
+                <Label text="Course Name" styleClass="form-label"/>
+                <Label fx:id="courseNameField" 
+                       styleClass="display-field"
+                       maxWidth="Infinity"/>
+            </VBox>
+
+            <!-- Score Field - Keep editable -->
+            <VBox spacing="10">
+                <Label text="Score" styleClass="form-label"/>
+                <TextField fx:id="scoreField" 
+                          styleClass="form-field"
+                          promptText="Enter score (0.0 - 10.0)"/>
+            </VBox>
+
+            <!-- Date Field - Keep editable -->
+            <VBox spacing="10">
+                <Label text="Date" styleClass="form-label"/>
+                <DatePicker fx:id="datePicker" 
+                           styleClass="form-field"/>
+            </VBox>
+
+            <!-- Button Container -->
+            <HBox spacing="15" alignment="CENTER_RIGHT" styleClass="button-container">
+                <Button text="Cancel" 
+                        onAction="#handleCancel" 
+                        styleClass="cancel-button"/>
+                <Button text="Save Changes" 
+                        onAction="#handleUpdate" 
+                        styleClass="save-button"/>
+            </HBox>
+        </VBox>
+    </VBox>
+</HBox>

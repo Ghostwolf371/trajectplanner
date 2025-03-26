@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<HBox xmlns="http://javafx.com/javafx/17.0.6" 
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.trajectplanner.controllers.AddScoreController"
+      stylesheets="@../css/styles.css"
+      styleClass="dialog-container"
+      prefWidth="900"
+      prefHeight="700">
+    
+    <!-- Left Sidebar with gradient background -->
+    <VBox styleClass="dialog-sidebar">
+        <Label text="Add New" styleClass="dialog-sidebar-title"/>
+        <Label text="Score" styleClass="dialog-sidebar-title"/>
+        <Label text="Enter the score details below" 
+               styleClass="dialog-sidebar-subtitle"
+               wrapText="true"/>
+    </VBox>
+    
+    <!-- Right Content Area -->
+    <VBox styleClass="dialog-content" HBox.hgrow="ALWAYS">
+        <padding>
+            <Insets top="40" right="40" bottom="40" left="40"/>
+        </padding>
+        
+        <!-- Student Number Field -->
+        <VBox spacing="10" styleClass="form-group">
+            <Label text="Student Number" styleClass="form-label"/>
+            <TextField fx:id="studentNumberField" 
+                      styleClass="form-field"
+                      promptText="Enter student number"/>
+        </VBox>
+        
+        <!-- Exam ID Field -->
+        <VBox spacing="10" styleClass="form-group">
+            <Label text="Exam ID" styleClass="form-label"/>
+            <TextField fx:id="examIdField" 
+                      styleClass="form-field"
+                      promptText="Enter exam ID"/>
+        </VBox>
+        
+        <!-- Score Field -->
+        <VBox spacing="10" styleClass="form-group">
+            <Label text="Score" styleClass="form-label"/>
+            <TextField fx:id="scoreField" 
+                      styleClass="form-field"
+                      promptText="Enter score (0.0 - 10.0)"/>
+        </VBox>
+        
+        <!-- Date Field -->
+        <VBox spacing="10" styleClass="form-group">
+            <Label text="Date" styleClass="form-label"/>
+            <DatePicker fx:id="datePicker" 
+                       styleClass="form-field"
+                       promptText="Select date (optional)"/>
+        </VBox>
+        
+        <!-- Spacer -->
+        <Region VBox.vgrow="ALWAYS"/>
+        
+        <!-- Buttons -->
+        <HBox spacing="15" alignment="CENTER_RIGHT">
+            <Button text="Cancel" 
+                    onAction="#handleCancel" 
+                    styleClass="cancel-button"/>
+            <Button text="Add Score" 
+                    onAction="#handleAdd" 
+                    defaultButton="true" 
+                    styleClass="save-button"/>
+        </HBox>
+    </VBox>
+</HBox>

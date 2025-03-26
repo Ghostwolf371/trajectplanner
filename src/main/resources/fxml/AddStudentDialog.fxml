@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<HBox prefHeight="600" prefWidth="800" 
+      styleClass="dialog-container" 
+      stylesheets="@../css/styles.css"
+      xmlns="http://javafx.com/javafx/17.0.6" 
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.trajectplanner.controllers.AddStudentDialogController">
+    
+    <!-- Left Sidebar with gradient background -->
+    <VBox styleClass="dialog-sidebar" minWidth="250">
+        <Label text="Add New" styleClass="dialog-sidebar-title"/>
+        <Label text="Student" styleClass="dialog-sidebar-title"/>
+        <Label text="Enter the student details below" 
+               styleClass="dialog-sidebar-subtitle"
+               wrapText="true"/>
+    </VBox>
+    
+    <!-- Right Content Area with Scroll -->
+    <ScrollPane fitToWidth="true" 
+                hbarPolicy="NEVER"
+                VBox.vgrow="ALWAYS">
+        <VBox styleClass="dialog-content" spacing="20">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            
+            <!-- First Name Field -->
+            <VBox spacing="10">
+                <Label text="First Name" styleClass="form-label"/>
+                <TextField fx:id="firstNameField" 
+                          styleClass="form-field"
+                          promptText="Enter first name"/>
+            </VBox>
+            
+            <!-- Last Name Field -->
+            <VBox spacing="10">
+                <Label text="Last Name" styleClass="form-label"/>
+                <TextField fx:id="lastNameField" 
+                          styleClass="form-field"
+                          promptText="Enter last name"/>
+            </VBox>
+            
+            <!-- Major Field -->
+            <VBox spacing="10">
+                <Label text="Major" styleClass="form-label"/>
+                <ComboBox fx:id="majorComboBox" 
+                          styleClass="form-field"
+                          promptText="Select major"/>
+            </VBox>
+            
+            <!-- Cohort Field -->
+            <VBox spacing="10">
+                <Label text="Cohort" styleClass="form-label"/>
+                <TextField fx:id="cohortField" 
+                          styleClass="form-field"
+                          promptText="Enter cohort"/>
+            </VBox>
+            
+            <!-- Gender Field -->
+            <VBox spacing="10">
+                <Label text="Gender" styleClass="form-label"/>
+                <ComboBox fx:id="genderComboBox" 
+                          styleClass="form-field"
+                          promptText="Select gender"/>
+            </VBox>
+            
+            <!-- Birthdate Field -->
+            <VBox spacing="10">
+                <Label text="Birthdate" styleClass="form-label"/>
+                <DatePicker fx:id="birthdatePicker" 
+                           styleClass="form-field"
+                           promptText="Select birthdate"/>
+            </VBox>
+            
+            <!-- Button Container -->
+            <HBox spacing="15" alignment="CENTER_RIGHT" styleClass="button-container">
+                <Button text="Cancel" 
+                        onAction="#handleCancel" 
+                        styleClass="cancel-button"/>
+                <Button text="Create" 
+                        onAction="#handleSave" 
+                        defaultButton="true" 
+                        styleClass="save-button"/>
+            </HBox>
+        </VBox>
+    </ScrollPane>
+</HBox>
+
+
