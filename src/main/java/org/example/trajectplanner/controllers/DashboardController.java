@@ -41,7 +41,7 @@ import javafx.event.ActionEvent;
 public class DashboardController implements Initializable {
     private static final String STUDENT_NUMBER = "SE/1145/47";
     private static final String API_URL = "https://trajectplannerapi.dulamari.com/students/";
-    private static final double TOTAL_EC_REQUIRED = 120.0;
+    private static final double TOTAL_EC_REQUIRED = 75.0;
     private final ObjectMapper mapper = new ObjectMapper();
     private final GetMethods getMethods = new GetMethods();
 
@@ -87,14 +87,12 @@ public class DashboardController implements Initializable {
 
     public void setStudentNumber(String studentNumber) {
         this.studentNumber = studentNumber;
-        if (studentNumberLabel != null) {
-            studentNumberLabel.setText(studentNumber);
-        }
-        // Load student data with the new student number
+        
+        // Fetch and load all student data
         fetchStudentData(studentNumber);
-        loadStudentInfo();
-        loadScores();
-        calculateAndDisplayAverageGrade();
+        
+        // Load exams for the student
+        loadExams();
     }
 
     public String getStudentNumber() {
@@ -109,6 +107,10 @@ public class DashboardController implements Initializable {
             initializeCoursesTable();
             initializeExamsTable();
             initializeScoresTable();
+            
+            // Set default student number and load data
+            this.studentNumber = STUDENT_NUMBER;
+            fetchStudentData(studentNumber);
             
             // Load all data
             loadCourses();
@@ -148,7 +150,6 @@ public class DashboardController implements Initializable {
 
     private void initializeCoursesTable() {
         if (coursesTable == null) {
-            System.err.println("coursesTable is null - FXML binding failed");
             return;
         }
 
@@ -160,13 +161,13 @@ public class DashboardController implements Initializable {
         courseEcColumn.setCellValueFactory(new PropertyValueFactory<>("ec"));
         
         // Set column widths
-        courseCodeColumn.setPrefWidth(100);
-        courseNameColumn.setPrefWidth(300);
-        courseSemesterColumn.setPrefWidth(120);
-        courseBlockColumn.setPrefWidth(80);
-        courseEcColumn.setPrefWidth(60);
+        courseCodeColumn.setPrefWidth(150);
+        courseNameColumn.setPrefWidth(400);
+        courseSemesterColumn.setPrefWidth(150);
+        courseBlockColumn.setPrefWidth(120);
+        courseEcColumn.setPrefWidth(120);
         
-        // Ensure consistent cell alignment
+        // Ensure consistent cell alignment - ALL CENTER
         courseCodeColumn.setStyle("-fx-alignment: CENTER;");
         courseNameColumn.setStyle("-fx-alignment: CENTER;");
         courseSemesterColumn.setStyle("-fx-alignment: CENTER;");
@@ -188,8 +189,6 @@ public class DashboardController implements Initializable {
                 showError("Error", "Failed to load courses");
             }
         } catch (Exception e) {
-            System.err.println("Error loading courses: " + e.getMessage());
-            e.printStackTrace();
             showError("Error", "Failed to load courses: " + e.getMessage());
         }
     }
@@ -303,12 +302,10 @@ public class DashboardController implements Initializable {
         } catch (Exception e) {
             upcomingExamsLabel.setText("0");
             showError("Error", "Failed to load upcoming exams: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 
     private void showError(String title, String content) {
-        System.err.println("ERROR: " + title + " - " + content);
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
         alert.setHeaderText(null);
@@ -317,6 +314,10 @@ public class DashboardController implements Initializable {
     }
 
     private void initializeExamsTable() {
+        if (examsTable == null) {
+            return;
+        }
+
         examIdColumn.setVisible(false);
         
         examCourseColumn.setCellValueFactory(new PropertyValueFactory<>("courseName"));
@@ -326,12 +327,12 @@ public class DashboardController implements Initializable {
         examTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
 
         // Set column widths
-        examCourseColumn.setPrefWidth(300);
-        examSemesterColumn.setPrefWidth(120);
-        examDateColumn.setPrefWidth(120);
-        examTypeColumn.setPrefWidth(100);
+        examCourseColumn.setPrefWidth(400);
+        examSemesterColumn.setPrefWidth(150);
+        examDateColumn.setPrefWidth(150);
+        examTypeColumn.setPrefWidth(150);
         
-        // Ensure consistent cell alignment
+        // Ensure consistent cell alignment - ALL CENTER
         examCourseColumn.setStyle("-fx-alignment: CENTER;");
         examSemesterColumn.setStyle("-fx-alignment: CENTER;");
         examDateColumn.setStyle("-fx-alignment: CENTER;");
@@ -383,7 +384,6 @@ public class DashboardController implements Initializable {
                             LocalDate examDate = LocalDate.parse(exam.getDate());
                             return !examDate.isBefore(today);
                         } catch (Exception e) {
-                            System.err.println("Error parsing exam date: " + e.getMessage());
                             return false;
                         }
                     })
@@ -393,7 +393,6 @@ public class DashboardController implements Initializable {
                             LocalDate date2 = LocalDate.parse(exam2.getDate());
                             return date1.compareTo(date2);
                         } catch (Exception e) {
-                            System.err.println("Error sorting exams: " + e.getMessage());
                             return 0;
                         }
                     })
@@ -402,12 +401,9 @@ public class DashboardController implements Initializable {
                 examsTable.setItems(FXCollections.observableArrayList(upcomingExams));
                 examsTable.refresh();
             } else {
-                System.err.println("Failed to load exams. Status: " + 
-                    (response != null ? response.statusCode() : "null"));
                 showError("Error", "Failed to load exams");
             }
         } catch (Exception e) {
-            e.printStackTrace();
             showError("Error", "Failed to load exams: " + e.getMessage());
         }
     }
@@ -442,7 +438,7 @@ public class DashboardController implements Initializable {
                 displaySemesters(semesters);
             }
         } catch (Exception e) {
-            System.err.println("Error loading semesters: " + e.getMessage());
+            showError("Error", "Failed to load semesters: " + e.getMessage());
         }
     }
 
@@ -535,10 +531,12 @@ public class DashboardController implements Initializable {
             courseItem.setMaxHeight(34);
             courseItem.setPadding(new Insets(0, 5, 0, 10));
             courseItem.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
+            courseItem.setSpacing(15); // Add spacing between elements
             
             Label codeLabel = new Label(course.getCourseCode());
             codeLabel.getStyleClass().add("course-code");
-            codeLabel.setMinWidth(65);
+            codeLabel.setMinWidth(70); // Increase minimum width
+            codeLabel.setPrefWidth(70); // Set preferred width
             
             Label nameLabel = new Label(course.getCourseName());
             nameLabel.getStyleClass().add("course-name");
@@ -576,12 +574,12 @@ public class DashboardController implements Initializable {
         scoresDateColumn.setCellValueFactory(new PropertyValueFactory<>("scoreDateTime"));
         
         // Set column widths
-        scoresCourseCodeColumn.setPrefWidth(100);
-        scoresCourseColumn.setPrefWidth(300);
-        scoresValueColumn.setPrefWidth(80);
-        scoresDateColumn.setPrefWidth(120);
+        scoresCourseCodeColumn.setPrefWidth(150);
+        scoresCourseColumn.setPrefWidth(400);
+        scoresValueColumn.setPrefWidth(120);
+        scoresDateColumn.setPrefWidth(150);
         
-        // Ensure consistent cell alignment
+        // Ensure consistent cell alignment - ALL CENTER
         scoresCourseCodeColumn.setStyle("-fx-alignment: CENTER;");
         scoresCourseColumn.setStyle("-fx-alignment: CENTER;");
         scoresValueColumn.setStyle("-fx-alignment: CENTER;");
@@ -618,12 +616,36 @@ public class DashboardController implements Initializable {
             HttpResponse<String> response = getMethods.getScoresByStudentNumber(formattedStudentNumber);
             
             if (response != null && response.statusCode() == 200) {
-                List<Score> scores = mapper.readValue(
-                    response.body(),
-                    mapper.getTypeFactory().constructCollectionType(List.class, Score.class)
-                );
+                String responseBody = response.body();
+                List<Score> scores = new java.util.ArrayList<>();
+                
+                // Check if response is an array or an object
+                JsonNode jsonNode = mapper.readTree(responseBody);
+                if (jsonNode.isArray()) {
+                    // Handle array response (list of scores)
+                    scores = mapper.readValue(
+                        responseBody,
+                        mapper.getTypeFactory().constructCollectionType(List.class, Score.class)
+                    );
+                } else if (jsonNode.isObject()) {
+                    // Check if it's an error message
+                    if (jsonNode.has("status") && jsonNode.get("status").asText().equals("error")) {
+                        // Clear the table and show no data
+                        scoresTable.setItems(FXCollections.observableArrayList());
+                        scoresTable.setPlaceholder(new Label("You don't have any scores recorded yet"));
+                        return;
+                    }
+                    
+                    // Check if this is actually a score object and add it if so
+                    if (jsonNode.has("courseCode") && jsonNode.has("courseName")) {
+                        Score singleScore = mapper.readValue(responseBody, Score.class);
+                        scores.add(singleScore);
+                    }
+                }
                 
                 if (scores.isEmpty()) {
+                    scoresTable.setItems(FXCollections.observableArrayList());
+                    scoresTable.setPlaceholder(new Label("You don't have any scores recorded yet"));
                     return;
                 }
                 
@@ -636,7 +658,6 @@ public class DashboardController implements Initializable {
                             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
                         return date2.compareTo(date1); // Reverse order for most recent first
                     } catch (Exception e) {
-                        System.err.println("Date parsing error: " + e.getMessage());
                         return 0;
                     }
                 });
@@ -644,13 +665,144 @@ public class DashboardController implements Initializable {
                 scoresTable.setItems(FXCollections.observableArrayList(scores));
                 scoresTable.refresh();
             } else {
-                System.err.println("Failed to load scores. Status: " + 
-                    (response != null ? response.statusCode() : "null"));
-                showError("Error", "Failed to load scores");
+                scoresTable.setItems(FXCollections.observableArrayList());
+                scoresTable.setPlaceholder(new Label("Unable to connect to the grading system"));
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            showError("Error", "Failed to load scores: " + e.getMessage());
+            scoresTable.setItems(FXCollections.observableArrayList());
+            scoresTable.setPlaceholder(new Label("Unable to load your scores at this time"));
+        }
+    }
+
+    private void filterScores(String searchText) {
+        if (searchText == null || searchText.isEmpty()) {
+            loadScores(); // Reset to all scores
+            return;
+        }
+
+        try {
+            String formattedStudentNumber = studentNumber.replace("/", "-");
+            HttpResponse<String> response = getMethods.getScoresByStudentNumber(formattedStudentNumber);
+            
+            if (response != null && response.statusCode() == 200) {
+                String responseBody = response.body();
+                List<Score> allScores = new java.util.ArrayList<>();
+                
+                // Check if response is an array or an object
+                JsonNode jsonNode = mapper.readTree(responseBody);
+                if (jsonNode.isArray()) {
+                    // Handle array response (list of scores)
+                    allScores = mapper.readValue(
+                        responseBody,
+                        mapper.getTypeFactory().constructCollectionType(List.class, Score.class)
+                    );
+                } else if (jsonNode.isObject()) {
+                    // Check if it's an error message
+                    if (jsonNode.has("status") && jsonNode.get("status").asText().equals("error")) {
+                        // Clear the table and show no data
+                        scoresTable.setItems(FXCollections.observableArrayList());
+                        scoresTable.setPlaceholder(new Label("You don't have any scores recorded yet"));
+                        return;
+                    }
+                    
+                    // Check if this is actually a score object and add it if so
+                    if (jsonNode.has("courseCode") && jsonNode.has("courseName")) {
+                        Score singleScore = mapper.readValue(responseBody, Score.class);
+                        allScores.add(singleScore);
+                    }
+                }
+                
+                if (allScores.isEmpty()) {
+                    scoresTable.setItems(FXCollections.observableArrayList());
+                    scoresTable.setPlaceholder(new Label("You don't have any scores recorded yet"));
+                    return;
+                }
+                
+                List<Score> filteredScores = allScores.stream()
+                    .filter(score -> 
+                        score.getCourseCode().toLowerCase().contains(searchText.toLowerCase()) ||
+                        score.getCourseName().toLowerCase().contains(searchText.toLowerCase()) ||
+                        score.getScoreValue().toLowerCase().contains(searchText.toLowerCase()) ||
+                        (score.getDate() != null && score.getDate().toLowerCase().contains(searchText.toLowerCase()))
+                    )
+                    .toList();
+                
+                scoresTable.setItems(FXCollections.observableArrayList(filteredScores));
+                
+                if (filteredScores.isEmpty()) {
+                    scoresTable.setPlaceholder(new Label("No results found for \"" + searchText + "\""));
+                }
+            } else {
+                scoresTable.setItems(FXCollections.observableArrayList());
+                scoresTable.setPlaceholder(new Label("Unable to connect to the grading system"));
+            }
+        } catch (Exception e) {
+            scoresTable.setItems(FXCollections.observableArrayList());
+            scoresTable.setPlaceholder(new Label("Unable to load your scores at this time"));
+        }
+    }
+
+    private void calculateAndDisplayAverageGrade() {
+        try {
+            String formattedStudentNumber = studentNumber.replace("/", "-");
+            HttpResponse<String> response = getMethods.getScoresByStudentNumber(formattedStudentNumber);
+            
+            if (response != null && response.statusCode() == 200) {
+                String responseBody = response.body();
+                List<Score> scores = new java.util.ArrayList<>();
+                
+                // Check if response is an array or an object
+                JsonNode jsonNode = mapper.readTree(responseBody);
+                if (jsonNode.isArray()) {
+                    // Handle array response (list of scores)
+                    scores = mapper.readValue(
+                        responseBody,
+                        mapper.getTypeFactory().constructCollectionType(List.class, Score.class)
+                    );
+                } else if (jsonNode.isObject()) {
+                    // Check if it's an error message
+                    if (jsonNode.has("status") && jsonNode.get("status").asText().equals("error")) {
+                        // Display N/A for average grade
+                        averageGradeLabel.setText("N/A");
+                        return;
+                    }
+                    
+                    // Check if this is actually a score object and add it if so
+                    if (jsonNode.has("courseCode") && jsonNode.has("courseName")) {
+                        Score singleScore = mapper.readValue(responseBody, Score.class);
+                        scores.add(singleScore);
+                    }
+                }
+                
+                if (!scores.isEmpty()) {
+                    double sum = 0;
+                    int count = 0;
+                    
+                    for (Score score : scores) {
+                        try {
+                            double value = Double.parseDouble(score.getScoreValue());
+                            sum += value;
+                            count++;
+                        } catch (NumberFormatException e) {
+                            // Skip non-numeric scores
+                        }
+                    }
+                    
+                    if (count > 0) {
+                        double average = sum / count;
+                        averageGradeLabel.setText(String.format("%.1f", average));
+                    } else {
+                        averageGradeLabel.setText("N/A");
+                    }
+                } else {
+                    averageGradeLabel.setText("N/A");
+                }
+            } else {
+                averageGradeLabel.setText("N/A");
+            }
+        } catch (Exception e) {
+            showError("Error", "Failed to calculate average grade: " + e.getMessage());
+            averageGradeLabel.setText("N/A");
         }
     }
 
@@ -680,126 +832,83 @@ public class DashboardController implements Initializable {
     }
 
     private void fetchStudentData(String studentNumber) {
-        // Format student number correctly for API call
-        String formattedStudentNumber = studentNumber.replace("/", "-");
-        
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(API_URL + formattedStudentNumber))
-                .build();
-
-        client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply(HttpResponse::body)
-                .thenAccept(this::updateStudentInfo)
-                .exceptionally(e -> {
-                    System.err.println("Error fetching student data: " + e.getMessage());
-                    return null;
-                });
-    }
-
-    private void updateStudentInfo(String jsonResponse) {
         try {
-            JsonNode jsonNode = mapper.readTree(jsonResponse);
-            if (jsonNode.isArray() && jsonNode.size() > 0) {
-                JsonNode student = jsonNode.get(0);
+            if (studentNumber == null) {
+                return;
+            }
+            
+            // Format student number correctly with dashes for API call (SE/1145/47 -> SE-1145-47)
+            String formattedStudentNumber = studentNumber.replace("/", "-");
+            
+            HttpResponse<String> response = getMethods.getStudentByNumber(formattedStudentNumber);
+            
+            if (response != null && response.statusCode() == 200) {
+                String responseBody = response.body();
                 
-                String firstName = student.get("first_name").asText();
-                String lastName = student.get("last_name").asText();
-                String studentNumber = student.get("student_number").asText();
-                int totalEc = student.get("total_ec").asInt();
-                String birthdate = student.get("birthdate").asText();
-
-                // Update UI on JavaFX Application Thread
-                javafx.application.Platform.runLater(() -> {
-                    studentNameLabel.setText(firstName + " " + lastName);
-                    studentNumberLabel.setText(studentNumber);
-                    totalEcLabel.setText(totalEc + " EC");
+                // The API returns an array with a single student object
+                JsonNode studentsArray = mapper.readTree(responseBody);
+                if (studentsArray.isArray() && studentsArray.size() > 0) {
+                    JsonNode studentNode = studentsArray.get(0);
                     
-                    // Format and display birthdate
-                    try {
-                        LocalDate date = LocalDate.parse(birthdate);
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                        birthdateLabel.setText(date.format(formatter));
-                    } catch (Exception e) {
-                        birthdateLabel.setText("N/A");
+                    // Update student name label with full name from API
+                    if (studentNameLabel != null) {
+                        String firstName = studentNode.has("first_name") ? studentNode.get("first_name").asText() : "";
+                        String lastName = studentNode.has("last_name") ? studentNode.get("last_name").asText() : "";
+                        String fullName = firstName + " " + lastName;
+                        studentNameLabel.setText(fullName.trim());
                     }
-                });
-            }
-        } catch (Exception e) {
-            System.err.println("Error parsing student data: " + e.getMessage());
-        }
-    }
-
-    private void filterScores(String searchText) {
-        if (searchText == null || searchText.isEmpty()) {
-            loadScores(); // Reset to all scores
-            return;
-        }
-
-        try {
-            String formattedStudentNumber = studentNumber.replace("/", "-");
-            HttpResponse<String> response = getMethods.getScoresByStudentNumber(formattedStudentNumber);
-            
-            if (response != null && response.statusCode() == 200) {
-                List<Score> allScores = mapper.readValue(
-                    response.body(),
-                    mapper.getTypeFactory().constructCollectionType(List.class, Score.class)
-                );
-                
-                List<Score> filteredScores = allScores.stream()
-                    .filter(score -> 
-                        score.getCourseCode().toLowerCase().contains(searchText.toLowerCase()) ||
-                        score.getCourseName().toLowerCase().contains(searchText.toLowerCase()) ||
-                        score.getScoreValue().toLowerCase().contains(searchText.toLowerCase()) ||
-                        (score.getDate() != null && score.getDate().toLowerCase().contains(searchText.toLowerCase()))
-                    )
-                    .toList();
-                
-                scoresTable.setItems(FXCollections.observableArrayList(filteredScores));
-            }
-        } catch (Exception e) {
-            showError("Error", "Failed to filter scores: " + e.getMessage());
-        }
-    }
-
-    private void calculateAndDisplayAverageGrade() {
-        try {
-            String formattedStudentNumber = studentNumber.replace("/", "-");
-            HttpResponse<String> response = getMethods.getScoresByStudentNumber(formattedStudentNumber);
-            
-            if (response != null && response.statusCode() == 200) {
-                List<Score> scores = mapper.readValue(
-                    response.body(),
-                    mapper.getTypeFactory().constructCollectionType(List.class, Score.class)
-                );
-                
-                if (!scores.isEmpty()) {
-                    double sum = 0;
-                    int count = 0;
                     
-                    for (Score score : scores) {
+                    // Update student number
+                    if (studentNumberLabel != null) {
+                        studentNumberLabel.setText(studentNumber);
+                    }
+                    
+                    // Update birthdate with properly formatted date
+                    if (birthdateLabel != null && studentNode.has("birthdate")) {
+                        String birthDate = studentNode.get("birthdate").asText();
                         try {
-                            double value = Double.parseDouble(score.getScoreValue());
-                            sum += value;
-                            count++;
-                        } catch (NumberFormatException e) {
-                            // Skip non-numeric scores
+                            // Format the date from API (assuming format is YYYY-MM-DD)
+                            LocalDate date = LocalDate.parse(birthDate);
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                            birthdateLabel.setText(date.format(formatter));
+                        } catch (Exception e) {
+                            birthdateLabel.setText(birthDate); // Use as-is if parsing fails
                         }
                     }
                     
-                    if (count > 0) {
-                        double average = sum / count;
-                        averageGradeLabel.setText(String.format("%.1f", average));
-                    } else {
-                        averageGradeLabel.setText("N/A");
+                    // Update total EC if available
+                    if (totalEcLabel != null && studentNode.has("total_ec")) {
+                        int totalEC = studentNode.get("total_ec").asInt();
+                        totalEcLabel.setText(totalEC + " EC");
                     }
                 } else {
-                    averageGradeLabel.setText("N/A");
+                    setDefaultValues(studentNumber);
                 }
+                
+                // Also load scores to calculate average grade
+                loadScores();
+                calculateAndDisplayAverageGrade();
+            } else {
+                setDefaultValues(studentNumber);
             }
         } catch (Exception e) {
-            System.err.println("Error calculating average grade: " + e.getMessage());
-            averageGradeLabel.setText("N/A");
+            showError("Error", "Failed to fetch student data: " + e.getMessage());
+        }
+    }
+    
+    private void setDefaultValues(String studentNumber) {
+        // Set default values if data can't be fetched
+        if (studentNameLabel != null) {
+            studentNameLabel.setText("Student");
+        }
+        if (studentNumberLabel != null) {
+            studentNumberLabel.setText(studentNumber);
+        }
+        if (birthdateLabel != null) {
+            birthdateLabel.setText("--");
+        }
+        if (totalEcLabel != null) {
+            totalEcLabel.setText("0 EC");
         }
     }
 
@@ -823,7 +932,6 @@ public class DashboardController implements Initializable {
             
         } catch (IOException e) {
             showError("Navigation Error", "Could not load login screen: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 }

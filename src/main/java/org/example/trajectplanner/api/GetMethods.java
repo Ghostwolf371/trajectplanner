@@ -11,7 +11,9 @@ public class GetMethods {
 
     public HttpResponse<String> getStudentByNumber(String studentNumber) {
         try {
+            // Ensure student number has dashes instead of slashes
             String formattedStudentNumber = studentNumber.replace("/", "-");
+            
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(new URI(BASE_URL + "/students/" + formattedStudentNumber))
@@ -33,22 +35,6 @@ public class GetMethods {
                 .build();
 
         return client.send(request, HttpResponse.BodyHandlers.ofString());
-    }
-
-    public HttpResponse<String> postExamById(String id) {
-        try {
-            HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("https://trajectplannerapi.dulamari.com/exams/" + id))
-                    .POST(HttpRequest.BodyPublishers.noBody())
-                    .build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            return response;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
     public HttpResponse<String> getScores() {
@@ -95,7 +81,6 @@ public class GetMethods {
             
             return response;
         } catch (Exception e) {
-            System.err.println("Error in getExamById: " + e.getMessage());
             e.printStackTrace();
             return null;
         }
@@ -111,7 +96,6 @@ public class GetMethods {
 
             return client.send(request, HttpResponse.BodyHandlers.ofString());
         } catch (Exception e) {
-            System.err.println("Error in getCourseById: " + e.getMessage());
             e.printStackTrace();
             return null;
         }
