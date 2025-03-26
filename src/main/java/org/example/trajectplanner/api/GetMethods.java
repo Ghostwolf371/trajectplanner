@@ -157,5 +157,20 @@ public class GetMethods {
         return HttpClient.newHttpClient()
             .send(request, HttpResponse.BodyHandlers.ofString());
     }
+
+    public HttpResponse<String> getStudents() {
+        try {
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(BASE_URL + "/students"))
+                    .GET()
+                    .build();
+
+            return client.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
 

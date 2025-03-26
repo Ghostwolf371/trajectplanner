@@ -24,6 +24,7 @@ public class ScoresController {
     @FXML private TextField searchField;
     @FXML private Button addButton;
     @FXML private Button examinationsButton;
+    @FXML private Button studentsButton;
     @FXML private VBox scoresLayout;
 
     private ObservableList<GridPane> scoreItems;
@@ -60,6 +61,7 @@ public class ScoresController {
     private void setupButtons() {
         addButton.setOnAction(event -> navigateToAddScore());
         examinationsButton.setOnAction(event -> navigateToExaminations());
+        studentsButton.setOnAction(event -> navigateToStudents());
     }
 
     public void loadScores() {
@@ -123,6 +125,18 @@ public class ScoresController {
             scene.setRoot(root);
         } catch (IOException e) {
             DialogUtils.showError("Error", "Failed to navigate to examinations: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void navigateToStudents() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/student-view.fxml"));
+            Parent root = loader.load();
+            Scene scene = studentsButton.getScene();
+            scene.setRoot(root);
+        } catch (IOException e) {
+            DialogUtils.showError("Error", "Failed to navigate to students: " + e.getMessage());
         }
     }
 }

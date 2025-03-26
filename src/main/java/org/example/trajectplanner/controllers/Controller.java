@@ -35,6 +35,8 @@ public class Controller implements Initializable {
     private TextField searchField;
     @FXML
     private Button scoresButton;
+    @FXML
+    private Button studentsButton;
 
     private ObservableList<GridPane> examItems = FXCollections.observableArrayList();
     private FilteredList<GridPane> filteredExams;
@@ -61,6 +63,7 @@ public class Controller implements Initializable {
         
         addButton.setOnAction(event -> navigateToAdd());
         scoresButton.setOnAction(event -> navigateToScores());
+        studentsButton.setOnAction(event -> navigateToStudents());
     }
 
     private void loadExams() {
@@ -133,6 +136,18 @@ public class Controller implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/scores-view.fxml"));
             Parent root = loader.load();
             Scene scene = scoresButton.getScene();
+            scene.setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void navigateToStudents() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/student-view.fxml"));
+            Parent root = loader.load();
+            Scene scene = studentsButton.getScene();
             scene.setRoot(root);
         } catch (IOException e) {
             e.printStackTrace();

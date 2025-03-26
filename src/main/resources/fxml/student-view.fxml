@@ -1,75 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.example.trajectplanner.controllers.StudentController"
-            stylesheets="@../css/styles.css">
-    <left>
-        <VBox styleClass="sidebar" spacing="10">
-            <padding><Insets top="20" left="20" right="20" bottom="20"/></padding>
-            
-            <!-- Logo and Title -->
-            <Label text="Trajectplanner" styleClass="sidebar-title"/>
-            
-            <!-- Navigation Buttons -->
-            <Button text="Dashboard" styleClass="sidebar-button" onAction="#navigateToDashboard"/>
-            <Button text="Studenten" styleClass="sidebar-button active" onAction="#navigateToStudents"/>
-            <Button text="Tentamens" styleClass="sidebar-button" onAction="#navigateToExams"/>
-            <Button text="Cursussen" styleClass="sidebar-button" onAction="#navigateToCourses"/>
-            
-            <!-- Spacer to push admin section to bottom -->
-            <VBox VBox.vgrow="ALWAYS"/>
-            
-            <!-- Admin User Section -->
-            <VBox styleClass="admin-section">
-                <Label text="Admin User" styleClass="admin-label"/>
-                <Label text="Admin" styleClass="admin-name"/>
-            </VBox>
-            
-            <!-- Logout Button -->
-            <Button text="Logout" styleClass="logout-button" onAction="#handleLogout"/>
-        </VBox>
-    </left>
+<HBox xmlns="http://javafx.com/javafx/17.0.6" 
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.trajectplanner.controllers.StudentController"
+      styleClass="root"
+      stylesheets="@../css/styles.css">
     
-    <center>
-        <VBox spacing="20" styleClass="content-container">
-            <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
-            
-            <!-- Header -->
-            <HBox alignment="CENTER_LEFT" spacing="10">
-                <Label text="Studenten" styleClass="page-title"/>
+    <!-- Sidebar -->
+    <VBox styleClass="sidebar" minWidth="200">
+        <!-- Brand Header -->
+        <VBox styleClass="sidebar-header">
+            <Label text="Traject" styleClass="brand-name"/>
+            <Label text="Planner" styleClass="brand-subtitle"/>
+        </VBox>
+        
+        <!-- Navigation Items -->
+        <VBox styleClass="nav-items">
+            <Button text="Examinations" styleClass="nav-item" onAction="#navigateToExams"/>
+            <Button text="Scores" styleClass="nav-item" onAction="#navigateToScores"/>
+            <Button text="Students" styleClass="nav-item, nav-item-active"/>
+            <Button text="Reports" styleClass="nav-item"/>
+            <Button text="Settings" styleClass="nav-item"/>
+        </VBox>
+    </VBox>
+
+    <!-- Main Content -->
+    <VBox HBox.hgrow="ALWAYS" styleClass="main-content">
+        <!-- Header -->
+        <VBox styleClass="content-header">
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <Label text="Students" styleClass="page-title"/>
                 <Region HBox.hgrow="ALWAYS"/>
-                <Button text="Nieuwe Student" styleClass="primary-button" onAction="#handleAddStudent"/>
-            </HBox>
-            
-            <!-- Search Bar -->
-            <HBox spacing="10" alignment="CENTER_LEFT">
-                <TextField fx:id="searchField" promptText="Zoek studenten..." styleClass="search-field"/>
-                <Region HBox.hgrow="ALWAYS"/>
-            </HBox>
-            
-            <!-- Student Table -->
-            <TableView fx:id="studentTable" VBox.vgrow="ALWAYS" styleClass="data-table">
-                <columns>
-                    <TableColumn fx:id="studentNumberColumn" text="Studentnummer" prefWidth="150"/>
-                    <TableColumn fx:id="firstNameColumn" text="Voornaam" prefWidth="150"/>
-                    <TableColumn fx:id="lastNameColumn" text="Achternaam" prefWidth="150"/>
-                    <TableColumn fx:id="majorColumn" text="Opleiding" prefWidth="150"/>
-                    <TableColumn fx:id="cohortColumn" text="Cohort" prefWidth="100"/>
-                    <TableColumn fx:id="genderColumn" text="Geslacht" prefWidth="100"/>
-                    <TableColumn fx:id="birthdateColumn" text="Geboortedatum" prefWidth="150"/>
-                    <TableColumn fx:id="totalEcColumn" text="EC" prefWidth="100"/>
-                </columns>
-            </TableView>
-            
-            <!-- Action Buttons -->
-            <HBox spacing="10" alignment="CENTER_RIGHT">
-                <Button text="Bewerken" styleClass="secondary-button" onAction="#handleEditStudent"/>
-                <Button text="Verwijderen" styleClass="danger-button" onAction="#handleDeleteStudent"/>
+                <TextField fx:id="searchField" promptText="Search students..." 
+                          styleClass="search-field"/>
+                <Button fx:id="addButton" text="Add New Student" 
+                        styleClass="add-exam-button"
+                        onAction="#handleAddStudent"/>
             </HBox>
         </VBox>
-    </center>
-</BorderPane> 
+
+        <!-- Table Header -->
+        <GridPane styleClass="table-header" hgap="10">
+            <padding>
+                <Insets left="20" right="20" top="10" bottom="10"/>
+            </padding>
+            <columnConstraints>
+                <ColumnConstraints percentWidth="20"/>  <!-- Student Number -->
+                <ColumnConstraints percentWidth="20"/>  <!-- First Name -->
+                <ColumnConstraints percentWidth="20"/>  <!-- Last Name -->
+                <ColumnConstraints percentWidth="20"/>  <!-- Gender -->
+                <ColumnConstraints percentWidth="20"/>  <!-- Birthday/Actions -->
+            </columnConstraints>
+
+            <Label text="Student Number" styleClass="header-label" 
+                   GridPane.columnIndex="0" GridPane.halignment="LEFT"/>
+            <Label text="First Name" styleClass="header-label" style="-fx-font-size: 14px;"
+                   GridPane.columnIndex="1" GridPane.halignment="CENTER"/>
+            <Label text="Last Name" styleClass="header-label" style="-fx-font-size: 14px;"
+                   GridPane.columnIndex="2" GridPane.halignment="CENTER"/>
+            <Label text="Gender" styleClass="header-label" style="-fx-font-size: 14px;"
+                   GridPane.columnIndex="3" GridPane.halignment="CENTER"/>
+            <HBox spacing="50" alignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="CENTER">
+                <Label text="Birthday" styleClass="header-label" style="-fx-font-size: 14px;"/>
+                <Label text="Actions" styleClass="header-label" style="-fx-font-size: 14px;"/>
+            </HBox>
+        </GridPane>
+
+        <!-- Table Content -->
+        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="table-content">
+            <VBox fx:id="studentsLayout" spacing="10">
+                <padding>
+                    <Insets top="10" right="20" bottom="10" left="20"/>
+                </padding>
+            </VBox>
+        </ScrollPane>
+    </VBox>
+</HBox> 

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<GridPane alignment="CENTER_LEFT" 
+          style="-fx-background-color: white; -fx-border-color: #e0e0e0; -fx-border-width: 0 0 1 0;" 
+          styleClass="student-item" 
+          hgap="10"
+          xmlns="http://javafx.com/javafx/17.0.6"
+          xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="org.example.trajectplanner.controllers.StudentItemController">
+    
+    <padding>
+        <Insets top="10" right="20" bottom="10" left="20"/>
+    </padding>
+
+    <columnConstraints>
+        <ColumnConstraints percentWidth="20"/> <!-- Student Number -->
+        <ColumnConstraints percentWidth="20"/> <!-- First Name -->
+        <ColumnConstraints percentWidth="20"/> <!-- Last Name -->
+        <ColumnConstraints percentWidth="20"/> <!-- Gender -->
+        <ColumnConstraints percentWidth="20"/> <!-- Birthday/Actions -->
+    </columnConstraints>
+
+    <Label fx:id="studentNumber" styleClass="item-label" 
+           GridPane.columnIndex="0" GridPane.halignment="LEFT"/>
+    <Label fx:id="firstName" styleClass="item-label" 
+           GridPane.columnIndex="1" GridPane.halignment="CENTER"/>
+    <Label fx:id="lastName" styleClass="item-label" 
+           GridPane.columnIndex="2" GridPane.halignment="CENTER"/>
+    <Label fx:id="gender" styleClass="item-label" 
+           GridPane.columnIndex="3" GridPane.halignment="CENTER"/>
+    
+    <HBox spacing="50" alignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="CENTER">
+        <Label fx:id="birthdate" styleClass="item-label"/>
+        <HBox spacing="10" alignment="CENTER">
+            <Button fx:id="editButton" text="Edit" styleClass="edit-button" prefWidth="55"/>
+            <Button fx:id="deleteButton" text="Delete" styleClass="delete-button" prefWidth="55"/>
+        </HBox>
+    </HBox>
+</GridPane>
+
+
+
+
+
+
