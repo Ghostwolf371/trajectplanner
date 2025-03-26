@@ -79,10 +79,6 @@ public class NewPasswordController {
             // Create HTTP client
             HttpClient client = HttpClient.newHttpClient();
             
-            // For a real implementation, this would be a PUT request to update the password
-            // Since we don't have an actual update endpoint, we'll just simulate success
-            // In a real app, you would make an API call like this:
-            /*
             // Create JSON body with updated password
             ObjectNode requestBody = mapper.createObjectNode();
             requestBody.put("password", newPassword);
@@ -101,7 +97,11 @@ public class NewPasswordController {
                           // Password updated successfully
                           Platform.runLater(() -> {
                               showFeedback("Password successfully changed. Redirecting to login...", false);
-                              redirectToLogin(event);
+                              try {
+                                  navigateToLogin(event);
+                              } catch (IOException e) {
+                                  showFeedback("Error redirecting to login: " + e.getMessage(), true);
+                              }
                           });
                       } else {
                           // Error updating password
@@ -109,28 +109,13 @@ public class NewPasswordController {
                               showFeedback("Error updating password. Please try again.", true);
                           });
                       }
+                  })
+                  .exceptionally(e -> {
+                      Platform.runLater(() -> {
+                          showFeedback("Error connecting to server: " + e.getMessage(), true);
+                      });
+                      return null;
                   });
-            */
-            
-            // For now, simulate successful password change
-            showFeedback("Password successfully changed. Redirecting to login...", false);
-            
-            // Redirect to login screen after 2 seconds
-            new Thread(() -> {
-                try {
-                    Thread.sleep(2000);
-                    Platform.runLater(() -> {
-                        try {
-                            navigateToLogin(event);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    });
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }).start();
-            
         } catch (Exception e) {
             showFeedback("Error updating password: " + e.getMessage(), true);
         }

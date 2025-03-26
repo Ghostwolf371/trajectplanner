@@ -12,6 +12,7 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.example.trajectplanner.model.Student;
+import org.example.trajectplanner.services.StudentService;
 
 import java.io.IOException;
 import java.net.URI;
@@ -98,12 +99,12 @@ public class StudentItemController {
 
     private void handleDelete() {
         if (student == null) {
-            showError("Error", "No student selected for deletion");
+            showError("Delete Failed", "No student selected for deletion");
             return;
         }
 
         if (showDeleteConfirmation()) {
-            deleteStudent();
+            deleteThroughApi();
         }
     }
 
@@ -120,37 +121,29 @@ public class StudentItemController {
         return result.isPresent() && result.get() == ButtonType.OK;
     }
 
-    private void deleteStudent() {
-        String deleteUrl = API_URL + "/" + student.getStudentNumber();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(deleteUrl))
-                .DELETE()
-                .build();
-
-        client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenAccept(this::handleDeleteResponse)
-                .exceptionally(this::handleDeleteError);
-    }
-
-    private void handleDeleteResponse(HttpResponse<String> response) {
-        Platform.runLater(() -> {
-            if (isSuccessfulResponse(response.statusCode())) {
-                refreshParentController();
+    private void deleteThroughApi() {
+        try {
+            // Format student number by replacing slashes with dashes (e.g., "SE/2324/01" -> "SE-2324-01")
+            String formattedStudentNumber = student.getStudentNumber().replace("/", "-");
+            var response = StudentService.delete(formattedStudentNumber);
+            
+            if (response != null) {
+                switch (((HttpResponse<String>) response).statusCode()) {
+                    case 200, 204 -> {
+                        studentNumber.getParent().setVisible(false);
+                        refreshParentController();
+                    }
+                    case 400 -> showError("Delete Failed", "Invalid student number format");
+                    case 404 -> showError("Delete Failed", "Student not found");
+                    default -> showError("Delete Failed", 
+                        String.format("Server error occurred (Status: %d)", response.statusCode()));
+                }
             } else {
-                showError("Error", "Failed to delete student. Status code: " + response.statusCode());
+                showError("Delete Failed", "Could not connect to server");
             }
-        });
-    }
-
-    private boolean isSuccessfulResponse(int statusCode) {
-        return statusCode == 200 || statusCode == 204;
-    }
-
-    private Void handleDeleteError(Throwable e) {
-        Platform.runLater(() -> 
-            showError("Error", "Failed to delete student: " + e.getMessage())
-        );
-        return null;
+        } catch (Exception e) {
+            showError("Error", "Failed to delete student: " + e.getMessage());
+        }
     }
 
     private void refreshParentController() {
@@ -169,6 +162,14 @@ public class StudentItemController {
         });
     }
 }
+
+
+
+
+
+
+
+
 
 
 

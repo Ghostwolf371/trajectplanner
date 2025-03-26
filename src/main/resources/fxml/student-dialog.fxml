@@ -57,8 +57,11 @@
             <VBox spacing="10">
                 <Label text="Password" styleClass="form-label"/>
                 <PasswordField fx:id="passwordField" 
-                              promptText="Enter password"
+                              promptText="Enter new password or leave blank to keep current"
                               styleClass="form-field"/>
+                <Label text="Minimum 8 characters" 
+                       styleClass="helper-text"
+                       opacity="0.7"/>
             </VBox>
 
             <!-- Gender Field -->

@@ -5,6 +5,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import org.example.trajectplanner.model.Student;
 
@@ -126,6 +127,12 @@ public class StudentDialogController {
         if (birthdatePicker.getValue() == null) {
             errorMessage.append("Birthdate is required!\n");
         }
+        // Add password validation
+        if (isNullOrEmpty(passwordField.getText())) {
+            errorMessage.append("Password is required!\n");
+        } else if (passwordField.getText().length() < 8) {
+            errorMessage.append("Password must be at least 8 characters long!\n");
+        }
 
         if (errorMessage.length() == 0) {
             return true;
@@ -140,17 +147,24 @@ public class StudentDialogController {
     }
 
     private ObjectNode createRequestBody() {
-        return mapper.createObjectNode()
+        ObjectNode requestBody = mapper.createObjectNode()
             .put("student_number", studentNumberField.getText().trim())
             .put("first_name", firstNameField.getText().trim())
             .put("last_name", lastNameField.getText().trim())
-            .put("password", passwordField.getText().trim())
             .put("gender", genderComboBox.getValue())
             .put("birthdate", birthdatePicker.getValue().toString());
+
+        // Only include password in request if it has been changed
+        String password = passwordField.getText().trim();
+        if (!password.isEmpty()) {
+            requestBody.put("password", password);
+        }
+
+        return requestBody;
     }
 
     private void sendUpdateRequest(ObjectNode requestBody) {
-        String updateUrl = API_URL + "/" + student.getStudentNumber();
+        String updateUrl = API_URL + "/" + student.getStudentNumber().replace("/", "-");
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create(updateUrl))
             .header("Content-Type", "application/json")
@@ -174,6 +188,13 @@ public class StudentDialogController {
     private void handleSuccessfulUpdate() {
         okClicked = true;
         javafx.application.Platform.runLater(() -> {
+            // Show success message
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText(null);
+            alert.setContentText("Student information updated successfully!");
+            alert.showAndWait();
+            
             dialogStage.close();
             if (studentController != null) {
                 studentController.refreshStudents();
@@ -195,14 +216,11 @@ public class StudentDialogController {
     }
 
     private void showError(String title, String content) {
-        javafx.application.Platform.runLater(() -> {
-            javafx.scene.control.Alert alert = new javafx.scene.control.Alert(
-                javafx.scene.control.Alert.AlertType.ERROR);
-            alert.setTitle(title);
-            alert.setHeaderText(null);
-            alert.setContentText(content);
-            alert.showAndWait();
-        });
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
     public boolean isOkClicked() {
