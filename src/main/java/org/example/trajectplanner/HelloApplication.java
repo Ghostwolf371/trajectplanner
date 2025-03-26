@@ -11,7 +11,7 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/fxml/login_scherm.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/fxml/student-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 1600, 900);
             stage.setTitle("Traject Planner");
             stage.setScene(scene);
