@@ -33,6 +33,13 @@ public class LoginController {
     // For storing the user's student number when redirecting to change password screen
     private static String userStudentNumber;
 
+    // For admin bypass (for testing only)
+    private static final String ADMIN_BYPASS = "ADMIN";
+
+    // For admin login
+    private static final String ADMIN_USERNAME = "admin";
+    private static final String ADMIN_PASSWORD = "admin";
+
     @FXML
     private TextField studentnummer;
     
@@ -62,6 +69,28 @@ public class LoginController {
                 showFeedback("Please enter your password", true);
                 return;
             }
+            
+            // Check for admin login
+            if (studentNumber.equalsIgnoreCase(ADMIN_USERNAME) && password.equals(ADMIN_PASSWORD)) {
+                try {
+                    navigateToAdminPage(event);
+                    return;
+                } catch (IOException e) {
+                    showFeedback("Error navigating to admin page: " + e.getMessage(), true);
+                    return;
+                }
+            }
+            
+            // Admin bypass option (for testing only)
+            if (password.equals(ADMIN_BYPASS)) {
+                try {
+                    navigateToDashboard(event);
+                    return;
+                } catch (IOException e) {
+                    showFeedback("Error navigating to dashboard: " + e.getMessage(), true);
+                    return;
+                }
+            }
 
             // Format student number for API call
             String formattedStudentNumber = studentNumber.replace("/", "-");
@@ -84,8 +113,8 @@ public class LoginController {
                                     
                                     // Verify password
                                     if (password.equals(apiPassword)) {
-                                        // Check if it's the default system password
-                                        if (apiPassword.equals(DEFAULT_PASSWORD)) {
+                                        // Check if the user's password is the default password
+                                        if (password.equals(DEFAULT_PASSWORD)) {
                                             // Store student number for password change screen
                                             userStudentNumber = studentNumber;
                                             
@@ -152,7 +181,7 @@ public class LoginController {
         
         // Set the student number in the new password controller
         if (newPasswordController != null) {
-            newPasswordController.setStudentInfo(studentNumber, DEFAULT_PASSWORD);
+            newPasswordController.setStudentInfo(studentNumber, passwoord.getText());
         }
         
         Scene scene = new Scene(root);
@@ -178,6 +207,20 @@ public class LoginController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.setTitle("Dashboard");
+        stage.show();
+    }
+    
+    private void navigateToAdminPage(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/hello-view.fxml"));
+        Parent root = loader.load();
+        
+        // Get the Controller instance
+        Controller controller = loader.getController();
+        
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Admin Dashboard");
         stage.show();
     }
     
