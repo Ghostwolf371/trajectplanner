@@ -20,6 +20,7 @@ import org.example.trajectplanner.model.Course;
 import org.example.trajectplanner.model.Score;
 import org.example.trajectplanner.model.Semester;
 import org.example.trajectplanner.model.Tentamen;
+import org.example.trajectplanner.services.CourseService;
 
 import java.util.List;
 import java.util.ResourceBundle;
@@ -170,7 +171,7 @@ public class DashboardController implements Initializable {
 
     private void loadCourses() {
         try {
-            HttpResponse<String> response = getMethods.getCourses();
+            HttpResponse<String> response = CourseService.getAll();
             
             if (response != null && response.statusCode() == 200) {
                 List<Course> courses = mapper.readValue(
@@ -193,7 +194,7 @@ public class DashboardController implements Initializable {
         }
 
         try {
-            HttpResponse<String> response = getMethods.getCourses();
+            HttpResponse<String> response = CourseService.getAll();
             if (response != null && response.statusCode() == 200) {
                 List<Course> allCourses = mapper.readValue(
                     response.body(), 

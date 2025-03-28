@@ -3,11 +3,11 @@ package org.example.trajectplanner.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import org.example.trajectplanner.api.GetMethods;
-import org.example.trajectplanner.api.PutMethods;
+import org.example.trajectplanner.services.ExamService;
+
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.net.http.HttpResponse;
@@ -28,7 +28,6 @@ public class EditTentamenController {
     private DatePicker datePicker;
     
     private String tentamenId;
-    private String courseId;
     
     @FXML
     public void initialize() {
@@ -59,76 +58,58 @@ public class EditTentamenController {
     
     private void loadExamData() {
         try {
-            GetMethods getMethods = new GetMethods();
-            HttpResponse<String> examResponse = getMethods.getExamById(tentamenId);
+            HttpResponse<String> response = ExamService.getById(tentamenId);
             
-            if (examResponse != null && examResponse.statusCode() == 200) {
-                String responseBody = examResponse.body();
+            if (response == null) {
+                showError("Error", "Failed to connect to server");
+                return;
+            }
+            
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode jsonNode = mapper.readTree(response.body());
+            
+            // Check if response is an error
+            if (jsonNode.has("status") && jsonNode.get("status").asText().equals("error")) {
+                String errorMessage = jsonNode.has("message") ? 
+                    jsonNode.get("message").asText() : 
+                    "Unknown error occurred";
+                showError("Database Error", errorMessage);
+                return;
+            }
+            
+            if (response.statusCode() == 200) {
+                // Handle single exam object
+                if (jsonNode.has("code")) {
+                    String courseCode = jsonNode.get("code").asText();
+                    courseCodeComboBox.setValue(courseCode);
+                }
                 
-                ObjectMapper mapper = new ObjectMapper();
-                ArrayNode arrayNode = (ArrayNode) mapper.readTree(responseBody);
+                if (jsonNode.has("exam_type")) {
+                    String examType = jsonNode.get("exam_type").asText();
+                    typeComboBox.setValue(examType);
+                }
                 
-                if (arrayNode.size() > 0) {
-                    ObjectNode examData = (ObjectNode) arrayNode.get(0);
-                    
-                    // Get course_id and fetch course details
-                    if (examData.has("course_id")) {
-                        this.courseId = examData.get("course_id").asText();
-                        loadCourseData(this.courseId);
-                    }
-                    
-                    // Set type
-                    if (examData.has("type")) {
-                        String examType = examData.get("type").asText();
-                        typeComboBox.setValue(examType);
-                    }
-                    
-                    // Set date
-                    if (examData.has("date")) {
-                        String dateStr = examData.get("date").asText();
-                        if (dateStr != null && !dateStr.isEmpty()) {
-                            datePicker.setValue(LocalDate.parse(dateStr));
+                if (jsonNode.has("exam_date")) {
+                    String dateStr = jsonNode.get("exam_date").asText();
+                    if (dateStr != null && !dateStr.isEmpty()) {
+                        try {
+                            LocalDate date = LocalDate.parse(dateStr);
+                            datePicker.setValue(date);
+                        } catch (Exception e) {
+                            System.out.println("Date parse error: " + e.getMessage());
+                            showError("Error", "Invalid date format in data");
                         }
                     }
-                } else {
-                    showError("Error", "No examination data found for ID: " + tentamenId);
                 }
             } else {
-                String errorMsg = "Failed to load examination data. Status code: " + 
-                    (examResponse != null ? examResponse.statusCode() : "null");
-                showError("Error", errorMsg);
+                showError("Error", "Failed to load examination data. Status code: " + response.statusCode());
             }
         } catch (Exception e) {
+            e.printStackTrace();
             showError("Error", "Failed to load examination data: " + e.getMessage());
         }
     }
     
-    private void loadCourseData(String courseId) {
-        try {
-            GetMethods getMethods = new GetMethods();
-            HttpResponse<String> courseResponse = getMethods.getCourseById(courseId);
-            
-            if (courseResponse != null && courseResponse.statusCode() == 200) {
-                ObjectMapper mapper = new ObjectMapper();
-                ArrayNode arrayNode = (ArrayNode) mapper.readTree(courseResponse.body());
-                
-                if (arrayNode.size() > 0) {
-                    ObjectNode courseData = (ObjectNode) arrayNode.get(0);
-                    
-                    // Set course code
-                    if (courseData.has("code")) {
-                        String courseCode = courseData.get("code").asText();
-                        courseCodeComboBox.setValue(courseCode);
-                    }
-                }
-            } else {
-                System.err.println("Failed to load course data. Status code: " + 
-                    (courseResponse != null ? courseResponse.statusCode() : "null"));
-            }
-        } catch (Exception e) {
-            System.err.println("Error loading course data: " + e.getMessage());
-        }
-    }
 
     @FXML
     private void handleUpdate() {
@@ -140,7 +121,6 @@ public class EditTentamenController {
             ObjectMapper mapper = new ObjectMapper();
             ObjectNode requestBody = mapper.createObjectNode();
             
-            // Required field - ensure it's a valid integer
             try {
                 int examIdInt = Integer.parseInt(tentamenId);
                 requestBody.put("exam_id", examIdInt);
@@ -149,7 +129,6 @@ public class EditTentamenController {
                 return;
             }
 
-            // Optional fields
             String courseCode = courseCodeComboBox.getValue();
             if (courseCode != null && !courseCode.isEmpty()) {
                 requestBody.put("code", courseCode);
@@ -166,14 +145,9 @@ public class EditTentamenController {
                 requestBody.put("exam_date", formattedDate);
             }
 
-            PutMethods putMethods = new PutMethods();
-            HttpResponse<String> response = putMethods.putExam(requestBody.toString());
-
-            if (response != null) {
-                handleUpdateResponse(response);
-            } else {
-                showError("Error", "Failed to connect to server");
-            }
+            HttpResponse<String> response = ExamService.update(requestBody.toString());
+            handleUpdateResponse(response);
+            
         } catch (Exception e) {
             showError("Error", "Failed to update examination: " + e.getMessage());
             e.printStackTrace();

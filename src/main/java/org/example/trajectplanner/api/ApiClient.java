@@ -37,12 +37,25 @@ public class ApiClient {
 
     private static HttpResponse<String> sendRequest(String endpoint, String method, String body) {
         try {
-            HttpRequest request = HttpRequest.newBuilder()
+            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
                     .uri(new URI(BASE_URL + endpoint))
-                    .header("Content-Type", "application/json")
-                    .method(method, HttpRequest.BodyPublishers.ofString(body, StandardCharsets.UTF_8))
-                    .build();
-            return client.send(request, HttpResponse.BodyHandlers.ofString());
+                    .header("Content-Type", "application/json");
+
+            switch (method) {
+                case "POST":
+                    requestBuilder.POST(HttpRequest.BodyPublishers.ofString(body));
+                    break;
+                case "PUT":
+                    requestBuilder.PUT(HttpRequest.BodyPublishers.ofString(body));
+                    break;
+                case "DELETE":
+                    requestBuilder.method("DELETE", HttpRequest.BodyPublishers.ofString(body));
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unsupported HTTP method: " + method);
+            }
+
+            return client.send(requestBuilder.build(), HttpResponse.BodyHandlers.ofString());
         } catch (Exception e) {
             e.printStackTrace();
             return null;

@@ -9,6 +9,10 @@ public class ExamService {
         return ApiClient.get("/exams");
     }
 
+    public static HttpResponse<String> getById(String examId) {
+        return ApiClient.get("/exams/" + examId);
+    }
+
     public static HttpResponse<String> create(String examData) {
         return ApiClient.post("/exams", examData);
     }

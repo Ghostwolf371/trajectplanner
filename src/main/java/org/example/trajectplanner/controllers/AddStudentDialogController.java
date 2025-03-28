@@ -7,10 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.example.trajectplanner.services.StudentService;
-import org.example.trajectplanner.utils.DialogUtils;
 
 import java.net.http.HttpResponse;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Random;
@@ -172,19 +170,9 @@ public class AddStudentDialogController {
         stage.close();
     }
 
-    private String generateStudentNumber() {
-        // Generate a more structured student number
-        LocalDate now = LocalDate.now();
-        return String.format("S%d%02d%06d", 
-            now.getYear(),
-            now.getMonthValue(),
-            System.currentTimeMillis() % 1000000);
-    }
+   
 
-    private String generateDefaultPassword() {
-        // Generate a more secure default password
-        return "Pass" + generateStudentNumber();
-    }
+    
 
     private static final String DEFAULT_PASSWORD = "9x#V@7p!Lz$Q2w%T8m^C3j*B6r&K0d";
 }
