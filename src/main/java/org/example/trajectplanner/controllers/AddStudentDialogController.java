@@ -69,17 +69,10 @@ public class AddStudentDialogController {
                 .put("birthdate", birthdatePicker.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE))
                 .put("password", DEFAULT_PASSWORD); // Using the same default password as in LoginController
 
-            // Debug output
-            System.out.println("Student number (display): " + studentNumber);
-            System.out.println("Student number (API): " + apiStudentNumber);
-            System.out.println("Request body: " + mapper.writerWithDefaultPrettyPrinter().writeValueAsString(requestBody));
 
             HttpResponse<String> response = StudentService.create(requestBody.toString());
 
             if (response != null) {
-                System.out.println("Response status: " + response.statusCode());
-                System.out.println("Response body: " + response.body());
-                System.out.println("Response headers: " + response.headers().map());
 
                 handleResponse(response);
             } else {

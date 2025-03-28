@@ -1,6 +1,8 @@
-package org.example.trajectplanner.api;
+package org.example.trajectplanner.services;
 
 import java.net.http.HttpResponse;
+
+import org.example.trajectplanner.api.ApiClient;
 
 public class ScoreService {
     public static HttpResponse<String> getAll() {

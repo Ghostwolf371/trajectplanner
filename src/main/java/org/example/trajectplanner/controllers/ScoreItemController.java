@@ -3,8 +3,9 @@ package org.example.trajectplanner.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import org.example.trajectplanner.api.ScoreService;
+
 import org.example.trajectplanner.model.Score;
+import org.example.trajectplanner.services.ScoreService;
 import org.example.trajectplanner.utils.DialogUtils;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
