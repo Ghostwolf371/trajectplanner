@@ -93,8 +93,7 @@ public class NewPasswordController {
                     
             // Send request
             client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                  .thenAccept(response -> {
-                      if (response.statusCode() == 200) {
+                  .thenAccept(_ -> {
                           Platform.runLater(() -> {
                               showFeedback("Password successfully changed. Redirecting to login...", false);
                               // Redirect to login screen after 2 seconds
@@ -115,22 +114,7 @@ public class NewPasswordController {
                                   }
                               }).start();
                           });
-                      } else {
-                          String errorMessage = "Error updating password. ";
-                          try {
-                              JsonNode responseJson = mapper.readTree(response.body());
-                              if (responseJson.has("message")) {
-                                  errorMessage += responseJson.get("message").asText();
-                              } else {
-                                  errorMessage += "Status code: " + response.statusCode();
-                              }
-                          } catch (Exception e) {
-                              errorMessage += "Status code: " + response.statusCode();
-                          }
-                          
-                          final String finalErrorMessage = errorMessage;
-                          Platform.runLater(() -> showFeedback(finalErrorMessage, true));
-                      }
+                      
                   })
                   .exceptionally(e -> {
                       Platform.runLater(() -> 
