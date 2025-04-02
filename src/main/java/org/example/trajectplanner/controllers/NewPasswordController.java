@@ -73,27 +73,34 @@ public class NewPasswordController {
     
     private void updatePasswordOnServer(String newPassword, ActionEvent event) {
         try {
+            System.out.println("DEBUG: Starting updatePasswordOnServer");
             // Format student number for API call
-            String formattedStudentNumber = studentNumber.replace("/", "-");
+            System.out.println("DEBUG: Formatted student number: " + studentNumber);
             
             // Create JSON body with student number and new password
             ObjectNode requestBody = mapper.createObjectNode();
-            requestBody.put("student_number", formattedStudentNumber);
+            requestBody.put("student_number", studentNumber);
             requestBody.put("password", newPassword);
+            System.out.println("DEBUG: Request body: " + requestBody.toString());
             
             // Create HTTP client
             HttpClient client = HttpClient.newHttpClient();
             
             // Create HTTP request
+            String url = API_URL + "/" + studentNumber;
+            System.out.println("DEBUG: Sending request to URL: " + url);
+            
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(API_URL + "/" + formattedStudentNumber))
+                    .uri(URI.create(url))
                     .header("Content-Type", "application/json")
                     .PUT(HttpRequest.BodyPublishers.ofString(requestBody.toString()))
                     .build();
                     
             // Send request
+            System.out.println("DEBUG: Sending async request...");
             client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                  .thenAccept(_ -> {
+                  .thenAccept(response -> {
+                          System.out.println("DEBUG: Server response received: " + response);
                           Platform.runLater(() -> {
                               showFeedback("Password successfully changed. Redirecting to login...", false);
                               // Redirect to login screen after 2 seconds
@@ -104,24 +111,29 @@ public class NewPasswordController {
                                           try {
                                               navigateToLogin(event);
                                           } catch (IOException e) {
+                                              System.out.println("DEBUG: Error during navigation: " + e.getMessage());
                                               showFeedback("Error redirecting to login: " + e.getMessage(), true);
                                           }
                                       });
                                   } catch (InterruptedException e) {
                                       Thread.currentThread().interrupt();
+                                      System.out.println("DEBUG: Thread interrupted during sleep");
                                       Platform.runLater(() -> 
                                           showFeedback("Error during redirect: " + e.getMessage(), true));
                                   }
                               }).start();
                           });
-                      
                   })
                   .exceptionally(e -> {
+                      System.out.println("DEBUG: Server error occurred: " + e.getMessage());
+                      e.printStackTrace();
                       Platform.runLater(() -> 
                           showFeedback("Error connecting to server: " + e.getMessage(), true));
                       return null;
                   });
         } catch (Exception e) {
+            System.out.println("DEBUG: Exception in updatePasswordOnServer: " + e.getMessage());
+            e.printStackTrace();
             showFeedback("Error updating password: " + e.getMessage(), true);
         }
     }
